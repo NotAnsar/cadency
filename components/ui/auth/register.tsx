@@ -26,6 +26,7 @@ import {
 } from '@/components/ui/popover';
 import { format } from 'date-fns';
 import { signIn } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
 
 const formSchema = z.object({
 	email: z.string().email({ message: 'Please enter a valid email address.' }),
@@ -72,6 +73,7 @@ export default function RegisterPage({
 			dateBirth: undefined,
 		},
 	});
+	const searchParams = useSearchParams();
 
 	function onSubmit(values: z.infer<typeof formSchema>) {
 		console.log(values);
@@ -239,7 +241,7 @@ export default function RegisterPage({
 					disabled={isLoading}
 					onClick={() => {
 						setIsLoading(true);
-						signIn('google');
+						signIn('google', { callbackUrl: '/player' });
 					}}
 				>
 					{isLoading ? (
@@ -256,7 +258,7 @@ export default function RegisterPage({
 					className='w-full'
 					onClick={() => {
 						setIsLoading(true);
-						signIn('github');
+						signIn('github', { callbackUrl: '/player' });
 					}}
 				>
 					{isLoading ? (
