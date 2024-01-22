@@ -17,8 +17,6 @@ type LayoutProps = { children: React.ReactNode };
 export default async function RootLayout({ children }: LayoutProps) {
 	const session = await getServerSession();
 
-	console.log(session);
-
 	return (
 		<html lang='en' suppressHydrationWarning={true}>
 			<head />

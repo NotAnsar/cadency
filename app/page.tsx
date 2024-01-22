@@ -1,33 +1,23 @@
-'use client';
-
 import Logo from '@/components/logo';
-
-import { signOut, useSession } from 'next-auth/react';
+import SignOutButton from '@/components/signOutButton';
+import { getCurrentUser } from '@/lib/session';
 
 import Link from 'next/link';
 
-export default function Home() {
-	const { data: session } = useSession();
-	console.log(session);
+export default async function Home() {
+	const user = await getCurrentUser();
 
 	return (
 		<main className=' p-24 space-y-3'>
 			<Logo className='text-3xl  block' />
 			<h1 className='text-3xl text-bold block'>Home Page</h1>
 
-			{session ? (
-				<button
-					className='text-primary  text-2xl hover:underline block'
-					onClick={() => {
-						signOut();
-					}}
-				>
-					Logout
-				</button>
+			{user ? (
+				<SignOutButton />
 			) : (
 				<Link
 					href={'/login'}
-					className='text-primary  text-2xl hover:underline block'
+					className='text-primary text-2xl hover:underline block'
 				>
 					Login
 				</Link>

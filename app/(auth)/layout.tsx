@@ -1,14 +1,15 @@
 import AuthLeftSection from '@/components/ui/auth/auth-left-section';
-import { getServerSession } from 'next-auth';
+import { getCurrentUser } from '@/lib/session';
+
 import { redirect } from 'next/navigation';
 
 type AuthLayoutProps = { children: React.ReactNode };
 
 export default async function AuthLayout({ children }: AuthLayoutProps) {
-	const session = await getServerSession();
+	const user = await getCurrentUser();
 
-	if (session) {
-		redirect('/');
+	if (user) {
+		redirect('/player');
 	}
 
 	return (
