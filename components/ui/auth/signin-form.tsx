@@ -3,14 +3,15 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
+import { signIn } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import {
-	Form,
 	FormControl,
+	FormMessage,
 	FormField,
 	FormItem,
+	Form,
 	FormLabel,
-	FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
@@ -19,28 +20,34 @@ import { useState } from 'react';
 
 const formSchema = z.object({
 	email: z.string().email({ message: 'Please enter a valid email address.' }),
-	// password: z
-	// 	.string()
-	// 	.min(6, { message: 'Password must be at least 6 characters long.' })
-	// 	.max(30, { message: 'Password must be no longer than 30 characters.' }),
 });
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export default function LoginPage({ className, ...props }: UserAuthFormProps) {
+export default function SignInForm({ className, ...props }: UserAuthFormProps) {
+	const callbackUrl = '/player';
+
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
-		defaultValues: { email: '' /* password: '' */ },
+		defaultValues: { email: '' },
 	});
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
+	async function onSubmit(values: z.infer<typeof formSchema>) {
 		console.log(values);
 		setIsLoading(true);
 
-		setTimeout(() => {
-			setIsLoading(false);
-		}, 3000);
+		// setTimeout(() => {
+		// 	setIsLoading(false);
+		// }, 3000);
+		const signInResult = await signIn('email', {
+			email: values.email.toLowerCase(),
+			redirect: false,
+			callbackUrl,
+		});
+		console.log(signInResult);
+		// show a toast
+		setIsLoading(false);
 	}
 
 	return (
@@ -86,7 +93,15 @@ export default function LoginPage({ className, ...props }: UserAuthFormProps) {
 				</div>
 			</div>
 			<form className='grid gap-3 w-full'>
-				<Button variant='outline' type='button' disabled={isLoading}>
+				<Button
+					variant='outline'
+					type='button'
+					disabled={isLoading}
+					onClick={() => {
+						setIsLoading(true);
+						signIn('google', { callbackUrl });
+					}}
+				>
 					{isLoading ? (
 						<Icons.spinner className='mr-2 h-4 w-4 animate-spin' />
 					) : (
@@ -94,7 +109,15 @@ export default function LoginPage({ className, ...props }: UserAuthFormProps) {
 					)}{' '}
 					Google
 				</Button>
-				<Button variant='outline' type='button' disabled={isLoading}>
+				<Button
+					variant='outline'
+					type='button'
+					disabled={isLoading}
+					onClick={() => {
+						setIsLoading(true);
+						signIn('github', { callbackUrl: '/player' });
+					}}
+				>
 					{isLoading ? (
 						<Icons.spinner className='mr-2 h-4 w-4 animate-spin' />
 					) : (
@@ -106,3 +129,8 @@ export default function LoginPage({ className, ...props }: UserAuthFormProps) {
 		</div>
 	);
 }
+
+// password: z
+// 	.string()
+// 	.min(6, { message: 'Password must be at least 6 characters long.' })
+// 	.max(30, { message: 'Password must be no longer than 30 characters.' }),

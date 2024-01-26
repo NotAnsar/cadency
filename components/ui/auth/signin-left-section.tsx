@@ -4,7 +4,7 @@ import { Lusitana } from 'next/font/google';
 
 export const lusitana = Lusitana({ subsets: ['latin'], weight: ['400'] });
 
-export default function AuthLeftSection() {
+export default function SignInLeftSection() {
 	return (
 		<div className='relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r '>
 			<div className='absolute inset-0 bg-gradient-to-br from-[#e11d48] to-black p-10 z-10 opacity-70' />

@@ -11,17 +11,9 @@ export default async function Home() {
 		<main className=' p-24 space-y-3'>
 			<Logo className='text-3xl  block' />
 			<h1 className='text-3xl text-bold block'>Home Page</h1>
-
-			{user ? (
-				<SignOutButton />
-			) : (
-				<Link
-					href={'/login'}
-					className='text-primary text-2xl hover:underline block'
-				>
-					Login
-				</Link>
-			)}
+			<p>
+				Your user :<br /> {JSON.stringify(user)}
+			</p>
 
 			<Link
 				href={'/player'}
@@ -29,6 +21,16 @@ export default async function Home() {
 			>
 				Player
 			</Link>
+			{user ? (
+				<SignOutButton />
+			) : (
+				<Link
+					href={'/signin'}
+					className='text-primary text-2xl hover:underline block'
+				>
+					Auth
+				</Link>
+			)}
 		</main>
 	);
 }
