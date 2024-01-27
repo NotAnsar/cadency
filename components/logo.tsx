@@ -3,12 +3,9 @@ import { Inknut_Antiqua } from 'next/font/google';
 import Link from 'next/link';
 const inknut_Antiqua = Inknut_Antiqua({ subsets: ['latin'], weight: '400' });
 
-export default function Logo({
-	className,
-	...props
-}: {
-	className?: string | undefined;
-}) {
+type LogoProps = { className?: string | undefined };
+
+export default function Logo({ className, ...props }: LogoProps) {
 	return (
 		<Link
 			href={'/'}

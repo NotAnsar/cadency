@@ -21,7 +21,6 @@ model User {
   updated_at DateTime? @updatedAt
   emailVerified DateTime?
   accounts      Account[]
-  sessions      Session[]
 }
 
 enum Gender{
@@ -48,15 +47,8 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
 
-
+// used in email authorisation mail
 model VerificationToken {
   identifier String
   token      String   @unique

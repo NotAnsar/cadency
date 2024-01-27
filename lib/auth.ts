@@ -15,10 +15,12 @@ export const authOptions: NextAuthOptions = {
 		GithubProvider({
 			clientId: process.env.GITHUB_ID as string,
 			clientSecret: process.env.GITHUB_SECRET as string,
+			allowDangerousEmailAccountLinking: true,
 		}),
 		GoogleProvider({
 			clientId: process.env.GOOGLE_ID as string,
 			clientSecret: process.env.GOOGLE_SECRET as string,
+			allowDangerousEmailAccountLinking: true,
 		}),
 		EmailProvider({
 			server: {
@@ -34,29 +36,6 @@ export const authOptions: NextAuthOptions = {
 		}),
 	],
 	callbacks: {
-		async signIn({ profile, account }) {
-			if (account?.provider === 'github' || account?.provider === 'google') {
-				if (!profile?.email) {
-					console.log('error');
-					throw new Error('No Profile');
-				}
-				// create or update user
-				await prisma.user.upsert({
-					where: {
-						email: profile.email,
-					},
-					create: {
-						email: profile.email,
-						name: profile.name,
-						image: profile.image,
-					},
-					update: {},
-				});
-			}
-
-			return true;
-		},
-
 		session({ session, token }) {
 			return {
 				...session,
@@ -66,10 +45,10 @@ export const authOptions: NextAuthOptions = {
 					email: token.email,
 					image: token.picture,
 					name: token.name,
+					// add subscription type
 				},
 			};
 		},
-
 		async jwt({ token, user }) {
 			const u = await prisma.user.findFirst({
 				where: { email: token.email || undefined },
@@ -87,6 +66,7 @@ export const authOptions: NextAuthOptions = {
 				id: u.id,
 				name: u.name,
 				picture: u.image,
+				// and add subscription type
 			};
 		},
 	},
