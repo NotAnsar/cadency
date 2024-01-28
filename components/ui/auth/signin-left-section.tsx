@@ -8,7 +8,7 @@ export default function SignInLeftSection() {
 	return (
 		<div className='relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r '>
 			<div className='absolute inset-0 bg-gradient-to-br from-[#e11d48] to-black p-10 z-10 opacity-70' />
-			<div className="absolute inset-0 bg-[url('/authPic.jpg')] bg-cover bg-center" />
+			<div className='absolute inset-0 bg-signin bg-cover bg-center' />
 
 			<div className='relative z-20 flex items-center text-lg font-medium gap-2'>
 				<Logo className='text-2xl' />

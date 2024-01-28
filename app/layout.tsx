@@ -1,12 +1,15 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+// import { Inter } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import SessionProvider from '@/components/session-provider';
 import { getServerSession } from 'next-auth';
 import { Toaster } from '@/components/ui/toaster';
+import { cn } from '@/lib/utils';
 
-const inter = Inter({ subsets: ['latin'] });
+// const inter = Inter({ subsets: ['latin'] });
+const popping = Poppins({ subsets: ['latin'], weight: ['400', '500', '600'] });
 
 export const metadata: Metadata = {
 	title: 'Cadency | Find Your Perfect Pulse.',
@@ -21,7 +24,10 @@ export default async function RootLayout({ children }: LayoutProps) {
 	return (
 		<html lang='en' suppressHydrationWarning={true}>
 			<head />
-			<body className={inter.className} suppressHydrationWarning={true}>
+			<body
+				className={cn(popping.className, 'bg-noise ')}
+				suppressHydrationWarning={true}
+			>
 				<SessionProvider session={session}>
 					<ThemeProvider
 						attribute='class'

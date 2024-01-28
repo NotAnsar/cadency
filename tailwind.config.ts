@@ -73,7 +73,14 @@ const config = {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 			},
 			backgroundImage: {
-				'hero-pattern': "url('/authPic.jpg')",
+				signin: "url('/authPic.jpg')",
+				noise: "url('/bg-light.png')",
+			},
+			backgroundPosition: {
+				noise: '0 0',
+			},
+			backgroundSize: {
+				noise: '200px 200px',
 			},
 		},
 	},

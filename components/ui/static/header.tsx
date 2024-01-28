@@ -1,40 +1,47 @@
 'use client';
 import Link from 'next/link';
 import Logo from '../../logo';
-import { Button, buttonVariants } from '../button';
+import { buttonVariants } from '../button';
 import { ModeToggle } from '../mode-toggle';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { usePathname } from 'next/navigation';
 
 const mainNav = [
 	{ title: 'About', href: '/about' },
-	{ title: 'Pricing', href: '/pricing' },
+	{ title: 'Pricing', href: '/#pricing' },
+	{ title: 'Features', href: '/features' },
 ];
 export default function Header() {
 	const [showMobileNav, setshowMobileNav] = useState(false);
+	const path = usePathname();
+
 	return (
-		<div className='px-4 sticky top-0 z-50 w-full border-b border-border/40 backdrop-blur bg-background md:bg-background/40 md:dark:bg-background/75'>
+		<div className='px-4 sticky top-0 z-50 w-full border-b border-border/40 bg-noise bg bg-background/70'>
 			<header className='md:max-w-7xl mx-auto py-3 flex items-center justify-between'>
 				<nav className='flex items-center'>
-					<Logo className='text-xl mr-8 font-medium' />
-					<nav className='hidden md:flex items-center gap-6 text-sm '>
-						{mainNav.map((nav, i) => (
-							<Link
-								href={nav.href}
-								key={i}
-								className='font-medium transition-colors hover:text-primary  text-foreground/60'
-							>
-								{nav.title}
-							</Link>
-						))}
-					</nav>
+					<Logo className='text-2xl mr-8 font-medium' />
+				</nav>
+				<nav className='hidden md:flex items-center gap-6 text-sm '>
+					{mainNav.map((nav, i) => (
+						<Link
+							href={nav.href}
+							key={i}
+							className={cn(
+								'font-medium transition-colors hover:text-primary text-foreground/60',
+								path === nav.href && 'text-primary font-semibold'
+							)}
+						>
+							{nav.title}
+						</Link>
+					))}
 				</nav>
 				<nav className='flex items-center gap-2'>
 					<Link
 						href='/signin'
 						className={cn(
-							buttonVariants({ variant: 'outline' }),
+							buttonVariants({ variant: 'ghost' }),
 							'hidden md:flex'
 						)}
 					>
@@ -56,7 +63,8 @@ export default function Header() {
 
 			<div
 				className={cn(
-					'w-full bg-background px-2 py-4 block md:hidden',
+					// 'w-full bg-background px-2 py-4 block md:hidden',
+					'w-full  px-2 py-4 block md:hidden backdrop-blur-md',
 					!showMobileNav && 'hidden'
 				)}
 			>
