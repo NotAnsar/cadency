@@ -1,3 +1,4 @@
+import FAQ from '@/components/ui/static/home/FAQ';
 import Hero from '@/components/ui/static/home/hero';
 import MarqueeSection from '@/components/ui/static/home/marquee';
 import PlanSection from '@/components/ui/static/home/plan';
@@ -8,6 +9,7 @@ export default async function Home() {
 			<Hero />
 			<MarqueeSection />
 			<PlanSection />
+			<FAQ />
 			{/* <p>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, eaque
 				suscipit optio nesciunt veritatis ratione quas doloremque quasi quod

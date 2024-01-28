@@ -2,13 +2,14 @@ import { cn } from '@/lib/utils';
 import { buttonVariants } from '../../button';
 import classes from './header.module.css';
 import Link from 'next/link';
+import Wrapper from '../wrapper';
 
 export default function Hero() {
 	return (
-		<section
+		<Wrapper
 			id='hero'
 			className={cn(
-				'md:max-w-7xl mx-auto py-3 grid items-center h-[550px] text-center w-full',
+				'grid items-center h-[550px] text-center w-full',
 				classes.hero
 			)}
 			data-astro-cid-5vuvvkej
@@ -46,6 +47,6 @@ export default function Hero() {
 					</Link>
 				</div>
 			</div>
-		</section>
+		</Wrapper>
 	);
 }

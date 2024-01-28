@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils';
 import { CheckCircle2 } from 'lucide-react';
 import { buttonVariants } from '../../button';
 import Link from 'next/link';
+import Wrapper from '../wrapper';
 
 const PLANS = [
 	{
@@ -41,10 +42,7 @@ const PLANS = [
 
 export default function PlanSection() {
 	return (
-		<section
-			className='md:max-w-7xl mx-auto py-3 mt-20 text-center mb-10 px-4'
-			id='pricing'
-		>
+		<Wrapper className='mt-20 text-center mb-10' id='pricing'>
 			<h2 className='text-4xl font-medium md:text-5xl'>
 				{"Choose the plan that's right for you."}
 			</h2>
@@ -98,6 +96,6 @@ export default function PlanSection() {
 					</article>
 				))}
 			</div>
-		</section>
+		</Wrapper>
 	);
 }

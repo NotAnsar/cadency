@@ -7,6 +7,7 @@ import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
+import Wrapper from './wrapper';
 
 const mainNav = [
 	{ title: 'About', href: '/about' },
@@ -18,8 +19,8 @@ export default function Header() {
 	const path = usePathname();
 
 	return (
-		<div className='px-4 sticky top-0 z-50 w-full border-b border-border/40 bg-noise bg bg-background/70'>
-			<header className='md:max-w-7xl mx-auto py-3 flex items-center justify-between'>
+		<header className=' sticky top-0 z-50 w-full border-b border-border/40 bg-noise bg bg-background/70'>
+			<Wrapper className='flex items-center justify-between'>
 				<nav className='flex items-center'>
 					<Logo className='text-2xl mr-8 font-medium' />
 				</nav>
@@ -59,12 +60,12 @@ export default function Header() {
 						)}
 					</button>
 				</nav>
-			</header>
+			</Wrapper>
 
 			<div
 				className={cn(
 					// 'w-full bg-background px-2 py-4 block md:hidden',
-					'w-full  px-2 py-4 block md:hidden backdrop-blur-md',
+					'w-full  px-2 py-4 block md:hidden ',
 					!showMobileNav && 'hidden'
 				)}
 			>
@@ -88,6 +89,6 @@ export default function Header() {
 					</Link>
 				))}
 			</div>
-		</div>
+		</header>
 	);
 }
