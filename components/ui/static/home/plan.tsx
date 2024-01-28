@@ -53,14 +53,14 @@ export default function PlanSection() {
 				Perks
 			</p>
 
-			<div className='grid grid-cols-3 gap-6 mt-32 text-left'>
+			<div className='grid grid-cols-1 md:grid-cols-3 gap-6 mt-32 text-left'>
 				{PLANS.map((plan, i) => (
 					<article
 						key={i}
 						className={cn(
 							'bg-[#fdfdfd] dark:bg-[#181818] rounded-lg px-6 py-8 ',
 							plan.best && 'border-2 border-primary ',
-							i === 1 && '-translate-y-12  z-10 '
+							i === 1 && 'md:-translate-y-12  md:z-10 '
 						)}
 					>
 						<div className='space-y-4 pb-2 border-b-2 h-48'>
