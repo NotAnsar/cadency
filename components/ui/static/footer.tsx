@@ -21,6 +21,7 @@ export default function Footer() {
 							href={social.href}
 							className=' w-9 h-9 bg-secondary hover: flex justify-center items-center rounded-full text-muted-foreground hover:bg-primary hover:text-white'
 							key={i}
+							target='_blank'
 						>
 							<social.icon width={20} height={20} />
 						</Link>
@@ -38,8 +39,8 @@ const socials = [
 	{ icon: Github, href: 'https://github.com/' },
 ];
 const links = [
-	{ title: 'About Us', href: 'https://www.facebook.com/' },
+	{ title: 'Features', href: '/#features' },
 	{ title: 'Pricing', href: '/#pricing' },
-	{ title: 'Terms of Service', href: 'https://www.instagram.com/' },
+	{ title: 'Terms of Service', href: '/#' },
 	{ title: 'FAQ', href: '/#FAQ' },
 ];

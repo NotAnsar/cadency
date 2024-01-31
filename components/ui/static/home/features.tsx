@@ -3,7 +3,7 @@ import Wrapper from '../wrapper';
 
 export default function Features() {
 	return (
-		<Wrapper className='mt-20 text-center mb-10' id='features'>
+		<Wrapper className='pt-20 text-center mb-10' id='features'>
 			<h2 className='text-4xl font-medium md:text-5xl'>
 				Elevate Your Music Journey
 			</h2>
@@ -15,7 +15,7 @@ export default function Features() {
 				{features.map((feature, i) => (
 					<div
 						key={i}
-						className='space-y-3 px-5 py-8 bg-[#fdfdfd] dark:bg-[#181818] flex items-center flex-col	rounded-md hover:opacity-80'
+						className='space-y-3 px-5 py-8 bg-[#fdfdfd] dark:bg-[#181818] flex items-center flex-col	rounded-lg hover:opacity-80 '
 					>
 						<feature.icon
 							width={40}

@@ -8,7 +8,7 @@ import Wrapper from '../wrapper';
 
 export default function FAQ() {
 	return (
-		<Wrapper className='mt-16 text-center ' id='FAQ'>
+		<Wrapper className='pt-16 text-center ' id='FAQ'>
 			<h2 className='text-4xl font-medium md:text-5xl mb-16'>
 				Questions? Answers.
 			</h2>
@@ -57,29 +57,10 @@ const faqs = [
 		answer:
 			'If you have any questions or need assistance, you can reach out to Cadency support through the "Contact Us" section on the app. Our support team is ready to help you with any queries you may have.',
 	},
-	{
-		question: 'Is there a free trial for the Premium Plan?',
-		answer:
-			'Cadency offers a Free Plan with basic features, but unfortunately, there is no free trial for the Premium Plan. However, you can explore the Premium features through our affordable subscription plans.',
-	},
+
 	{
 		question: 'What genres of music are available on Cadency?',
 		answer:
 			'Cadency provides a diverse selection of music genres, ranging from pop and rock to classical and electronic. You can explore and discover your favorite genres to enhance your musical experience.',
-	},
-	{
-		question: 'Can I cancel my subscription at any time?',
-		answer:
-			'Yes, you can cancel your subscription to Cadency at any time. There are no long-term commitments, and you have the flexibility to manage your subscription preferences according to your needs.',
-	},
-	{
-		question: 'Are my payment details secure on Cadency?',
-		answer:
-			'Cadency takes the security of your payment information seriously. We use industry-standard encryption and security measures to ensure that your payment details are protected and handled with the utmost care.',
-	},
-	{
-		question: 'How often is the music library updated?',
-		answer:
-			'Our music library is regularly updated with new releases and a diverse range of tracks. You can expect fresh content to keep your musical journey exciting and up-to-date with the latest trends in the music world.',
 	},
 ];

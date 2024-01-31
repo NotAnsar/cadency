@@ -42,7 +42,7 @@ const PLANS = [
 
 export default function PlanSection() {
 	return (
-		<Wrapper className='mt-20 text-center mb-10' id='pricing'>
+		<Wrapper className='pt-20 text-center mb-10' id='pricing'>
 			<h2 className='text-4xl font-medium md:text-5xl'>
 				{"Choose the plan that's right for you."}
 			</h2>
@@ -85,7 +85,7 @@ export default function PlanSection() {
 							))}
 						</ul>
 						<Link
-							href='/pricing'
+							href='/#'
 							className={cn(
 								buttonVariants({ variant: 'hero_secondary', size: 'hero' }),
 								'w-full rounded-lg'

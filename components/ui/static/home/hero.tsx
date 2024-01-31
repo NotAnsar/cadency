@@ -1,6 +1,5 @@
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '../../button';
-import classes from './header.module.css';
 import Link from 'next/link';
 import Wrapper from '../wrapper';
 
@@ -8,10 +7,7 @@ export default function Hero() {
 	return (
 		<Wrapper
 			id='hero'
-			className={cn(
-				'grid items-center h-[550px] text-center w-full',
-				classes.hero
-			)}
+			className={cn('grid items-center h-[550px] text-center w-full')}
 		>
 			<div className='mx-auto'>
 				<h1 className='text-[40px] md:text-7xl font-medium mb-8'>
@@ -36,7 +32,7 @@ export default function Hero() {
 					</Link>
 
 					<Link
-						href='/pricing'
+						href='/#pricing'
 						className={cn(
 							buttonVariants({ variant: 'hero_secondary', size: 'hero' }),
 							'hidden md:inline-flex '
