@@ -8,7 +8,7 @@ import Wrapper from '../wrapper';
 
 export default function FAQ() {
 	return (
-		<Wrapper className='mt-16 text-center '>
+		<Wrapper className='mt-16 text-center ' id='FAQ'>
 			<h2 className='text-4xl font-medium md:text-5xl mb-16'>
 				Questions? Answers.
 			</h2>
@@ -16,10 +16,12 @@ export default function FAQ() {
 				{faqs.map((faq, i) => (
 					<Accordion type='single' collapsible key={i}>
 						<AccordionItem value='item-1'>
-							<AccordionTrigger className=' md:text-2xl hover:no-underline pb-8 pt-6'>
+							<AccordionTrigger
+								className='md:text-2xl hover:no-underline pb-8 pt-6 text-left' /* [&[data-state=open]]:text-primary' */
+							>
 								{faq.question}
 							</AccordionTrigger>
-							<AccordionContent className='md:text-base hover:no-underline text-left'>
+							<AccordionContent className='md:text-base hover:no-underline text-left '>
 								{faq.answer}
 							</AccordionContent>
 						</AccordionItem>

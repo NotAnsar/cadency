@@ -12,7 +12,7 @@ export default function Hero() {
 				'grid items-center h-[550px] text-center w-full',
 				classes.hero
 			)}
-			data-astro-cid-5vuvvkej
+			// data-astro-cid-5vuvvkej
 		>
 			<div className='mx-auto'>
 				<h1 className='text-[40px] md:text-7xl font-medium mb-8'>
