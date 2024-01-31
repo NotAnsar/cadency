@@ -12,7 +12,6 @@ export default function Hero() {
 				'grid items-center h-[550px] text-center w-full',
 				classes.hero
 			)}
-			// data-astro-cid-5vuvvkej
 		>
 			<div className='mx-auto'>
 				<h1 className='text-[40px] md:text-7xl font-medium mb-8'>
@@ -40,7 +39,7 @@ export default function Hero() {
 						href='/pricing'
 						className={cn(
 							buttonVariants({ variant: 'hero_secondary', size: 'hero' }),
-							'hidden md:inline-flex'
+							'hidden md:inline-flex '
 						)}
 					>
 						View all Premium plans

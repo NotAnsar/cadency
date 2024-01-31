@@ -10,9 +10,9 @@ import { usePathname } from 'next/navigation';
 import Wrapper from './wrapper';
 
 const mainNav = [
-	{ title: 'About', href: '/about' },
 	{ title: 'Pricing', href: '/#pricing' },
-	{ title: 'Features', href: '/features' },
+	{ title: 'Features', href: '/#features' },
+	{ title: 'FAQ', href: '/#FAQ' },
 ];
 export default function Header() {
 	const [showMobileNav, setshowMobileNav] = useState(false);
