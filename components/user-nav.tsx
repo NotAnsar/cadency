@@ -44,10 +44,10 @@ export default function UserNav({ user }: Prop) {
 					<Link href='/player'>Music Player</Link>
 				</DropdownMenuItem>
 				<DropdownMenuItem asChild>
-					<Link href='/dashboard/billing'>Account</Link>
+					<Link href='/player'>Account</Link>
 				</DropdownMenuItem>
 				<DropdownMenuItem asChild>
-					<Link href='/dashboard/settings'>Settings</Link>
+					<Link href='/player'>Settings</Link>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem
