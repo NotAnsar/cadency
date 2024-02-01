@@ -22,7 +22,7 @@ export default async function RootLayout({ children }: LayoutProps) {
 	const session = await getServerSession();
 
 	return (
-		<html lang='en' suppressHydrationWarning={true}>
+		<html lang='en' suppressHydrationWarning={true} className='scroll-smooth'>
 			<head />
 			<body
 				className={cn(popping.className, 'bg-noise ')}

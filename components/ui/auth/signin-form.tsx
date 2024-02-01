@@ -94,6 +94,7 @@ export default function SignInForm({ className, ...props }: UserAuthFormProps) {
 									<Input
 										type='email'
 										placeholder='name@example.com'
+										className='bg-transparent'
 										disabled={isLoading}
 										{...field}
 									/>
@@ -127,6 +128,7 @@ export default function SignInForm({ className, ...props }: UserAuthFormProps) {
 					variant='outline'
 					type='button'
 					disabled={isLoading}
+					className='bg-transparent'
 					onClick={() => {
 						signInSocials('google');
 					}}
@@ -142,6 +144,7 @@ export default function SignInForm({ className, ...props }: UserAuthFormProps) {
 					variant='outline'
 					type='button'
 					disabled={isLoading}
+					className='bg-transparent'
 					onClick={() => {
 						signInSocials('github');
 					}}

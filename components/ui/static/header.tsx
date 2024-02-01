@@ -5,9 +5,8 @@ import Logo from '../../logo';
 import { buttonVariants } from '../button';
 import { ModeToggle } from '../mode-toggle';
 import { Menu, X } from 'lucide-react';
-import { Suspense, useState } from 'react';
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { usePathname } from 'next/navigation';
 import Wrapper from './wrapper';
 import UserNav from '@/components/user-nav';
 import { useSession } from 'next-auth/react';
@@ -19,7 +18,7 @@ const mainNav = [
 ];
 export default function Header() {
 	const [showMobileNav, setshowMobileNav] = useState(false);
-	const path = usePathname();
+
 	const { data: session } = useSession();
 
 	return (
@@ -34,8 +33,7 @@ export default function Header() {
 							href={nav.href}
 							key={i}
 							className={cn(
-								'font-medium transition-colors hover:text-primary text-foreground/60',
-								path === nav.href && 'text-primary font-semibold'
+								'font-medium transition-colors hover:text-primary text-foreground/60'
 							)}
 						>
 							{nav.title}
@@ -44,7 +42,7 @@ export default function Header() {
 				</nav>
 				<nav className='flex items-center gap-2'>
 					{session?.user ? (
-						<UserNav user={session.user} />
+						<UserNav />
 					) : (
 						<Link
 							href='/signin'

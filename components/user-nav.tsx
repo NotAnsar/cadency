@@ -8,7 +8,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from './ui/dropdown-menu';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { UserAvatar } from './user-avatar';
 
 type User = {
@@ -17,9 +17,10 @@ type User = {
 	image?: string | null | undefined;
 };
 
-type Prop = { user: User };
+export default function UserNav() {
+	const { data: session } = useSession();
+	const user = session?.user;
 
-export default function UserNav({ user }: Prop) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger>

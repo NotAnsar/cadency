@@ -13,13 +13,10 @@ export default function Features() {
 			</p>
 			<div className='grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 '>
 				{features.map((feature, i) => (
-					<div
-						key={i}
-						className='space-y-3 px-5 py-8 bg-[#fdfdfd] dark:bg-[#181818] flex items-center flex-col	rounded-lg hover:opacity-80 '
-					>
+					<div key={i} className='space-y-3 px-5 py-8 text-left'>
 						<feature.icon
-							width={40}
-							height={40}
+							width={36}
+							height={36}
 							className='mb-4'
 							color='#e11d48'
 						/>

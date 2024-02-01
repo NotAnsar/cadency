@@ -6,16 +6,23 @@ const inknut_Antiqua = Inknut_Antiqua({
 	weight: ['400', '500'],
 });
 
-type LogoProps = { className?: string | undefined };
+type LogoProps = {
+	className?: string | undefined;
+	type?: 'mobile' | 'default';
+};
 
-export default function Logo({ className, ...props }: LogoProps) {
+export default function Logo({
+	type = 'default',
+	className,
+	...props
+}: LogoProps) {
 	return (
 		<Link
 			href={'/'}
 			className={cn(inknut_Antiqua.className, className)}
 			{...props}
 		>
-			Cadency
+			{type === 'default' ? 'Cadency' : 'C'}
 		</Link>
 	);
 }
