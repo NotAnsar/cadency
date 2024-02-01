@@ -11,6 +11,7 @@ export default async function page() {
 					<Input type='search' className='max-w-72' placeholder='Search' />
 					<div className='flex  gap-2'>
 						<UserNav />
+
 						<ModeToggle />
 					</div>
 				</nav>
