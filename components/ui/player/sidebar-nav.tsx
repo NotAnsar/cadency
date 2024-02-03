@@ -26,16 +26,17 @@ import {
 
 export default function SideBarNav({
 	className,
+	...props
 }: React.HTMLAttributes<HTMLDivElement>) {
 	const path = usePathname();
 
 	return (
 		<div
 			className={cn(
-				'pb-12 md:w-64 bg-background h-screen border-r-2 border-[#ddd] dark:border-[#333]',
+				'pb-12 md:w-64 bg-background border-r-2 border-[#ddd] dark:border-[#333] flex flex-col',
 				className
 			)}
-			style={{ display: 'flex', flexDirection: 'column' }}
+			{...props}
 		>
 			<TooltipProvider delayDuration={0}>
 				<div className='space-y-4 py-4'>
@@ -81,7 +82,7 @@ export default function SideBarNav({
 						<h2 className='relative px-7 text-lg font-semibold tracking-tight hidden md:block'>
 							Playlists
 						</h2>
-						<ScrollArea className='h-[220px] px-1'>
+						<ScrollArea className='max-h-[220px] px-1'>
 							<div className='flex flex-col gap-1 p-2'>
 								<Nav
 									Icon={PlusCircle}

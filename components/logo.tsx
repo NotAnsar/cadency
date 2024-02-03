@@ -1,9 +1,11 @@
 import { cn } from '@/lib/utils';
 import { Inknut_Antiqua } from 'next/font/google';
+
 import Link from 'next/link';
+
 const inknut_Antiqua = Inknut_Antiqua({
 	subsets: ['latin'],
-	weight: ['400', '500'],
+	weight: ['400', '500', '600'],
 });
 
 type LogoProps = {

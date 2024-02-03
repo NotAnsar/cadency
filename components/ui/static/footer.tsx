@@ -10,21 +10,29 @@ export default function Footer() {
 				<Logo className='text-2xl ' />
 				<ul className='flex flex-col md:flex-row  md:items-center gap-3 text-muted-foreground '>
 					{links.map((link, i) => (
-						<Link key={i} href={link.href} className='hover:text-primary'>
-							{link.title}
-						</Link>
+						<li key={i}>
+							<Link
+								href={link.href}
+								className='hover:text-primary'
+								aria-label={link.title}
+							>
+								{link.title}
+							</Link>
+						</li>
 					))}
 				</ul>
 				<ul className='flex items-center gap-4'>
 					{socials.map((social, i) => (
-						<Link
-							href={social.href}
-							className=' w-9 h-9 bg-secondary hover: flex justify-center items-center rounded-full text-muted-foreground hover:bg-primary hover:text-white'
-							key={i}
-							target='_blank'
-						>
-							<social.icon width={20} height={20} />
-						</Link>
+						<li key={i}>
+							<Link
+								href={social.href}
+								className=' w-9 h-9 bg-secondary hover: flex justify-center items-center rounded-full text-muted-foreground hover:bg-primary hover:text-white'
+								target='_blank'
+								aria-label={social.title}
+							>
+								<social.icon width={20} height={20} />
+							</Link>
+						</li>
 					))}
 				</ul>
 			</Wrapper>
@@ -33,10 +41,10 @@ export default function Footer() {
 }
 
 const socials = [
-	{ icon: Facebook, href: 'https://www.facebook.com/' },
-	{ icon: Twitter, href: 'https://twitter.com/' },
-	{ icon: Instagram, href: 'https://www.instagram.com/' },
-	{ icon: Github, href: 'https://github.com/' },
+	{ title: 'facebook', icon: Facebook, href: 'https://www.facebook.com/' },
+	{ title: 'twitter', icon: Twitter, href: 'https://twitter.com/' },
+	{ title: 'instagram', icon: Instagram, href: 'https://www.instagram.com/' },
+	{ title: 'github', icon: Github, href: 'https://github.com/' },
 ];
 const links = [
 	{ title: 'Features', href: '/#features' },

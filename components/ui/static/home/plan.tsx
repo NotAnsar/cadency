@@ -62,14 +62,14 @@ export default function PlanSection() {
 						)}
 					>
 						<div className='space-y-4 pb-2 border-b-2 h-48'>
-							<h1 className='text-xl font-medium'>{plan.title}</h1>
+							<h3 className='text-xl font-medium'>{plan.title}</h3>
 
-							<h5 className='text-muted-foreground'>
+							<h4 className='text-muted-foreground'>
 								<span className='text-foreground font-medium text-4xl'>
 									${plan.price}
 								</span>
 								/month
-							</h5>
+							</h4>
 							<p className='text-muted-foreground text-sm'>
 								{plan.description}
 							</p>

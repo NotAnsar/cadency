@@ -35,6 +35,7 @@ export default function Header() {
 							className={cn(
 								'font-medium transition-colors hover:text-primary text-foreground/60'
 							)}
+							aria-label={nav.title}
 						>
 							{nav.title}
 						</Link>
@@ -58,11 +59,22 @@ export default function Header() {
 					<button
 						className='block md:hidden'
 						onClick={() => setshowMobileNav((a) => !a)}
+						aria-label='menu'
 					>
 						{showMobileNav ? (
-							<X strokeWidth={1.5} width={'2rem'} height={'2rem'} />
+							<X
+								strokeWidth={1.5}
+								width={'2rem'}
+								height={'2rem'}
+								name='close'
+							/>
 						) : (
-							<Menu strokeWidth={1.5} width={'2rem'} height={'2rem'} />
+							<Menu
+								strokeWidth={1.5}
+								width={'2rem'}
+								height={'2rem'}
+								name='open'
+							/>
 						)}
 					</button>
 				</nav>
@@ -87,6 +99,7 @@ export default function Header() {
 					<Link
 						href={nav.href}
 						key={i}
+						aria-label={nav.title}
 						className='block w-full border-b border-slate-6 py-4 font-medium transition duration-200 ease-in-out last:border-none text-foreground/70 hover:text-primary'
 					>
 						{nav.title}

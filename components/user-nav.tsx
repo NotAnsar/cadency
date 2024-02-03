@@ -11,12 +11,6 @@ import {
 import { signOut, useSession } from 'next-auth/react';
 import { UserAvatar } from './user-avatar';
 
-type User = {
-	name?: string | null | undefined;
-	email?: string | null | undefined;
-	image?: string | null | undefined;
-};
-
 export default function UserNav() {
 	const { data: session } = useSession();
 	const user = session?.user;
