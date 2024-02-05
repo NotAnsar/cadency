@@ -15,6 +15,7 @@ import {
 	PlusCircle,
 	Heart,
 	LucideIcon,
+	Search,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import {
@@ -117,7 +118,7 @@ const library = [
 ];
 const mainNav = [
 	{ title: 'Home', icon: Home, path: '/player' },
-	{ title: 'Browse', icon: LayoutGrid, path: '/player/browse' },
+	{ title: 'Search', icon: Search, path: '/player/search' },
 	{ title: 'Favorites', icon: Heart, path: '/player/library' },
 ];
 

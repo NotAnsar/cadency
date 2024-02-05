@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
-import { Icons } from '@/components/icons';
+import { Icons } from '@/components/icons/icons';
 import { useEffect, useState } from 'react';
 import { toast } from '../use-toast';
 import { useSearchParams } from 'next/navigation';

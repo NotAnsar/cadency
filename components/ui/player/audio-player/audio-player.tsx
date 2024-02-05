@@ -1,59 +1,95 @@
-import { Heart, Pause, Play, SkipBack, SkipForward } from 'lucide-react';
+'use client';
 
-import Image from 'next/image';
-import { Progress } from '../../progress';
-import { cn } from '@/lib/utils';
-import { Input } from '../../input';
+import { cn, formatSongTime } from '@/lib/utils';
+import { useEffect, useRef } from 'react';
+import { useAudioPlayer } from '@/hooks/useAudioPlayer';
 import VolumeSection from './volume-section';
+import SongDetails from './song-details';
+import VolumeSkeleton from './volume-skeleton';
+import SongDetailsSkeleton from './song-details-skeleton';
 
+import AudioController from './audio-controller';
+
+const audio = {
+	url: 'https://p.scdn.co/mp3-preview/315b151078df729934712ed1cc21e11506c64017?cid=f6a40776580943a7bc5173125a1e8832',
+	thumbnail: 'https://i.scdn.co/image/ab67616d00004851bbdceba2bf1867d4966d0347',
+	title: 'n.h.i.e.',
+	author: '21 Savage',
+	liked: false,
+};
 export default function AudioPlayer() {
-	return (
-		<div className='h-20 bg-background w-full sticky bottom-0 backdrop-blur-sm border-t-4 border-primary flex justify-between items-center px-3'>
-			<div className='flex gap-3 items-center w-1/4'>
-				<Image
-					src={
-						'https://i.scdn.co/image/ab67616d00004851bbdceba2bf1867d4966d0347'
-					}
-					alt='n.h.i.e.'
-					width={56}
-					height={56}
-					className='rounded-sm'
-				/>
-				<div className=''>
-					<p className='text-sm font-medium'>n.h.i.e.</p>
-					<p className='text-sm text-muted-foreground'>21 Savage</p>
-				</div>
+	const audioRef = useRef<HTMLAudioElement | null>(null);
+	const progressBarRef = useRef<HTMLInputElement | null>(null);
+	const {
+		currentTime,
+		duration,
+		isPlaying,
+		tooglePlay,
+		onLoadedMetadata,
+		handleCurrentTime,
+	} = useAudioPlayer(audioRef, progressBarRef);
 
-				<Heart
-					className='w-[18px] h-[18px] ml-2 cursor-pointer'
-					fill='#eee'
-					role='button'
-				/>
-			</div>
-			<div className='w-1/2 grid gap-1 mr-8'>
-				<div className='flex gap-5 justify-center items-center'>
-					<SkipBack className='text-[#888] hover:text-foreground hover:cursor-pointer' />
-					<div className='bg-primary p-2 rounded-full flex items-center justify-center'>
-						<Pause className='flex items-center justify-center' color='#fff' />
-					</div>
-					<SkipForward className='text-[#888] hover:text-foreground hover:cursor-pointer' />
-				</div>
+	useEffect(() => {
+		if (audioRef.current) onLoadedMetadata();
+	}, [onLoadedMetadata]);
+
+	return (
+		<div
+			className='h-20 bg-background w-full sticky backdrop-blur-sm border-t-4 border-primary flex justify-between items-center px-3 focus-visible:outline-none gap-4'
+			onKeyDown={(e) => {
+				if (e.key === ' ') tooglePlay();
+			}}
+			tabIndex={-1}
+		>
+			{audioRef.current ? <SongDetails {...audio} /> : <SongDetailsSkeleton />}
+
+			<div className='grid gap-[2px] px-2 w-full md:w-2/3 '>
+				<AudioController isPlaying={isPlaying} tooglePlay={tooglePlay} />
 				<div className='flex gap-2 items-center justify-center'>
-					<span className='text-sm'>0:25</span>
-					<span className='w-4/5 relative '>
-						{/* <span
-							className={cn(
-								'absolute -translate-y-1/2 top-1/2  w-3 h-3 rounded-full bg-primary z-10',
-								'left-[50%]'
-							)}
-						></span> */}
-						{/* <Progress value={50} className='h-1' /> */}
-						<Input type='range' className='h-1' />
+					<span className='text-[13px] text-muted-foreground'>
+						{audioRef.current ? formatSongTime(currentTime) : '--:--'}
 					</span>
-					<span className='text-sm'>4:25</span>
+					<span className='w-4/5 relative flex items-center'>
+						<input
+							type='range'
+							className={cn(
+								'h-1 w-full bg-muted rounded-full accent-primary appearance-none opacity-0 hover:opacity-100 z-20'
+							)}
+							ref={progressBarRef}
+							min={0}
+							max={duration}
+							onChange={handleCurrentTime}
+						/>
+
+						<div
+							className={
+								'h-1 bg-primary rounded-full absolute pointer-events-none z-20'
+							}
+							style={{
+								width: currentTime ? `${(currentTime / duration) * 100}%` : '',
+							}}
+						/>
+						<div
+							className={
+								'h-1 bg-muted w-full rounded-full absolute pointer-events-none z-10'
+							}
+						/>
+
+						<audio src={audio.url} ref={audioRef} />
+					</span>
+
+					<span className='text-[13px] text-muted-foreground'>
+						{duration && !isNaN(duration) ? formatSongTime(duration) : '--:--'}
+					</span>
 				</div>
 			</div>
-			<VolumeSection />
+			<div className='hidden md:grid'>
+				{audioRef.current ? (
+					<VolumeSection audioRef={audioRef} />
+				) : (
+					<VolumeSkeleton />
+				)}
+			</div>
 		</div>
 	);
 }

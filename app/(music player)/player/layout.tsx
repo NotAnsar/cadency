@@ -13,10 +13,10 @@ export default async function PlayerLayout({ children }: PlayerLayoutProps) {
 				<div className='w-full'>
 					<TopNav />
 					<div>
-						<ScrollArea style={{ height: 'calc(100vh - 56px)' }}>
-							<main className='p-8 pb-20'>{children}</main>
-							<AudioPlayer />
+						<ScrollArea style={{ height: 'calc(100vh - 136px)' }}>
+							{children}
 						</ScrollArea>
+						<AudioPlayer />
 					</div>
 				</div>
 			</div>

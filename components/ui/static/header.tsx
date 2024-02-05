@@ -1,5 +1,6 @@
 'use client';
 
+import Hamburger from 'hamburger-react';
 import Link from 'next/link';
 import Logo from '../../logo';
 import { buttonVariants } from '../button';
@@ -56,7 +57,7 @@ export default function Header() {
 						</Link>
 					)}
 					<ModeToggle />
-					<button
+					{/* <button
 						className='block md:hidden'
 						onClick={() => setshowMobileNav((a) => !a)}
 						aria-label='menu'
@@ -76,6 +77,13 @@ export default function Header() {
 								name='open'
 							/>
 						)}
+					</button> */}
+					<button
+						className='block md:hidden '
+						aria-label='menu'
+						onClick={() => setshowMobileNav((a) => !a)}
+					>
+						<Hamburger toggled={showMobileNav} size={24} />
 					</button>
 				</nav>
 			</Wrapper>
