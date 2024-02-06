@@ -43,44 +43,50 @@ export default function AudioPlayer() {
 		>
 			{audioRef.current ? <SongDetails {...audio} /> : <SongDetailsSkeleton />}
 
-			<div className='grid gap-[2px] px-2 w-full md:w-2/3 '>
-				<AudioController isPlaying={isPlaying} tooglePlay={tooglePlay} />
-				<div className='flex gap-2 items-center justify-center'>
-					<span className='text-[13px] text-muted-foreground'>
-						{audioRef.current ? formatSongTime(currentTime) : '--:--'}
-					</span>
-					<span className='w-4/5 relative flex items-center'>
-						<input
-							type='range'
-							className={cn(
-								'h-1 w-full bg-muted rounded-full accent-primary appearance-none opacity-0 hover:opacity-100 z-20'
-							)}
-							ref={progressBarRef}
-							min={0}
-							max={duration}
-							onChange={handleCurrentTime}
-						/>
+			<div className='w-full '>
+				<div className='grid gap-[2px] md:w-4/5 w-full mx-auto'>
+					<AudioController isPlaying={isPlaying} tooglePlay={tooglePlay} />
+					<div className='flex gap-2 items-center justify-center'>
+						<span className='text-[13px] text-muted-foreground'>
+							{audioRef.current ? formatSongTime(currentTime) : '--:--'}
+						</span>
+						<span className='w-4/5 relative flex items-center'>
+							<input
+								type='range'
+								className={cn(
+									'h-1 w-full bg-muted rounded-full accent-primary appearance-none opacity-0 hover:opacity-100 z-20'
+								)}
+								ref={progressBarRef}
+								min={0}
+								max={duration}
+								onChange={handleCurrentTime}
+							/>
 
-						<div
-							className={
-								'h-1 bg-primary rounded-full absolute pointer-events-none z-20'
-							}
-							style={{
-								width: currentTime ? `${(currentTime / duration) * 100}%` : '',
-							}}
-						/>
-						<div
-							className={
-								'h-1 bg-muted w-full rounded-full absolute pointer-events-none z-10'
-							}
-						/>
+							<div
+								className={
+									'h-1 bg-primary rounded-full absolute pointer-events-none z-20'
+								}
+								style={{
+									width: currentTime
+										? `${(currentTime / duration) * 100}%`
+										: '',
+								}}
+							/>
+							<div
+								className={
+									'h-1 bg-muted w-full rounded-full absolute pointer-events-none z-10'
+								}
+							/>
 
-						<audio src={audio.url} ref={audioRef} />
-					</span>
+							<audio src={audio.url} ref={audioRef} />
+						</span>
 
-					<span className='text-[13px] text-muted-foreground'>
-						{duration && !isNaN(duration) ? formatSongTime(duration) : '--:--'}
-					</span>
+						<span className='text-[13px] text-muted-foreground'>
+							{duration && !isNaN(duration)
+								? formatSongTime(duration)
+								: '--:--'}
+						</span>
+					</div>
 				</div>
 			</div>
 			<div className='hidden md:grid'>

@@ -6,9 +6,13 @@ import SessionProvider from '@/components/session-provider';
 import { getServerSession } from 'next-auth';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
-import { Poppins } from 'next/font/google';
+import { Poppins, Montserrat } from 'next/font/google';
 
 const popping = Poppins({
+	subsets: ['latin'],
+	weight: ['400', '500', '600', '700'],
+});
+const montserrat = Montserrat({
 	subsets: ['latin'],
 	weight: ['400', '500', '600', '700'],
 });
@@ -24,10 +28,15 @@ export default async function RootLayout({ children }: LayoutProps) {
 	const session = await getServerSession();
 
 	return (
-		<html lang='en' suppressHydrationWarning={true} className='scroll-smooth'>
+		<html
+			lang='en'
+			suppressHydrationWarning={true}
+			className='scroll-smooth overflow-x-hidden'
+		>
 			<head />
 			<body
-				className={cn(popping.className, 'bg-noise')}
+				// className={cn(popping.className, 'bg-noise')}
+				className={cn(montserrat.className, 'bg-noise')}
 				suppressHydrationWarning={true}
 			>
 				<SessionProvider session={session}>
