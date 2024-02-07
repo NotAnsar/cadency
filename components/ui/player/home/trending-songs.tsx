@@ -1,36 +1,48 @@
+import { Track } from '@/app/(music player)/player/page';
 import { Icons } from '@/components/icons/audio-icons';
+import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import Link from 'next/link';
 
-type Songs = {
-	key: string;
-	title: string;
-	subtitle: string;
-	image: string;
-	text: string;
-	// time in seconds
-	// liked or not
-	// song url
+type Prop = {
+	songs: Track[];
+	classname?: string;
 };
-export default function TrendingSongs({ songs }: { songs: Songs[] }) {
+export default function TrendingSongs({ songs, classname = '' }: Prop) {
 	return (
-		<div className='flex-none'>
-			<h2 className='text-xl font-medium mb-4 tracking-tight'>Now Trending</h2>
+		<div className={cn('flex-none', classname)}>
+			<div className='flex justify-between items-center pr-1 mb-4'>
+				<h2 className='text-xl font-medium  tracking-tight'>
+					Trending <span className='text-primary font-semibold'>Now</span>{' '}
+				</h2>
+				<Link
+					href={'/player'}
+					className='text-sm text-primary hover:underline font-semibold'
+				>
+					View all
+				</Link>
+			</div>
 
 			<div className='flex w-full flex-col gap-2'>
-				{songs.slice(0, 5).map((song) => (
+				{songs.slice(0, 5).map((song: Track) => (
 					<div
 						className='flex justify-between w-full rounded-md overflow-hidden items-center bg-secondary gap-2'
-						key={song.key}
+						key={song.id}
 					>
 						<div className='flex gap-2 items-center'>
-							<Image src={song.image} alt={song.text} width={52} height={52} />
+							<Image
+								src={song.album.cover_medium}
+								alt={song.title}
+								width={52}
+								height={52}
+							/>
 
-							<div>
-								<p className='leading-none text-nowrap overflow-hidden text-[15px] font-medium text-'>
+							<div className='overflow-hidden'>
+								<p className='leading-none text-[15px] font-medium text-nowrap whitespace-nowrap overflow-hidden'>
 									{song.title}
 								</p>
-								<p className='text-xs text-muted-foreground mt-1'>
-									{song.subtitle}
+								<p className='text-xs text-muted-foreground mt-1 text-nowrap whitespace-nowrap overflow-hidden'>
+									{song.artist.name}
 								</p>
 							</div>
 						</div>

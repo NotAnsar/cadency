@@ -13,7 +13,9 @@ export default async function PlayerLayout({ children }: PlayerLayoutProps) {
 				<div className='w-full'>
 					<TopNav />
 					<div>
-						<ScrollArea style={{ height: 'calc(100vh - 136px)' }}>
+						<ScrollArea
+							style={{ height: 'calc(100vh - 136px)', maxWidth: '1800px' }}
+						>
 							{children}
 						</ScrollArea>
 						<AudioPlayer />

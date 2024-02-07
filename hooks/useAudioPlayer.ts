@@ -60,7 +60,7 @@ export const useAudioPlayer = (
 			audioRef.current.currentTime = value;
 			setCurrentTime(value);
 		}
-	}
+	} 
 
 	return {
 		isPlaying,

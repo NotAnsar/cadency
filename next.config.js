@@ -11,11 +11,18 @@ const nextConfig = {
 				port: '',
 				pathname: '/image/**',
 			},
+
 			{
 				protocol: 'https',
-				hostname: 'is1-ssl.mzstatic.com',
+				hostname: 'api.deezer.com',
 				port: '',
-				pathname: '/image/**',
+				pathname: '/**',
+			},
+			{
+				protocol: 'https',
+				hostname: 'e-cdns-images.dzcdn.net',
+				port: '',
+				pathname: '/**',
 			},
 		],
 	},
