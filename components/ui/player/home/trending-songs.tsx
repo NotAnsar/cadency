@@ -1,13 +1,11 @@
-import { Track } from '@/app/(music player)/player/page';
+import { type Track } from '@/types/music';
 import { Icons } from '@/components/icons/audio-icons';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 
-type Prop = {
-	songs: Track[];
-	classname?: string;
-};
+type Prop = { songs: Track[]; classname?: string };
+
 export default function TrendingSongs({ songs, classname = '' }: Prop) {
 	return (
 		<div className={cn('flex-none', classname)}>

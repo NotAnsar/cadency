@@ -7,7 +7,8 @@ export default async function RootLayout({ children }: LayoutProps) {
 	return (
 		<div>
 			<Header />
-			{children}
+			<main className='mt-[65px]'>{children}</main>
+
 			<Footer />
 		</div>
 	);

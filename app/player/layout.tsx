@@ -7,21 +7,18 @@ type PlayerLayoutProps = { children: React.ReactNode };
 
 export default async function PlayerLayout({ children }: PlayerLayoutProps) {
 	return (
-		<>
-			<div className='flex bg-background h-screen'>
-				<SideBarNav />
-				<div className='w-full'>
-					<TopNav />
-					<div>
-						<ScrollArea
-							style={{ height: 'calc(100vh - 136px)', maxWidth: '1800px' }}
-						>
-							{children}
-						</ScrollArea>
-						<AudioPlayer />
-					</div>
-				</div>
+		<div className='flex bg-background h-screen'>
+			<SideBarNav />
+			<div className='w-full'>
+				<TopNav />
+
+				<ScrollArea
+					style={{ height: 'calc(100vh - 136px)', maxWidth: '1800px' }}
+				>
+					{children}
+				</ScrollArea>
+				<AudioPlayer />
 			</div>
-		</>
+		</div>
 	);
 }

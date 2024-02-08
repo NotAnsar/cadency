@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Logo from '../../logo';
 import { buttonVariants } from '../button';
 import { ModeToggle } from '../mode-toggle';
-import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import Wrapper from './wrapper';
@@ -23,8 +22,8 @@ export default function Header() {
 	const { data: session } = useSession();
 
 	return (
-		<header className=' sticky top-0 z-50 w-full border-b border-border/40 bg-noise bg bg-background/70'>
-			<Wrapper className='flex items-center justify-between'>
+		<header className='fixed top-0 z-50 w-full border-b border-border/40 bg-noise bg bg-background/70 '>
+			<Wrapper className='flex items-center justify-between py-0 h-16'>
 				<nav className='flex items-center'>
 					<Logo className='text-2xl mr-8 font-medium' />
 				</nav>
@@ -57,27 +56,7 @@ export default function Header() {
 						</Link>
 					)}
 					<ModeToggle />
-					{/* <button
-						className='block md:hidden'
-						onClick={() => setshowMobileNav((a) => !a)}
-						aria-label='menu'
-					>
-						{showMobileNav ? (
-							<X
-								strokeWidth={1.5}
-								width={'2rem'}
-								height={'2rem'}
-								name='close'
-							/>
-						) : (
-							<Menu
-								strokeWidth={1.5}
-								width={'2rem'}
-								height={'2rem'}
-								name='open'
-							/>
-						)}
-					</button> */}
+
 					<button
 						className='block md:hidden '
 						aria-label='menu'

@@ -1,11 +1,9 @@
-import { Artist } from '@/app/(music player)/player/page';
+import { type Artist } from '@/types/music';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 
-type Prop = {
-	artists: Artist[];
-	classname?: string;
-};
+type Prop = { artists: Artist[]; classname?: string };
+
 export default function TopArtists({ artists, classname = '' }: Prop) {
 	return (
 		<div className={cn('w-full', classname)}>

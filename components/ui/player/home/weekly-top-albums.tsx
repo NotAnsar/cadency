@@ -1,12 +1,9 @@
-import { Album } from '@/app/(music player)/player/page';
 import { cn } from '@/lib/utils';
+import { type Album } from '@/types/music';
 import Image from 'next/image';
 import Link from 'next/link';
 
-type Prop = {
-	albums: Album[];
-	classname?: string;
-};
+type Prop = { albums: Album[]; classname?: string };
 
 export default function WeeklyTopAlbums({ albums, classname = '' }: Prop) {
 	return (

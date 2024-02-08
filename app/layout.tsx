@@ -6,12 +6,8 @@ import SessionProvider from '@/components/session-provider';
 import { getServerSession } from 'next-auth';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
-import { Poppins, Montserrat } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 
-const popping = Poppins({
-	subsets: ['latin'],
-	weight: ['400', '500', '600', '700'],
-});
 const montserrat = Montserrat({
 	subsets: ['latin'],
 	weight: ['400', '500', '600', '700'],
@@ -35,7 +31,6 @@ export default async function RootLayout({ children }: LayoutProps) {
 		>
 			<head />
 			<body
-				// className={cn(popping.className, 'bg-noise')}
 				className={cn(montserrat.className, 'bg-noise')}
 				suppressHydrationWarning={true}
 			>

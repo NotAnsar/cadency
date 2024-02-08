@@ -1,6 +1,7 @@
 import TopArtists from '@/components/ui/player/home/top-artists';
 import TrendingSongs from '@/components/ui/player/home/trending-songs';
 import WeeklyTopAlbums from '@/components/ui/player/home/weekly-top-albums';
+import { Chart } from '@/types/music';
 import axios from 'axios';
 
 export default async function page() {
@@ -35,35 +36,3 @@ async function getChart() {
 		return { tracks: null, albums: null, artists: null };
 	}
 }
-
-export type Track = {
-	id: string;
-	title: string;
-	duration: number;
-	preview: string;
-	position: number;
-	artist: Artist;
-	album: Album;
-};
-
-export type Artist = {
-	id: string;
-	name: string;
-	picture: 'https://api.deezer.com/artist/14235001/image';
-	tracklist: 'https://api.deezer.com/artist/14235001/top?limit=50';
-	position: 1;
-};
-
-export type Album = {
-	id: string;
-	title: string;
-	cover_medium: string;
-	tracklist: string;
-	artist: Artist;
-};
-
-export type Chart = {
-	tracks: Track[];
-	albums: Album[];
-	artists: Artist[];
-};
