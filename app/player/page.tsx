@@ -18,7 +18,7 @@ export default async function page() {
 	);
 }
 
-async function getChart() {
+export async function getChart() {
 	const options = {
 		method: 'GET',
 		url: 'https://api.deezer.com/chart',

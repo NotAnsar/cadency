@@ -42,10 +42,10 @@ export default function UserNav() {
 					<Link href='/player'>Music Player</Link>
 				</DropdownMenuItem>
 				<DropdownMenuItem asChild>
-					<Link href='/player'>Account</Link>
+					<Link href='/player/profile'>Profile</Link>
 				</DropdownMenuItem>
 				<DropdownMenuItem asChild>
-					<Link href='/player'>Settings</Link>
+					<Link href='/player/setting'>Settings</Link>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem
