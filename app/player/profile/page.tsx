@@ -5,9 +5,9 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Chart } from '@/types/music';
-import { getChart } from '../page';
 import ListPlaylists from '@/components/ui/player/profile/ListPlaylists';
 import ListFollowedArtists from '@/components/ui/player/profile/ListFollowedArtists';
+import { getChart } from '@/lib/db';
 
 export default async function page() {
 	const user = await getCurrentUser();
