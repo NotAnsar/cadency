@@ -5,7 +5,7 @@ import { Input } from '../input';
 
 export default function TopNav() {
 	return (
-		<header className='sticky top-0 z-50 w-full border-b bg-background  px-4 border-[#ddd] dark:border-[#333] h-14 grid items-center'>
+		<header className='sticky top-0 z-50 w-full border-b bg-background px-4 border-[#ddd] dark:border-[#333] h-14 grid items-center'>
 			<nav className='flex justify-between items-center gap-4'>
 				<form className='w-3/4 md:w-2/5  '>
 					<div className='relative  '>
@@ -17,10 +17,8 @@ export default function TopNav() {
 						/>
 					</div>
 				</form>
-				<div className='flex gap-2 ml-auto'>
-					<UserNav />
-					<ModeToggle />
-				</div>
+
+				<UserNav />
 			</nav>
 		</header>
 	);

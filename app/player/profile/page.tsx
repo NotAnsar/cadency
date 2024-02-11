@@ -1,15 +1,14 @@
 import { getCurrentUser } from '@/lib/session';
-
+import { getChart } from '@/lib/db';
+import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Chart } from '@/types/music';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ListPlaylists from '@/components/ui/player/profile/ListPlaylists';
 import ListFollowedArtists from '@/components/ui/player/profile/ListFollowedArtists';
-import { getChart } from '@/lib/db';
 
-export default async function page() {
+export default async function Page() {
 	const user = await getCurrentUser();
 	const { albums, artists }: Chart = await getChart();
 
@@ -60,7 +59,7 @@ export default async function page() {
 				className='p-8'
 				style={{
 					background:
-						' linear-gradient(180deg, rgba(225,29,72,.2) 0%, rgba(225,29,72,0) 50%)',
+						'linear-gradient(180deg, rgba(225,29,72,.2) 0%, rgba(225,29,72,0) 50%)',
 				}}
 			>
 				<Tabs defaultValue='playlist' className='w-full'>

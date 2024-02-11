@@ -4,7 +4,7 @@ import WeeklyTopAlbums from '@/components/ui/player/home/weekly-top-albums';
 import { getChart } from '@/lib/db';
 import { Chart } from '@/types/music';
 
-export default async function page() {
+export default async function Page() {
 	const { albums, tracks, artists }: Chart = await getChart();
 
 	return (

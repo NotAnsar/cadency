@@ -10,9 +10,12 @@ import {
 } from './ui/dropdown-menu';
 import { signOut, useSession } from 'next-auth/react';
 import { UserAvatar } from './user-avatar';
+import { useTheme } from 'next-themes';
+import { Switch } from './ui/switch';
 
 export default function UserNav() {
 	const { data: session } = useSession();
+	const { setTheme, theme } = useTheme();
 	const user = session?.user;
 
 	return (
@@ -46,6 +49,18 @@ export default function UserNav() {
 				</DropdownMenuItem>
 				<DropdownMenuItem asChild>
 					<Link href='/player/setting'>Settings</Link>
+				</DropdownMenuItem>
+				<DropdownMenuItem asChild>
+					<div className='flex gap-4'>
+						<p>Dark Mode</p>
+						<Switch
+							id='theme'
+							checked={theme === 'dark'}
+							onCheckedChange={() =>
+								setTheme(theme === 'light' ? 'dark' : 'light')
+							}
+						/>
+					</div>
 				</DropdownMenuItem>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem

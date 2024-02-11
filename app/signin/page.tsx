@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 	description: 'Sign in to have Access.',
 };
 
-export default async function page() {
+export default async function Page() {
 	const user = await getCurrentUser();
 
 	if (user) redirect('/player');

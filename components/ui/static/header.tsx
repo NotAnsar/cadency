@@ -1,15 +1,12 @@
 'use client';
 
-import Hamburger from 'hamburger-react';
 import Link from 'next/link';
 import Logo from '../../logo';
-import { buttonVariants } from '../button';
 import { ModeToggle } from '../mode-toggle';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import Wrapper from './wrapper';
-import UserNav from '@/components/user-nav';
-import { useSession } from 'next-auth/react';
+import { Menu, X } from 'lucide-react';
 
 const mainNav = [
 	{ title: 'Pricing', href: '/#pricing' },
@@ -18,8 +15,6 @@ const mainNav = [
 ];
 export default function Header() {
 	const [showMobileNav, setshowMobileNav] = useState(false);
-
-	const { data: session } = useSession();
 
 	return (
 		<header className='fixed top-0 z-50 w-full border-b border-border/40 bg-noise bg bg-background/70 '>
@@ -41,28 +36,18 @@ export default function Header() {
 						</Link>
 					))}
 				</nav>
-				<nav className='flex items-center gap-2'>
-					{session?.user ? (
-						<UserNav />
-					) : (
-						<Link
-							href='/signin'
-							className={cn(
-								buttonVariants({ variant: 'ghost' }),
-								'hidden md:flex'
-							)}
-						>
-							Sign In
-						</Link>
-					)}
-					<ModeToggle />
 
+				<nav className='flex items-center gap-2'>
+					<ModeToggle />
 					<button
-						className='block md:hidden '
-						aria-label='menu'
+						className='block md:hidden'
 						onClick={() => setshowMobileNav((a) => !a)}
 					>
-						<Hamburger toggled={showMobileNav} size={24} />
+						{showMobileNav ? (
+							<X strokeWidth={1.5} width={'2rem'} height={'2rem'} />
+						) : (
+							<Menu strokeWidth={1.5} width={'2rem'} height={'2rem'} />
+						)}
 					</button>
 				</nav>
 			</Wrapper>
@@ -70,18 +55,6 @@ export default function Header() {
 			<div
 				className={cn('w-full p-4 block md:hidden', !showMobileNav && 'hidden')}
 			>
-				{!session?.user && (
-					<Link
-						href='/signin'
-						className={cn(
-							buttonVariants({ variant: 'secondary' }),
-							'w-full my-2'
-						)}
-					>
-						Sign In
-					</Link>
-				)}
-
 				{mainNav.map((nav, i) => (
 					<Link
 						href={nav.href}

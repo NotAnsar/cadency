@@ -1,12 +1,11 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Button } from '../button';
+import { Button, buttonVariants } from '../button';
 import { ScrollArea } from '../scroll-area';
 import Logo from '@/components/logo';
 import {
 	Home,
-	LayoutGrid,
 	Library,
 	ListMusic,
 	ListMusicIcon,
@@ -24,6 +23,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from '../tooltip';
+import Link from 'next/link';
 
 export default function SideBarNav({
 	className,
@@ -109,13 +109,15 @@ export default function SideBarNav({
 	);
 }
 
-const playlists: string[] = ['fkllmfke'];
+const playlists: string[] = [];
+
 const library = [
 	{ title: 'Playlists', icon: ListMusic, path: '/player/library/playlists' },
 	{ title: 'Songs', icon: Music2, path: '/player/library' },
 	{ title: 'Artists', icon: Mic2, path: '/player/library' },
 	{ title: 'Albums', icon: Library, path: '/player/library' },
 ];
+
 const mainNav = [
 	{ title: 'Home', icon: Home, path: '/player' },
 	{ title: 'Search', icon: Search, path: '/player/search' },
@@ -136,13 +138,18 @@ function Nav({
 	return (
 		<Tooltip>
 			<TooltipTrigger asChild>
-				<Button
-					variant={path === currentPath ? 'secondary' : 'ghost'}
-					className='justify-start'
+				<Link
+					className={cn(
+						buttonVariants({
+							variant: path === currentPath ? 'secondary' : 'ghost',
+						}),
+						'justify-start'
+					)}
+					href={path}
 				>
 					<Icon className='md:mr-2 h-4 w-4' />
 					<p className='hidden md:block'>{title}</p>
-				</Button>
+				</Link>
 			</TooltipTrigger>
 			<TooltipContent
 				side='right'
