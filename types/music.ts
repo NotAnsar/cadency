@@ -1,7 +1,10 @@
-export type Track = {
+export type TrackData = {
 	id: string;
 	title: string;
 	duration: number;
+};
+
+export type Track = TrackData & {
 	preview: string;
 	position: number;
 	artist: Artist;
@@ -11,17 +14,31 @@ export type Track = {
 export type Artist = {
 	id: string;
 	name: string;
-	picture: 'https://api.deezer.com/artist/14235001/image';
-	tracklist: 'https://api.deezer.com/artist/14235001/top?limit=50';
-	position: 1;
+	picture: string;
+	tracklist: string;
+};
+
+export type ArtistDetails = Artist & {
+	picture_medium: string;
+	nb_album: number;
+	nb_fan: number;
 };
 
 export type Album = {
 	id: string;
 	title: string;
 	cover_medium: string;
-	tracklist: string;
 	artist: Artist;
+	release_date?: string;
+	record_type?: string;
+};
+
+export type AlbumDetails = Album & {
+	nb_tracks: number;
+	duration: number;
+	label: string;
+	explicit_lyrics: boolean;
+	tracks: { data: Track[] };
 };
 
 export type Chart = {

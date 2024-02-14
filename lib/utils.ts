@@ -12,3 +12,23 @@ export function formatSongTime(seconds: number) {
 	const returnedSeconds = secs < 10 ? `0${secs}` : `${secs}`;
 	return `${returnedMinutes}:${returnedSeconds}`;
 }
+
+export function formatTime(seconds: number): string {
+	let hours: number = Math.floor(seconds / 3600);
+	let minutes: number = Math.floor((seconds % 3600) / 60);
+	let remainingSeconds: number = seconds % 60;
+
+	// Format hours, minutes, and seconds
+	const formattedHours = hours > 0 ? `${hours} hr` : '';
+	const formattedMinutes = minutes > 0 ? `${minutes} min` : '';
+	const formattedSeconds =
+		remainingSeconds > 0 ? `${remainingSeconds} sec` : '';
+
+	// Combine formatted parts
+	const formattedTimeParts = [
+		formattedHours,
+		formattedMinutes,
+		formattedSeconds,
+	].filter(Boolean);
+	return formattedTimeParts.join(' ');
+}

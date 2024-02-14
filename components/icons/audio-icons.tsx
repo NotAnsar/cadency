@@ -1,3 +1,5 @@
+import { MoreHorizontal } from 'lucide-react';
+
 type IconProps = React.HTMLAttributes<SVGElement>;
 
 export const Icons = {
@@ -97,6 +99,7 @@ export const Icons = {
 			/>
 		</svg>
 	),
+	MoreHorizontal,
 	speakerWave: (props: IconProps) => (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'

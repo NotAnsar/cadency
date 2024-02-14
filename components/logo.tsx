@@ -11,16 +11,18 @@ const inknut_Antiqua = Inknut_Antiqua({
 type LogoProps = {
 	className?: string | undefined;
 	type?: 'mobile' | 'default';
+	href?: string;
 };
 
 export default function Logo({
 	type = 'default',
+	href = '/',
 	className,
 	...props
 }: LogoProps) {
 	return (
 		<Link
-			href={'/'}
+			href={href}
 			className={cn(inknut_Antiqua.className, className)}
 			{...props}
 		>

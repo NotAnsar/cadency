@@ -1,4 +1,3 @@
-import { ModeToggle } from '@/components/ui/mode-toggle';
 import UserNav from '@/components/user-nav';
 import { Search } from 'lucide-react';
 import { Input } from '../input';

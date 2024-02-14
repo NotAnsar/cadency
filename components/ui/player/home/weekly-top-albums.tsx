@@ -22,22 +22,32 @@ export default function WeeklyTopAlbums({ albums, classname = '' }: Prop) {
 			<div className='flex items-center justify-between h-[200px] overflow-y-hidden flex-wrap'>
 				{albums.map((album: Album) => (
 					<div key={album.id} className='w-[150px] h-[200px] mr-4'>
-						<div className='overflow-hidden rounded-md'>
+						<Link
+							href={`/player/album/${album.id}`}
+							className='overflow-hidden rounded-md block'
+						>
 							<Image
 								src={album.cover_medium}
 								alt={album.title}
 								width={150}
 								height={150}
-								className='rounded-md h-auto object-cover transition-all hover:scale-105 aspect-square '
+								className='rounded-md h-auto object-cover transition-all hover:scale-105 aspect-square cursor-pointer'
 							/>
-						</div>
-						<p className='leading-none mt-2 text-nowrap whitespace-nowrap overflow-hidden text-[15px] font-medium'>
-							{album.title}
-						</p>
+						</Link>
 
-						<p className='text-xs text-muted-foreground mt-1 text-nowrap whitespace-nowrap overflow-hidden'>
+						<Link
+							href={`/player/album/${album.id}`}
+							className='leading-none mt-2 text-nowrap whitespace-nowrap overflow-hidden text-[15px] font-medium block hover:underline cursor-pointer'
+						>
+							{album.title}
+						</Link>
+
+						<Link
+							href={`/player/artist/${album.artist.id}`}
+							className='text-xs text-muted-foreground mt-1 text-nowrap whitespace-nowrap overflow-hidden hover:underline'
+						>
 							{album.artist.name}
-						</p>
+						</Link>
 					</div>
 				))}
 			</div>

@@ -51,7 +51,7 @@ export default function UserNav() {
 					<Link href='/player/setting'>Settings</Link>
 				</DropdownMenuItem>
 				<DropdownMenuItem asChild>
-					<div className='flex gap-4'>
+					<div className='flex gap-4 justify-between'>
 						<p>Dark Mode</p>
 						<Switch
 							id='theme'

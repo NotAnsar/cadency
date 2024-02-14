@@ -5,16 +5,30 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 
 type PlayerLayoutProps = { children: React.ReactNode };
 
+// export default async function PlayerLayout({ children }: PlayerLayoutProps) {
+// 	return (
+// 		<div className='flex bg-background h-screen'>
+// 			<SideBarNav />
+// 			<div className='w-[calc(100%-4.5rem)] md:w-[calc(100%-13rem)]'>
+// 				<TopNav />
+
+// 				<ScrollArea className='h-[calc(100vh-8.5rem)] mx-auto max-w-[1500px]'>
+// 					{children}
+// 				</ScrollArea>
+// 				<AudioPlayer />
+// 			</div>
+// 		</div>
+// 	);
+// }
+
 export default async function PlayerLayout({ children }: PlayerLayoutProps) {
 	return (
-		<div className='flex bg-background h-screen'>
+		<div className=''>
 			<SideBarNav />
-			<div className='w-full'>
+			<div className='ml-[72px] md:ml-52 w-[calc(100%-4.5rem)] md:w-[calc(100%-13rem)] bg-background'>
 				<TopNav />
 
-				<ScrollArea
-					style={{ height: 'calc(100vh - 136px)', maxWidth: '1800px' }}
-				>
+				<ScrollArea className='h-[calc(100vh-8.5rem)] w-full mx-auto max-w-[1500px]'>
 					{children}
 				</ScrollArea>
 				<AudioPlayer />

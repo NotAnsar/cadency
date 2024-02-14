@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Button, buttonVariants } from '../button';
+import { buttonVariants } from '../button';
 import { ScrollArea } from '../scroll-area';
 import Logo from '@/components/logo';
 import {
@@ -34,8 +34,9 @@ export default function SideBarNav({
 	return (
 		<div
 			className={cn(
-				'pb-12 md:w-64 bg-background border-r-2 border-[#ddd] dark:border-[#333] flex flex-col',
-				className
+				'pb-12 w-[72px] md:w-52 bg-background border-r-2 border-[#ddd] dark:border-[#333] flex flex-col  ',
+				className,
+				'h-screen fixed' //
 			)}
 			{...props}
 		>
@@ -43,10 +44,14 @@ export default function SideBarNav({
 				<div className='space-y-4 py-4'>
 					<div className='px-3 py-2 space-y-6'>
 						<div>
-							<Logo className='text-2xl ps-2 hidden md:block font-medium' />
+							<Logo
+								className='text-2xl ps-2 hidden md:block font-medium'
+								href='/player'
+							/>
 							<Logo
 								type='mobile'
 								className='text-2xl grid justify-center md:hidden  font-medium'
+								href='/player'
 							/>
 						</div>
 
