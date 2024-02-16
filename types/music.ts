@@ -9,17 +9,16 @@ export type Track = TrackData & {
 	position: number;
 	artist: Artist;
 	album: Album;
+	contributors: Artist[];
 };
 
 export type Artist = {
 	id: string;
 	name: string;
-	picture: string;
-	tracklist: string;
+	picture_medium: string;
 };
 
 export type ArtistDetails = Artist & {
-	picture_medium: string;
 	nb_album: number;
 	nb_fan: number;
 };
@@ -31,6 +30,7 @@ export type Album = {
 	artist: Artist;
 	release_date?: string;
 	record_type?: string;
+	explicit_lyrics?: boolean;
 };
 
 export type AlbumDetails = Album & {
@@ -38,6 +38,7 @@ export type AlbumDetails = Album & {
 	duration: number;
 	label: string;
 	explicit_lyrics: boolean;
+	record_type: string;
 	tracks: { data: Track[] };
 };
 

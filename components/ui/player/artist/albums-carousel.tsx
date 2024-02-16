@@ -36,7 +36,7 @@ export default function AlbumsCarousel({
 							<CarouselPrevious className='left-0 -translate-x-1/2 z-40' />
 							<CarouselNext className='right-0 z-40' />
 							<Link
-								href={`/player/artist/${id}/All`}
+								href={`/player/artist/${id}/all`}
 								className='text-primary text-[15px] hover:underline font-semibold cursor-pointer'
 							>
 								View All
@@ -47,6 +47,7 @@ export default function AlbumsCarousel({
 
 				<CarouselContent>
 					{albums.map((album) => (
+						// album.explicit_lyrics
 						<CarouselItem
 							key={album.id}
 							className='basis-44 mr-4  md:basis-52  '

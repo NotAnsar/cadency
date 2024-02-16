@@ -19,18 +19,18 @@ export default function WeeklyTopAlbums({ albums, classname = '' }: Prop) {
 					View all
 				</Link>
 			</div>
-			<div className='flex items-center justify-between h-[200px] overflow-y-hidden flex-wrap'>
+			<div className='flex items-center justify-between h-[220px] overflow-y-hidden flex-wrap'>
 				{albums.map((album: Album) => (
-					<div key={album.id} className='w-[150px] h-[200px] mr-4'>
+					<div key={album.id} className='w-[170px] h-[220px] mr-4'>
 						<Link
 							href={`/player/album/${album.id}`}
-							className='overflow-hidden rounded-md block'
+							className='overflow-hidden rounded-md block border border-border'
 						>
 							<Image
 								src={album.cover_medium}
 								alt={album.title}
-								width={150}
-								height={150}
+								width={170}
+								height={170}
 								className='rounded-md h-auto object-cover transition-all hover:scale-105 aspect-square cursor-pointer'
 							/>
 						</Link>

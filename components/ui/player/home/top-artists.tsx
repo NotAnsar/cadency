@@ -16,7 +16,7 @@ export default function TopArtists({ artists, classname = '' }: Prop) {
 				{artists.map((artist) => (
 					<div key={artist.id} className='text-center w-[120px] '>
 						<Image
-							src={artist.picture}
+							src={artist.picture_medium}
 							alt={artist.name}
 							width={120}
 							height={120}

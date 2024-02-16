@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ListPlaylists from '@/components/ui/player/profile/ListPlaylists';
 import ListFollowedArtists from '@/components/ui/player/profile/ListFollowedArtists';
 
+
 export default async function Page() {
 	const user = await getCurrentUser();
 	const { albums, artists }: Chart = await getChart();
@@ -15,11 +16,11 @@ export default async function Page() {
 	return (
 		<main>
 			<div
-				className='bg-noise w-full relative'
-				style={{
-					background:
-						' linear-gradient(180deg, rgba(225,29,72,.8) 0%, rgba(225,29,72,.25) 100%)',
-				}}
+				className='w-full relative'
+				// style={{
+				// 	background:
+				// 		' linear-gradient(180deg, rgba(225,29,72,.8) 0%, rgba(225,29,72,.25) 100%)',
+				// }}
 			>
 				<div className='flex flex-col items-center text-center justify-center p-8'>
 					{user ? (
@@ -35,9 +36,11 @@ export default async function Page() {
 					) : (
 						<div
 							className={cn(
-								'h-44 w-44 md:h-52 md:w-52 z-10 rounded-full mx-auto md:me-auto md:ms-0  bg-[#e11d48]'
+								'h-44 w-44 md:h-52 md:w-52 z-10 rounded-full mx-auto md:me-auto md:ms-0  bg-[#e11d48] flex items-center justify-center text-8xl font-semibold text-white'
 							)}
-						/>
+						>
+							A
+						</div>
 					)}
 
 					<div className='flex flex-col md:flex-row md:items-center md:justify-between mt-2 gap-4 w-full'>
@@ -57,10 +60,10 @@ export default async function Page() {
 
 			<div
 				className='p-8'
-				style={{
-					background:
-						'linear-gradient(180deg, rgba(225,29,72,.2) 0%, rgba(225,29,72,0) 50%)',
-				}}
+				// style={{
+				// 	background:
+				// 		'linear-gradient(180deg, rgba(225,29,72,.2) 0%, rgba(225,29,72,0) 50%)',
+				// }}
 			>
 				<Tabs defaultValue='playlist' className='w-full'>
 					<TabsList className='flex w-full bg-transparent justify-normal gap-4 mb-8'>

@@ -4,11 +4,11 @@ import { formatSongTime } from '@/lib/utils';
 import { Track } from '@/types/music';
 import { MoreHorizontal } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function PopularSongs({ songs }: { songs: Track[] }) {
 	const [showMore, setshowMore] = useState(false);
-
 	const songsShown = showMore ? songs.length : 5;
 
 	return (
@@ -31,8 +31,24 @@ export default function PopularSongs({ songs }: { songs: Track[] }) {
 								className='w-10 h-10 rounded-sm'
 							/>
 
-							<span className='text-[15px] ml-4'>{song.title}</span>
+							<div className='ml-4'>
+								<span className='text-[15px]'>{song.title}</span>
+								<div className='text-xs font-normal hover text-muted-foreground'>
+									{song.contributors.map((a, i) => (
+										<span key={a.id}>
+											<Link
+												href={`/player/artist/${a.id}`}
+												className='hover:underline'
+											>
+												{a.name}
+											</Link>
+											{`${song.contributors.length - 1 === i ? '' : ', '}`}
+										</span>
+									))}
+								</div>
+							</div>
 						</div>
+
 						<div className='flex items-center gap-6 mr-4'>
 							<Icons.heart className='w-5 h-5' />
 							<p className='text-sm w-10'>{formatSongTime(song.duration)}</p>

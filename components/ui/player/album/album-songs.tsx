@@ -28,7 +28,7 @@ export default function AlbumSongs({ label, tracks, title }: Prop) {
 					<TableHead>Album</TableHead>
 					<TableHead className='w-5'> </TableHead>
 					<TableHead>
-						<Clock3 width={20} height={20} className='ml-auto' />
+						<Clock3 width={16} height={16} className='ml-auto' />
 					</TableHead>
 				</TableRow>
 			</TableHeader>

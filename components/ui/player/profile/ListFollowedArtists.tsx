@@ -25,7 +25,7 @@ export default function ListFollowedArtists({ artists }: Prop) {
 				<div key={artist.id} className='w-[150px] '>
 					<div className='overflow-hidden rounded-md'>
 						<Image
-							src={artist.picture}
+							src={artist.picture_medium}
 							alt={artist.name}
 							width={150}
 							height={150}
