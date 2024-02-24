@@ -12,10 +12,10 @@ export default async function page({ params }: { params: { slug: string } }) {
 
 	return (
 		<div className='px-8 py-8 mb-16'>
-			<h1 className='text-[40px] font-semibold mb-10'>
+			<h1 className='text-4xl md:text-[40px] font-semibold mb-10'>
 				All <span className='text-primary'>The Beatles</span> Records
 			</h1>
-			<div className='w-full grid-cols-4 gap-6 grid'>
+			<div className='w-full grid grid-cols-3 md:grid-cols-4 gap-6'>
 				<Records records={records} />
 				<LoadMoreRecords id={params.slug} islast={!!!res.next} />
 			</div>

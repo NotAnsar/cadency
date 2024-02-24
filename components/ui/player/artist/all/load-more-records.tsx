@@ -26,10 +26,8 @@ export default function LoadMoreRecords({
 			if (!newRecords?.next) setIsLastPage(true);
 			pageLoaded.current++;
 		};
-		if (inView) {
-			console.log('loading');
-			loadMoreRecords();
-		}
+
+		if (inView) loadMoreRecords();
 	}, [inView, id]);
 
 	return (

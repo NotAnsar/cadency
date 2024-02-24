@@ -47,19 +47,19 @@ export async function getAlbum(id: string) {
 	}
 }
 
-async function getArtistDetails(id: string): Promise<any> {
+async function getArtistDetails(id: string) {
 	const response = await axios.get(`${url}/artist/${id}`);
 	return response.data;
 }
-async function getArtistTopSongs(id: string): Promise<any> {
+async function getArtistTopSongs(id: string) {
 	const response = await axios.get(`${url}/artist/${id}/top?limit=10`);
 	return response.data;
 }
-async function getArtistAlbums(id: string): Promise<any> {
+async function getArtistAlbums(id: string) {
 	const response = await axios.get(`${url}/artist/${id}/albums?limit=50`);
 	return response.data;
 }
-async function getArtistRelated(id: string): Promise<any> {
+async function getArtistRelated(id: string) {
 	const response = await axios.get(`${url}/artist/${id}/related?limit=10`);
 	return response.data;
 }
@@ -125,6 +125,49 @@ export async function getArtist(id: string) {
 	}
 }
 
-// const urls = [
-// 	`${url}/artist/${id}/related`, // get related artist top 5 album
-// ];
+export async function searchArtist(search: string) {
+	const response = await axios.get(`${url}/search/artist?q=${search}&limit=5`);
+	return response.data;
+}
+
+async function searchAlbum(search: string) {
+	const response = await axios.get(`${url}/search/album?q=${search}&limit=5`);
+	return response.data;
+}
+
+async function searchSong(search: string) {
+	const response = await axios.get(`${url}/search/track?q=${search}&limit=5`);
+	return response.data;
+}
+
+export async function searchAll(search: string) {
+	try {
+		const [res1, res2, res3] = await Promise.all([
+			searchArtist(search),
+			searchAlbum(search),
+			searchSong(search),
+		]);
+
+		if (res1.error) {
+			console.log('error 1');
+			throw new Error(res1.data.error);
+		}
+		if (res2.error) {
+			console.log('error 2');
+			throw new Error(res2.data.error);
+		}
+		if (res3.error) {
+			console.log('error 3');
+			throw new Error(res3.data.error);
+		}
+		const artists: ArtistDetails[] = res1.data;
+		const albums: AlbumDetails[] = res2.data;
+		const songs: Track[] = res3.data;
+
+		return { artists, albums, songs };
+	} catch (error) {
+		console.log('error', error);
+
+		return null;
+	}
+}

@@ -15,6 +15,7 @@ import {
 	Heart,
 	LucideIcon,
 	Search,
+	LibraryBig,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import {
@@ -117,16 +118,15 @@ export default function SideBarNav({
 const playlists: string[] = [];
 
 const library = [
-	{ title: 'Albums', icon: Library, path: '/player/favorite/albums' },
-	{ title: 'Artists', icon: Mic2, path: '/player/favorite/artists' },
-	{ title: 'Songs', icon: Music2, path: '/player/favorite/songs' },
-	{ title: 'Playlists', icon: ListMusic, path: '/player/favorite/playlists' },
+	{ title: 'Albums', icon: Library, path: '/player/library/albums' },
+	{ title: 'Artists', icon: Mic2, path: '/player/library/artists' },
+	{ title: 'Songs', icon: Music2, path: '/player/library/songs' },
+	{ title: 'Playlists', icon: ListMusic, path: '/player/library/playlists' },
 ];
 
 const mainNav = [
 	{ title: 'Home', icon: Home, path: '/player' },
-	// { title: 'Search', icon: Search, path: '/player/search' },
-	{ title: 'Favorites', icon: Heart, path: '/player/favorite' },
+	{ title: 'Library', icon: LibraryBig, path: '/player/library' },
 ];
 
 function Nav({
