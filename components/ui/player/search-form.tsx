@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useDebounce } from 'use-debounce';
+import { useDebounce, useDebouncedCallback } from 'use-debounce';
 import { Input } from '../input';
 import { searchAll } from '@/lib/db';
 import { Search } from 'lucide-react';
@@ -10,40 +10,30 @@ import type { AlbumDetails, ArtistDetails, Track } from '@/types/music';
 import SearchResult from './search-results';
 import { cn } from '@/lib/utils';
 
-type ResultType = {
+export type ResultType = {
 	artists: ArtistDetails[];
 	albums: AlbumDetails[];
 	songs: Track[];
 } | null;
 
 export default function SearchForm() {
-	const searchResultRef = useRef<HTMLDivElement | null>(null);
 	const [search, setSearch] = useState('');
-	const [query] = useDebounce(search, 400);
 	const [open, setOpen] = useState(false);
 	const [searchResult, setSearchResult] = useState<ResultType>(null);
 	const router = useRouter();
-
-	useEffect(() => {
-		const getSearch = async () => {
-			const res = await searchAll(query);
-			setSearchResult(res);
-		};
-
-		if (query !== '') getSearch();
-		else setOpen(false);
-	}, [query]);
-
-	useEffect(() => {
-		let handler = (e: MouseEvent) => {
-			console.log(searchResultRef.current);
-
-			if (!searchResultRef.current?.contains(e.target as Node)) {
-				setOpen(false);
-			}
-		};
-		document.addEventListener('mousedown', handler);
-	});
+	const debounced = useDebouncedCallback((value: string) => {
+		setSearch(value);
+		if (value === '') {
+			setOpen(false);
+		} else {
+			setOpen(true);
+			const getSearch = async () => {
+				const res = await searchAll(value);
+				setSearchResult(res);
+			};
+			getSearch();
+		}
+	}, 400);
 
 	return (
 		<form
@@ -59,24 +49,21 @@ export default function SearchForm() {
 					type='search'
 					className='pl-8 w-full'
 					placeholder='Search artists, albums, songs...'
-					value={search}
+					defaultValue={''}
 					onFocusCapture={() => {
-						if (query !== '') setOpen(true);
+						if (search !== '') setOpen(true);
 					}}
-					onChange={(e) => {
-						setSearch(e.target.value);
-						setOpen(true);
-					}}
+					onChange={(e) => debounced(e.target.value)}
 				/>
-				{searchResult && open ? (
-					<SearchResult
-						data={searchResult}
-						query={query}
-						closeModal={() => setOpen(false)}
-						innerRef={searchResultRef}
-						className={cn()}
-					/>
-				) : null}
+
+				<SearchResult
+					data={searchResult}
+					query={search}
+					closeModal={() => setOpen(false)}
+					className={cn(
+						!open || searchResult === null ? 'opacity-0 invisible ' : null
+					)}
+				/>
 			</div>
 		</form>
 	);
