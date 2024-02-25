@@ -4,22 +4,16 @@ import { cn } from '@/lib/utils';
 import { SearchX } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { ResultType } from './search-form';
 
 type Prop = {
 	data: ResultType;
-	query: string;
 	closeModal: () => void;
 	className: string;
 };
 
-export default function SearchResult({
-	data,
-	closeModal,
-	className,
-	query,
-}: Prop) {
+export default function SearchResult({ data, closeModal, className }: Prop) {
 	const searchResultRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -46,7 +40,7 @@ export default function SearchResult({
 			<Link
 				href={href}
 				onClick={closeModal}
-				className='h-[84px] flex items-center px-4 hover:bg-[#292929] cursor-pointer'
+				className='h-[84px] flex items-center px-4 hover:bg-[#eee] dark:hover:bg-[#292929] cursor-pointer'
 				key={id}
 			>
 				<Image
@@ -71,7 +65,7 @@ export default function SearchResult({
 	return (
 		<div
 			className={cn(
-				'bg-[#222] w-full absolute top-full mt-2 rounded-md py-2',
+				'bg-muted dark:bg-[#222] w-full absolute top-full mt-2 rounded-md py-2',
 				className
 			)}
 			ref={searchResultRef}
@@ -132,15 +126,6 @@ export default function SearchResult({
 								song.artist.name
 							)
 						)}
-
-					<div className='text-center '>
-						<Link
-							href={`/player/search/${query}`}
-							className='text-center inline-block text-sm bg-primary px-4 py-[6px] rounded-full my-2 font-medium text-white'
-						>
-							View All
-						</Link>
-					</div>
 				</>
 			)}
 		</div>

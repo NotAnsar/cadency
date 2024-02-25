@@ -125,18 +125,24 @@ export async function getArtist(id: string) {
 	}
 }
 
-export async function searchArtist(search: string) {
-	const response = await axios.get(`${url}/search/artist?q=${search}&limit=5`);
+export async function searchArtist(search: string, limit: number = 5) {
+	const response = await axios.get(
+		`${url}/search/artist?q=${search}&limit=${limit}`
+	);
 	return response.data;
 }
 
-async function searchAlbum(search: string) {
-	const response = await axios.get(`${url}/search/album?q=${search}&limit=5`);
+async function searchAlbum(search: string, limit: number = 5) {
+	const response = await axios.get(
+		`${url}/search/album?q=${search}&limit=${limit}`
+	);
 	return response.data;
 }
 
-async function searchSong(search: string) {
-	const response = await axios.get(`${url}/search/track?q=${search}&limit=5`);
+async function searchSong(search: string, limit: number = 5) {
+	const response = await axios.get(
+		`${url}/search/track?q=${search}&limit=${limit}`
+	);
 	return response.data;
 }
 

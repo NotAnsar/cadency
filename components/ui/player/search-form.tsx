@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useDebounce, useDebouncedCallback } from 'use-debounce';
+import { useDebouncedCallback } from 'use-debounce';
 import { Input } from '../input';
 import { searchAll } from '@/lib/db';
 import { Search } from 'lucide-react';
@@ -20,7 +20,6 @@ export default function SearchForm() {
 	const [search, setSearch] = useState('');
 	const [open, setOpen] = useState(false);
 	const [searchResult, setSearchResult] = useState<ResultType>(null);
-	const router = useRouter();
 	const debounced = useDebouncedCallback((value: string) => {
 		setSearch(value);
 		if (value === '') {
@@ -36,13 +35,7 @@ export default function SearchForm() {
 	}, 400);
 
 	return (
-		<form
-			className='w-3/4 md:w-2/5'
-			onSubmit={(e) => {
-				e.preventDefault();
-				router.push(`/player/search/${search}`);
-			}}
-		>
+		<form className='w-3/4 md:w-2/5' onSubmit={(e) => e.preventDefault()}>
 			<div className='relative'>
 				<Search className='absolute left-2 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground' />
 				<Input
@@ -58,7 +51,6 @@ export default function SearchForm() {
 
 				<SearchResult
 					data={searchResult}
-					query={search}
 					closeModal={() => setOpen(false)}
 					className={cn(
 						!open || searchResult === null ? 'opacity-0 invisible ' : null
