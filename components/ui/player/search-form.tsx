@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useDebouncedCallback } from 'use-debounce';
+import { useDebounce, useDebouncedCallback } from 'use-debounce';
 import { Input } from '../input';
 import { searchAll } from '@/lib/db';
 import { Search } from 'lucide-react';
@@ -20,19 +20,33 @@ export default function SearchForm() {
 	const [search, setSearch] = useState('');
 	const [open, setOpen] = useState(false);
 	const [searchResult, setSearchResult] = useState<ResultType>(null);
-	const debounced = useDebouncedCallback((value: string) => {
-		setSearch(value);
-		if (value === '') {
-			setOpen(false);
-		} else {
+	const [query] = useDebounce(search, 400);
+	// const debounced = useDebouncedCallback((value: string) => {
+	// 	setSearch(value);
+	// 	if (value === '') {
+	// 		setOpen(false);
+	// 	} else {
+	// 		setOpen(true);
+	// 		const getSearch = async () => {
+	// 			const res = await searchAll(value);
+	// 			setSearchResult(res);
+	// 		};
+	// 		getSearch();
+	// 	}
+	// }, 400);
+
+	useEffect(() => {
+		const getSearch = async () => {
+			const res = await searchAll(query);
+			setSearchResult(res);
+		};
+
+		if (query === '') setOpen(false);
+		else {
 			setOpen(true);
-			const getSearch = async () => {
-				const res = await searchAll(value);
-				setSearchResult(res);
-			};
 			getSearch();
 		}
-	}, 400);
+	}, [query]);
 
 	return (
 		<form className='w-3/4 md:w-2/5' onSubmit={(e) => e.preventDefault()}>
@@ -42,11 +56,19 @@ export default function SearchForm() {
 					type='search'
 					className='pl-8 w-full'
 					placeholder='Search artists, albums, songs...'
-					defaultValue={''}
+					// defaultValue={''}
+					// onFocusCapture={() => {
+					// 	if (search !== '') setOpen(true);
+					// }}
+					// onChange={(e) => debounced(e.target.value)}
+					value={search}
 					onFocusCapture={() => {
-						if (search !== '') setOpen(true);
+						if (query !== '') setOpen(true);
 					}}
-					onChange={(e) => debounced(e.target.value)}
+					onChange={(e) => {
+						setSearch(e.target.value);
+						setOpen(true);
+					}}
 				/>
 
 				<SearchResult
