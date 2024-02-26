@@ -3,6 +3,7 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import EmailProvider from 'next-auth/providers/email';
+
 import { prisma } from './prisma';
 import { sendVerificationRequest } from '../lib/email-provider-utils';
 

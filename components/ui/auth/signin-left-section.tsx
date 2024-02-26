@@ -1,6 +1,7 @@
 import Logo from '@/components/logo';
 import { cn } from '@/lib/utils';
 import { Lusitana } from 'next/font/google';
+import Image from 'next/image';
 
 export const lusitana = Lusitana({ subsets: ['latin'], weight: ['400'] });
 

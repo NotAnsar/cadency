@@ -1,6 +1,7 @@
 import { type Artist } from '@/types/music';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type Prop = { artists: Artist[]; classname?: string };
 
@@ -9,20 +10,27 @@ export default function TopArtists({ artists, classname = '' }: Prop) {
 		<div className={cn('w-full', classname)}>
 			<h2 className='text-xl font-medium mb-4 tracking-tight'>Top Artists</h2>
 
-			<div
-				className='grid gap-4  min-h-[168px] h-[320px] p-1 overflow-y-hidden  justify-between'
-				style={{ gridTemplateColumns: 'repeat(auto-fill, 120px)' }}
-			>
-				{artists.map((artist) => (
-					<div key={artist.id} className='text-center w-[120px] '>
-						<Image
-							src={artist.picture_medium}
-							alt={artist.name}
-							width={120}
-							height={120}
-							className='rounded-full mb-2 border-[3px] border-transparent outline-[3px] outline-primary outline '
-						/>
-						<p>{artist.name}</p>
+			<div className='grid gap-4 grid-cols-4'>
+				{artists.slice(0, 8).map((artist) => (
+					<div key={artist.id} className='col-span-1'>
+						<Link
+							href={`/player/artist/${artist.id}`}
+							className='overflow-hidden rounded-full block border border-border mb-2'
+						>
+							<Image
+								src={artist.picture_medium}
+								alt={artist.name}
+								width={160}
+								height={160}
+								className='w-auto h-auto transition-all hover:scale-105'
+							/>
+						</Link>
+						<Link
+							href={`/player/artist/${artist.id}`}
+							className='text-sm text-center hover:underline w-full block font-medium'
+						>
+							{artist.name}
+						</Link>
 					</div>
 				))}
 			</div>

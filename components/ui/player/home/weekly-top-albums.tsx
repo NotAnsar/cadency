@@ -8,20 +8,13 @@ type Prop = { albums: Album[]; classname?: string };
 export default function WeeklyTopAlbums({ albums, classname = '' }: Prop) {
 	return (
 		<div className={cn('w-full', classname)}>
-			<div className='flex justify-between items-center pr-2 mb-4'>
-				<h2 className='text-xl font-medium mb-4 tracking-tight'>
-					Weekly Top Albums
-				</h2>
-				<Link
-					href={'/player'}
-					className='text-sm text-primary hover:underline font-semibold'
-				>
-					View all
-				</Link>
-			</div>
-			<div className='flex items-center justify-between h-[220px] overflow-y-hidden flex-wrap'>
-				{albums.map((album: Album) => (
-					<div key={album.id} className='w-[170px] h-[220px] mr-4'>
+			<h2 className='text-xl font-medium mb-4 tracking-tight'>
+				Weekly Top Albums
+			</h2>
+
+			<div className='grid grid-cols-3 gap-2 md:grid-cols-6 md:gap-4'>
+				{albums.splice(0, 6).map((album: Album) => (
+					<div key={album.id} className='col-span-1'>
 						<Link
 							href={`/player/album/${album.id}`}
 							className='overflow-hidden rounded-md block border border-border'
@@ -31,7 +24,7 @@ export default function WeeklyTopAlbums({ albums, classname = '' }: Prop) {
 								alt={album.title}
 								width={170}
 								height={170}
-								className='rounded-md h-auto object-cover transition-all hover:scale-105 aspect-square cursor-pointer'
+								className='rounded-md object-cover transition-all hover:scale-105 aspect-square cursor-pointer w-auto h-auto'
 							/>
 						</Link>
 

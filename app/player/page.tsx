@@ -10,9 +10,9 @@ export default async function Page() {
 	return (
 		<main className='px-8 pt-6 pb-20'>
 			<WeeklyTopAlbums albums={albums} classname='mb-4' />
-			<div className='gap-8 grid md:grid-cols-5 w-full md:gap-12'>
-				<TopArtists artists={artists} classname='md:col-span-3' />
-				<TrendingSongs songs={tracks} classname='md:col-span-2 w-full' />
+			<div className='gap-8 grid md:grid-cols-7 w-full md:gap-12'>
+				<TopArtists artists={artists} classname='md:col-span-4' />
+				<TrendingSongs songs={tracks} classname='md:col-span-3' />
 			</div>
 		</main>
 	);

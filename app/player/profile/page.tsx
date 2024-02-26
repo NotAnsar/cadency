@@ -8,27 +8,20 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ListPlaylists from '@/components/ui/player/profile/ListPlaylists';
 import ListFollowedArtists from '@/components/ui/player/profile/ListFollowedArtists';
 
-
 export default async function Page() {
 	const user = await getCurrentUser();
 	const { albums, artists }: Chart = await getChart();
 
 	return (
 		<main>
-			<div
-				className='w-full relative'
-				// style={{
-				// 	background:
-				// 		' linear-gradient(180deg, rgba(225,29,72,.8) 0%, rgba(225,29,72,.25) 100%)',
-				// }}
-			>
-				<div className='flex flex-col items-center text-center justify-center p-8'>
-					{user ? (
+			<div className='w-full relative'>
+				<div className='flex flex-col items-center justify-center p-8'>
+					{user?.image ? (
 						<Image
 							alt={user.name ? user.name : ''}
 							src={user.image ? user.image : ''}
 							className={cn(
-								'h-44 w-44 md:h-52 md:w-52 bg-noise rounded-full mx-auto md:me-auto bg-[#e11d48]'
+								'h-44 w-44 md:h-52 md:w-52 bg-noise rounded-full bg-[#e11d48]'
 							)}
 							width={208}
 							height={208}
@@ -45,8 +38,8 @@ export default async function Page() {
 
 					<div className='flex flex-col md:flex-row md:items-center md:justify-between mt-2 gap-4 w-full'>
 						<div className='md:mb-0 md:text-left'>
-							<h2 className='text-3xl font-semibold'>Ansar Karrouach</h2>
-							<p className='text-muted-foreground'>karrouach.ansar@gmail.com</p>
+							<h2 className='text-3xl font-semibold'>{user?.name}</h2>
+							<p className='text-muted-foreground'>{user?.email}</p>
 						</div>
 						<Link
 							href={'/player/setting'}
@@ -58,13 +51,7 @@ export default async function Page() {
 				</div>
 			</div>
 
-			<div
-				className='p-8'
-				// style={{
-				// 	background:
-				// 		'linear-gradient(180deg, rgba(225,29,72,.2) 0%, rgba(225,29,72,0) 50%)',
-				// }}
-			>
+			<div className='p-8'>
 				<Tabs defaultValue='playlist' className='w-full'>
 					<TabsList className='flex w-full bg-transparent justify-normal gap-4 mb-8'>
 						{tabs.map((tab) => (

@@ -25,6 +25,7 @@ import {
 	TooltipTrigger,
 } from '../tooltip';
 import Link from 'next/link';
+import { TooltipPortal } from '@radix-ui/react-tooltip';
 
 export default function SideBarNav({
 	className,
@@ -156,12 +157,14 @@ function Nav({
 					<p className='hidden md:block'>{title}</p>
 				</Link>
 			</TooltipTrigger>
-			<TooltipContent
-				side='right'
-				className='flex items-center gap-4 md:hidden'
-			>
-				{title}
-			</TooltipContent>
+			<TooltipPortal>
+				<TooltipContent
+					side='right'
+					className='flex items-center gap-4 md:hidden'
+				>
+					{title}
+				</TooltipContent>
+			</TooltipPortal>
 		</Tooltip>
 	);
 }
