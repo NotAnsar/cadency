@@ -12,6 +12,8 @@ import {
 	AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { cn } from '@/lib/utils';
+import { signOut } from 'next-auth/react';
+import { deleteUser } from '@/actions/user-actions';
 
 export default function Page() {
 	return (
@@ -39,7 +41,15 @@ export default function Page() {
 						<AlertDialogCancel>Cancel</AlertDialogCancel>
 						<AlertDialogAction
 							className={cn(buttonVariants({ variant: 'destructive' }))}
-							onClick={() => console.log('clicked')}
+							onClick={async () => {
+								const res = await deleteUser();
+
+								if (res.message === 'Done') {
+									signOut();
+								} else {
+									// toast(res.message)
+								}
+							}}
 						>
 							Delete
 						</AlertDialogAction>

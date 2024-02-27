@@ -13,10 +13,16 @@ import { UserAvatar } from './user-avatar';
 import { useTheme } from 'next-themes';
 import { Switch } from './ui/switch';
 
-export default function UserNav() {
-	const { data: session } = useSession();
+export default function UserNav({
+	user,
+}: {
+	user: {
+		name?: string | null | undefined;
+		email?: string | null | undefined;
+		image?: string | null | undefined;
+	};
+}) {
 	const { setTheme, theme } = useTheme();
-	const user = session?.user;
 
 	return (
 		<DropdownMenu>
@@ -32,8 +38,8 @@ export default function UserNav() {
 			>
 				<div className='flex items-center justify-start gap-2 p-2'>
 					<div className='flex flex-col space-y-1 leading-none'>
-						{user?.name && <p className='font-medium'>{user.name}</p>}
-						{user?.email && (
+						{user.name && <p className='font-medium'>{user.name}</p>}
+						{user.email && (
 							<p className='w-[200px] truncate text-sm text-muted-foreground'>
 								{user.email}
 							</p>
