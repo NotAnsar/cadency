@@ -24,20 +24,21 @@ export default function WeeklyTopAlbums({ albums, classname = '' }: Prop) {
 								alt={album.title}
 								width={170}
 								height={170}
-								className='rounded-md object-cover transition-all hover:scale-105 aspect-square cursor-pointer w-auto h-auto'
+								className='rounded-md object-cover transition-all hover:scale-105 aspect-square cursor-pointer w-full h-auto'
 							/>
 						</Link>
 
 						<Link
 							href={`/player/album/${album.id}`}
-							className='leading-none mt-2 text-nowrap whitespace-nowrap overflow-hidden text-[15px] font-medium block hover:underline cursor-pointer'
+							className='leading-none mt-2 text-nowrap whitespace-nowrap overflow-hidden text-[15px] font-medium block cursor-pointer hover:underline '
 						>
 							{album.title}
 						</Link>
 
 						<Link
 							href={`/player/artist/${album.artist.id}`}
-							className='text-xs text-muted-foreground mt-1 text-nowrap whitespace-nowrap overflow-hidden hover:underline'
+							// className='text-xs text-muted-foreground mt-1 text-nowrap whitespace-nowrap overflow-hidden hover:underline'
+							className='text-xs text-muted-foreground mt-1 text-nowrap whitespace-nowrap overflow-hidden hover:underline cursor-pointer block leading-none'
 						>
 							{album.artist.name}
 						</Link>

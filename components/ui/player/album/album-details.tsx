@@ -18,7 +18,6 @@ export default function AlbumDetails({ album }: { album: AlbumDetails }) {
 					className='rounded-sm border border-border'
 					width={224}
 					height={224}
-					objectFit='square'
 				/>
 			</div>
 			<div className='space-y-2 mt-auto mb-2'>

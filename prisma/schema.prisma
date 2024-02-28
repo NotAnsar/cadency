@@ -24,6 +24,8 @@ model User {
   updated_at DateTime? @updatedAt
   emailVerified DateTime?
   accounts      Account[]
+  likedAlbums   Album[]
+  followedArtists   Artist[]
 }
 
 enum Gender{
@@ -50,8 +52,6 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-
-// used in email authorisation mail
 model VerificationToken {
   identifier String
   token      String   @unique
@@ -59,4 +59,23 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+
+
+
+model Album {
+  userId   String
+  albumId  Int
+
+  user     User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([albumId, userId])
+}
+model Artist {
+  userId   String
+  artistId  Int
+
+  user     User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([artistId, userId])
+}
+
 

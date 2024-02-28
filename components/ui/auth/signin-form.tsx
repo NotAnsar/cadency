@@ -58,7 +58,7 @@ export default function SignInForm({ className, ...props }: UserAuthFormProps) {
 
 	async function signInSocials(type: 'github' | 'google') {
 		setIsLoading(true);
-		const signInResult = await signIn(type, { callbackUrl });
+		await signIn(type, { callbackUrl });
 	}
 
 	return (

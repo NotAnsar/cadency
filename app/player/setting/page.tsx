@@ -1,5 +1,6 @@
 import { getCurrentUserData } from '@/actions/user-actions';
 import SettingForm from '@/components/ui/player/setting/SettingForm';
+
 import { redirect } from 'next/navigation';
 
 export default async function Page() {
@@ -9,5 +10,5 @@ export default async function Page() {
 		redirect('/signin');
 	}
 
-	return <SettingForm user={user} />;
+	return <SettingForm {...user} />;
 }

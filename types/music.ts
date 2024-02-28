@@ -1,5 +1,5 @@
 export type TrackData = {
-	id: string;
+	id: number;
 	title: string;
 	duration: number;
 };
@@ -13,7 +13,7 @@ export type Track = TrackData & {
 };
 
 export type Artist = {
-	id: string;
+	id: number;
 	name: string;
 	picture_medium: string;
 };
@@ -24,7 +24,7 @@ export type ArtistDetails = Artist & {
 };
 
 export type Album = {
-	id: string;
+	id: number;
 	title: string;
 	cover_medium: string;
 	artist: Artist;

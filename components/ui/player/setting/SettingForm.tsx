@@ -53,29 +53,30 @@ const formSchema = z.object({
 });
 
 export default function SettingForm({
-	user,
+	email,
+	name,
+	birthDate,
+	gender,
 }: {
-	user: {
-		email: string;
-		name: string | null;
-		birthDate: Date | null;
-		gender: 'male' | 'female' | null;
-	};
+	email: string;
+	name: string | null;
+	birthDate: Date | null;
+	gender: 'male' | 'female' | null;
 }) {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			email: user.email,
-			dateBirth: user.birthDate || undefined,
-			gender: user.gender || undefined,
-			name: user.name || undefined,
+			email,
+			dateBirth: birthDate || undefined,
+			gender: gender || undefined,
+			name: name || undefined,
 		},
 	});
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		setIsLoading(true);
-		const res = await updateUserInfo(values, user.email);
+		const res = await updateUserInfo(values, email);
 		if (res?.message) {
 			toast({
 				title: 'Something went Wrong',

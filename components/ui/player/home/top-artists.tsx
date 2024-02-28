@@ -22,7 +22,7 @@ export default function TopArtists({ artists, classname = '' }: Prop) {
 								alt={artist.name}
 								width={160}
 								height={160}
-								className='w-auto h-auto transition-all hover:scale-105'
+								className='w-full h-auto transition-all hover:scale-105'
 							/>
 						</Link>
 						<Link

@@ -36,13 +36,27 @@ export async function updateUserInfo(
 
 export async function getCurrentUserData() {
 	const session = await getCurrentUser();
+	console.log('session', session);
 
 	if (session?.email) {
 		const user = await prisma.user.findUnique({
 			where: { email: session.email },
+			select: {
+				id: true,
+				image: true,
+				name: true,
+				gender: true,
+				email: true,
+				birthDate: true,
+				likedAlbums: true,
+				followedArtists: true,
+			},
 		});
+		console.log(user);
+
 		return user;
 	}
+
 	return null;
 }
 
