@@ -2,10 +2,14 @@
 
 import { prisma } from '@/lib/prisma';
 import { getCurrentUser } from '@/lib/session';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { SessionProvider } from 'next-auth/react';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { S3 } from '@aws-sdk/client-s3';
+import { toast } from '@/components/ui/use-toast';
+
+const s3 = new S3({
+	region: 'eu-west-3',
+});
 
 export async function updateUserInfo(
 	values: {
@@ -58,4 +62,64 @@ export async function deleteUser() {
 
 		return { message: 'Database Error: Failed to Delete User Information.' };
 	}
+}
+
+// export async function updateProfileImage(file: File) {
+// 	try {
+// 		const user = await getCurrentUser();
+// 		if (!user?.email) {
+// 			throw new Error();
+// 		}
+
+// 		const image = await uploadImage(file);
+// 		console.log(image);
+
+// 		await prisma.user.update({
+// 			where: { email: user.email },
+// 			data: { image },
+// 		});
+// 	} catch (error) {
+// 		return { message: 'Database Error: Failed to Delete User Information.' };
+// 	}
+// }
+
+export async function updateProfileImage(formData: FormData) {
+	const file = formData.get('image') as File;
+
+	try {
+		const user = await getCurrentUser();
+		if (!user?.email) {
+			throw new Error();
+		}
+
+		const image = await uploadImage(file);
+
+		await prisma.user.update({
+			where: { email: user.email },
+			data: { image },
+		});
+	} catch (error) {
+		console.log(error);
+		return { message: 'Database Error: Failed to Update User Picture.' };
+	}
+
+	revalidatePath('/player/profile');
+	redirect('/player/profile');
+}
+
+async function uploadImage(file: File) {
+	const extension = file.name.split('.').pop();
+	const name = file.name.split('.')[0];
+	const arrayBuffer = await file.arrayBuffer();
+
+	const fileName = `${name}${Math.random() * 1000}.${extension}`;
+
+	s3.putObject({
+		Bucket: 'cadency',
+		Key: fileName,
+		Body: Buffer.from(arrayBuffer),
+		ContentType: file.type,
+	});
+
+	return `https://cadency.s3.eu-west-3.amazonaws.com/${fileName}`;
 }

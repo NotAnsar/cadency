@@ -16,9 +16,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons/icons';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { toast } from '../use-toast';
-import { useSearchParams } from 'next/navigation';
 
 const formSchema = z.object({
 	email: z.string().email({ message: 'Please enter a valid email address.' }),
@@ -27,29 +26,12 @@ const formSchema = z.object({
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export default function SignInForm({ className, ...props }: UserAuthFormProps) {
-	const searchParams = useSearchParams();
-
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: { email: '' },
 	});
 	const callbackUrl = '/player';
-
-	useEffect(() => {
-		if (searchParams.get('error') === 'OAuthAccountNotLinked') {
-			const timeout = setTimeout(() => {
-				toast({
-					title: 'Something went wrong.',
-					description:
-						'To confirm your identity, sign in with the same account you used originally.',
-					variant: 'destructive',
-				});
-			}, 0);
-
-			return () => clearTimeout(timeout);
-		}
-	}, [searchParams]);
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		setIsLoading(true);
@@ -77,7 +59,6 @@ export default function SignInForm({ className, ...props }: UserAuthFormProps) {
 	async function signInSocials(type: 'github' | 'google') {
 		setIsLoading(true);
 		const signInResult = await signIn(type, { callbackUrl });
-		console.log(signInResult);
 	}
 
 	return (

@@ -30,6 +30,12 @@ const nextConfig = {
 				port: '',
 				pathname: '/**',
 			},
+			{
+				protocol: 'https',
+				hostname: 'cadency.s3.eu-west-3.amazonaws.com',
+				port: '',
+				pathname: '/**',
+			},
 		],
 	},
 };

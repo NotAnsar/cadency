@@ -21,13 +21,12 @@ import {
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { User } from '@prisma/client';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
-import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
+import { toast } from '../../use-toast';
 
 const formSchema = z.object({
 	email: z.string().email({ message: 'Please enter a valid email address.' }),
@@ -53,9 +52,17 @@ const formSchema = z.object({
 		),
 });
 
-export default function SettingForm({ user }: { user: User }) {
+export default function SettingForm({
+	user,
+}: {
+	user: {
+		email: string;
+		name: string | null;
+		birthDate: Date | null;
+		gender: 'male' | 'female' | null;
+	};
+}) {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const { update } = useSession();
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -70,9 +77,16 @@ export default function SettingForm({ user }: { user: User }) {
 		setIsLoading(true);
 		const res = await updateUserInfo(values, user.email);
 		if (res?.message) {
-			console.log(res.message);
+			toast({
+				title: 'Something went Wrong',
+				description: res.message,
+				variant: 'destructive',
+			});
 		} else {
-			update();
+			toast({
+				title: 'Data updated',
+				description: 'Your Information Was Updated Successfully',
+			});
 		}
 
 		setIsLoading(false);
@@ -130,6 +144,7 @@ export default function SettingForm({ user }: { user: User }) {
 									<PopoverTrigger asChild>
 										<Button
 											variant={'outline'}
+											disabled={isLoading}
 											className={cn(
 												' justify-start text-left font-normal w-full',
 												!field.value && 'text-muted-foreground'

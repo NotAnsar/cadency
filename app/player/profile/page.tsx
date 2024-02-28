@@ -1,12 +1,11 @@
 import { getCurrentUser } from '@/lib/session';
 import { getChart } from '@/lib/db';
-import { cn } from '@/lib/utils';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Chart } from '@/types/music';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import ListPlaylists from '@/components/ui/player/profile/ListPlaylists';
 import ListFollowedArtists from '@/components/ui/player/profile/ListFollowedArtists';
+import ProfileDialog from '@/components/ui/player/profile/Profile-dialog';
 
 export default async function Page() {
 	const user = await getCurrentUser();
@@ -16,26 +15,7 @@ export default async function Page() {
 		<main>
 			<div className='w-full relative'>
 				<div className='flex flex-col items-center justify-center p-8'>
-					{user?.image ? (
-						<Image
-							alt={user.name ? user.name : ''}
-							src={user.image ? user.image : ''}
-							className={cn(
-								'h-44 w-44 md:h-52 md:w-52 bg-noise rounded-full bg-[#e11d48]'
-							)}
-							width={208}
-							height={208}
-						/>
-					) : (
-						<div
-							className={cn(
-								'h-44 w-44 md:h-52 md:w-52 z-10 rounded-full mx-auto md:me-auto md:ms-0  bg-[#e11d48] flex items-center justify-center text-8xl font-semibold text-white'
-							)}
-						>
-							A
-						</div>
-					)}
-
+					<ProfileDialog user={user} />
 					<div className='flex flex-col md:flex-row md:items-center md:justify-between mt-2 gap-4 w-full'>
 						<div className='md:mb-0 md:text-left'>
 							<h2 className='text-3xl font-semibold'>{user?.name}</h2>
