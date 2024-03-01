@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 type DataType<T> = {
@@ -21,8 +21,6 @@ export const useScroll = <T>(
 
 			const newData = await getData(nextPage);
 			if (newData) {
-				console.log('loaded');
-
 				setData((prev) => [...prev, ...newData?.data]);
 			}
 

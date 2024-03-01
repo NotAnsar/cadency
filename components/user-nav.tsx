@@ -8,7 +8,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from './ui/dropdown-menu';
-import { signOut, useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 import { UserAvatar } from './user-avatar';
 import { useTheme } from 'next-themes';
 import { Switch } from './ui/switch';

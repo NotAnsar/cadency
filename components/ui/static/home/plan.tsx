@@ -4,42 +4,6 @@ import { buttonVariants } from '../../button';
 import Link from 'next/link';
 import Wrapper from '../wrapper';
 
-const PLANS = [
-	{
-		title: 'Free Plan',
-		description:
-			'Explore the app with basic features and enjoy music with occasional ads.',
-		perks: ['Limited access to features', 'Occasional ads', 'Free forever'],
-		price: 0, // Free plan is priced at $0
-		best: false,
-	},
-	{
-		title: 'Premium Plan',
-		description:
-			'Ad-free experience, unlimited access to a vast music library, high-quality streaming, and offline listening.',
-		perks: [
-			'Ad-free experience',
-			'Unlimited access to a vast music library',
-			'High-quality streaming',
-			'Offline listening',
-		],
-		price: 9.99, // Price for the Premium Plan
-		best: true,
-	},
-	{
-		title: 'Family Plan',
-		description:
-			'All benefits of the Premium Plan, shared access for multiple family members, and centralized billing.',
-		perks: [
-			'Ad-free experience',
-			'Shared access for multiple family members',
-			'Centralized billing',
-		],
-		price: 14.99, // Price for the Family Plan
-		best: false,
-	},
-];
-
 export default function PlanSection() {
 	return (
 		<Wrapper className='pt-20 text-center mb-10' id='pricing'>
@@ -99,3 +63,39 @@ export default function PlanSection() {
 		</Wrapper>
 	);
 }
+
+const PLANS = [
+	{
+		title: 'Free Plan',
+		description:
+			'Explore the app with basic features and enjoy music with occasional ads.',
+		perks: ['Limited access to features', 'Occasional ads', 'Free forever'],
+		price: 0, // Free plan is priced at $0
+		best: false,
+	},
+	{
+		title: 'Premium Plan',
+		description:
+			'Ad-free experience, unlimited access to a vast music library, high-quality streaming, and offline listening.',
+		perks: [
+			'Ad-free experience',
+			'Unlimited access to a vast music library',
+			'High-quality streaming',
+			'Offline listening',
+		],
+		price: 9.99, // Price for the Premium Plan
+		best: true,
+	},
+	{
+		title: 'Family Plan',
+		description:
+			'All benefits of the Premium Plan, shared access for multiple family members, and centralized billing.',
+		perks: [
+			'Ad-free experience',
+			'Shared access for multiple family members',
+			'Centralized billing',
+		],
+		price: 14.99, // Price for the Family Plan
+		best: false,
+	},
+];

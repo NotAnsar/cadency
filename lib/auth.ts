@@ -8,10 +8,10 @@ import { prisma } from './prisma';
 import { sendVerificationRequest } from '../lib/email-provider-utils';
 
 export const authOptions: NextAuthOptions = {
-	adapter: PrismaAdapter(prisma as any),
+	adapter: PrismaAdapter(prisma),
 	secret: process.env.NEXTAUTH_SECRET,
 	session: { strategy: 'jwt' },
-	pages: { signIn: '/signin', newUser: '/player' },
+	pages: { signIn: '/signin' },
 	providers: [
 		GithubProvider({
 			clientId: process.env.GITHUB_ID as string,

@@ -4,6 +4,7 @@ import AlbumsCarousel from '@/components/ui/player/artist/albums-carousel';
 import ArtistDetails from '@/components/ui/player/artist/artist-details';
 import PopularSongs from '@/components/ui/player/artist/popular-songs';
 import { getArtist } from '@/lib/db';
+
 import { notFound } from 'next/navigation';
 
 export default async function page({ params }: { params: { slug: string } }) {
@@ -18,7 +19,9 @@ export default async function page({ params }: { params: { slug: string } }) {
 		<div className='px-8 py-6 mb-10'>
 			<ArtistDetails
 				artist={artist}
-				isFollowing={user.followedArtists.some((a) => a.artistId === artist.id)}
+				initialFollow={user.followedArtists.some(
+					(a) => a.artistId === artist.id
+				)}
 			/>
 			{songs.length ? <PopularSongs songs={songs} /> : null}
 			{albums.length ? (

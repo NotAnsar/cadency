@@ -13,6 +13,7 @@ const mainNav = [
 	{ title: 'Features', href: '/#features' },
 	{ title: 'FAQ', href: '/#FAQ' },
 ];
+
 export default function Header() {
 	const [showMobileNav, setshowMobileNav] = useState(false);
 
@@ -27,9 +28,9 @@ export default function Header() {
 						<Link
 							href={nav.href}
 							key={i}
-							className={cn(
+							className={
 								'font-medium transition-colors hover:text-primary text-foreground/60'
-							)}
+							}
 							aria-label={nav.title}
 						>
 							{nav.title}

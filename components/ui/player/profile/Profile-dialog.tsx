@@ -20,6 +20,7 @@ export default function ProfileDialog({ user }: Prop) {
 
 	return (
 		<form
+			className='h-44 w-44 md:h-52 md:w-52 z-10 rounded-full mx-auto md:me-auto md:ms-0  bg-primary flex items-center justify-center text-white group relative overflow-hidden'
 			action={async (formData) => {
 				const res = await updateProfileImage(formData);
 
@@ -36,7 +37,6 @@ export default function ProfileDialog({ user }: Prop) {
 					});
 				}
 			}}
-			className='h-44 w-44 md:h-52 md:w-52 z-10 rounded-full mx-auto md:me-auto md:ms-0  bg-primary flex items-center justify-center text-white group relative overflow-hidden'
 			ref={formInput}
 		>
 			{user?.image ? (

@@ -1,5 +1,3 @@
-'use server';
-
 import { url } from '@/lib/db';
 import axios from 'axios';
 
@@ -20,7 +18,7 @@ export async function getArtistRecords(
 
 		return data;
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 
 		return null;
 	}

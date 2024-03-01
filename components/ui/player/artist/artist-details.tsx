@@ -3,17 +3,20 @@ import Image from 'next/image';
 import { Button } from '../../button';
 import { ArtistDetails } from '@/types/music';
 import { cn } from '@/lib/utils';
-import { useState } from 'react';
-import axios from 'axios';
+import { useOptimistic } from 'react';
+import { toggleFollow } from '@/actions/favorite-action';
 
 export default function ArtistDetails({
 	artist,
-	isFollowing,
+	initialFollow,
 }: {
 	artist: ArtistDetails;
-	isFollowing: boolean;
+	initialFollow: boolean;
 }) {
-	const [isFollowed, setisFollowed] = useState(isFollowing);
+	const [optimisticFollow, addOptimisticFollow] = useOptimistic(
+		initialFollow,
+		(state, _) => !state
+	);
 
 	return (
 		<div className='flex gap-6'>
@@ -32,26 +35,23 @@ export default function ArtistDetails({
 					<p className='text-5xl font-bold'>{artist.name}</p>
 				</div>
 
-				<Button
-					className={cn(
-						'font-semibold text-base border-2 border-primary rounded-full py-6 w-40 transition-all duration-200',
-						isFollowed ? 'bg-background' : 'bg-primary'
-					)}
-					onClick={async () => {
-						try {
-							const response = await axios.post('/api/artist/follow-toggle', {
-								artistId: artist.id,
-							});
-							console.log(response.data.message);
-							setisFollowed(response.data.message === 'followed');
-							console.log(response.data);
-						} catch (error) {
-							console.log(error);
-						}
+				<form
+					action={async (formData) => {
+						addOptimisticFollow(null);
+						await toggleFollow(formData);
 					}}
 				>
-					{isFollowed ? 'Following' : 'Follow'}
-				</Button>
+					<input className='hidden' name='artistId' defaultValue={artist.id} />
+
+					<Button
+						className={cn(
+							'font-semibold text-base border-2 border-primary rounded-full py-6 w-40 transition-all duration-200',
+							optimisticFollow ? 'bg-background' : 'bg-primary'
+						)}
+					>
+						{optimisticFollow ? 'Following' : 'Follow'}
+					</Button>
+				</form>
 			</div>
 		</div>
 	);

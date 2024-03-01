@@ -18,6 +18,7 @@ import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons/icons';
 import { useState } from 'react';
 import { toast } from '../use-toast';
+import { useSearchParams } from 'next/navigation';
 
 const formSchema = z.object({
 	email: z.string().email({ message: 'Please enter a valid email address.' }),
@@ -31,14 +32,14 @@ export default function SignInForm({ className, ...props }: UserAuthFormProps) {
 		resolver: zodResolver(formSchema),
 		defaultValues: { email: '' },
 	});
-	const callbackUrl = '/player';
+	const searchParams = useSearchParams();
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		setIsLoading(true);
 		const signInResult = await signIn('email', {
 			email: values.email.toLowerCase(),
 			redirect: false,
-			callbackUrl,
+			callbackUrl: searchParams?.get('from') || '/player',
 		});
 		setIsLoading(false);
 
@@ -58,7 +59,7 @@ export default function SignInForm({ className, ...props }: UserAuthFormProps) {
 
 	async function signInSocials(type: 'github' | 'google') {
 		setIsLoading(true);
-		await signIn(type, { callbackUrl });
+		await signIn(type);
 	}
 
 	return (

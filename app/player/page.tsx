@@ -3,9 +3,15 @@ import TrendingSongs from '@/components/ui/player/home/trending-songs';
 import WeeklyTopAlbums from '@/components/ui/player/home/weekly-top-albums';
 import { getChart } from '@/lib/db';
 import { Chart } from '@/types/music';
+import { notFound } from 'next/navigation';
 
 export default async function Page() {
-	const { albums, tracks, artists }: Chart = await getChart();
+	const res = await getChart();
+
+	if (!res) {
+		notFound();
+	}
+	const { albums, tracks, artists }: Chart = res;
 
 	return (
 		<main className='px-8 pt-6 pb-20'>

@@ -7,7 +7,7 @@ export default function Hero() {
 	return (
 		<Wrapper
 			id='hero'
-			className={cn('grid items-center h-[550px] text-center w-full')}
+			className={'grid items-center h-[550px] text-center w-full'}
 		>
 			<div className='mx-auto'>
 				<h1 className='text-[40px] md:text-7xl font-medium mb-8'>

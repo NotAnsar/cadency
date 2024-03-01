@@ -1,6 +1,6 @@
 'use client';
 import { Album } from '@/types/music';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+
 import {
 	Carousel,
 	CarouselContent,

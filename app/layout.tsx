@@ -3,8 +3,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 import { ThemeProvider } from '@/components/theme-provider';
-import SessionProvider from '@/components/session-provider';
-import { getServerSession } from 'next-auth';
+
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import { Montserrat } from 'next/font/google';
@@ -22,8 +21,6 @@ export const metadata: Metadata = {
 type LayoutProps = { children: React.ReactNode };
 
 export default async function RootLayout({ children }: LayoutProps) {
-	const session = await getServerSession();
-
 	return (
 		<html
 			lang='en'
@@ -35,17 +32,15 @@ export default async function RootLayout({ children }: LayoutProps) {
 				className={cn(montserrat.className, 'bg-noise')}
 				suppressHydrationWarning={true}
 			>
-				<SessionProvider session={session}>
-					<ThemeProvider
-						attribute='class'
-						defaultTheme='system'
-						enableSystem
-						disableTransitionOnChange
-					>
-						{children}
-						<Toaster />
-					</ThemeProvider>
-				</SessionProvider>
+				<ThemeProvider
+					attribute='class'
+					defaultTheme='system'
+					enableSystem
+					disableTransitionOnChange
+				>
+					{children}
+					<Toaster />
+				</ThemeProvider>
 			</body>
 		</html>
 	);

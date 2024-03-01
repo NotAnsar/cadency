@@ -19,12 +19,11 @@ export async function getChart() {
 
 		return { tracks: tracks.data, albums: albums.data, artists: artists.data };
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 
-		return { tracks: null, albums: null, artists: null };
+		return null;
 	}
 }
-
 export async function getAlbum(id: string) {
 	const options = {
 		method: 'GET',
@@ -41,13 +40,12 @@ export async function getAlbum(id: string) {
 
 		return album;
 	} catch (error) {
-		console.log('error', error);
+		console.error('error', error);
 
 		return null;
 	}
 }
-
-async function getArtistDetails(id: string) {
+export async function getArtistDetails(id: string) {
 	const response = await axios.get(`${url}/artist/${id}`);
 	return response.data;
 }
@@ -63,7 +61,6 @@ async function getArtistRelated(id: string) {
 	const response = await axios.get(`${url}/artist/${id}/related?limit=10`);
 	return response.data;
 }
-
 export async function getArtist(id: string) {
 	try {
 		const [res1, res2, res3, res4] = await Promise.all([
@@ -74,19 +71,19 @@ export async function getArtist(id: string) {
 		]);
 
 		if (res1.error) {
-			console.log('error 1');
+			console.error('error 1');
 			throw new Error(res1.data.error);
 		}
 		if (res2.error) {
-			console.log('error 2');
+			console.error('error 2');
 			throw new Error(res2.data.error);
 		}
 		if (res3.error) {
-			console.log('error 3');
+			console.error('error 3');
 			throw new Error(res3.data.error);
 		}
 		if (res4.error) {
-			console.log('error 4');
+			console.error('error 4');
 			throw new Error(res4.data.error);
 		}
 
@@ -119,33 +116,29 @@ export async function getArtist(id: string) {
 
 		return { artist, songs, albums, singles, related };
 	} catch (error) {
-		console.log('error', error);
+		console.error('error', error);
 
 		return null;
 	}
 }
-
 export async function searchArtist(search: string, limit: number = 5) {
 	const response = await axios.get(
 		`${url}/search/artist?q=${search}&limit=${limit}`
 	);
 	return response.data;
 }
-
 async function searchAlbum(search: string, limit: number = 5) {
 	const response = await axios.get(
 		`${url}/search/album?q=${search}&limit=${limit}`
 	);
 	return response.data;
 }
-
 async function searchSong(search: string, limit: number = 5) {
 	const response = await axios.get(
 		`${url}/search/track?q=${search}&limit=${limit}`
 	);
 	return response.data;
 }
-
 export async function searchAll(search: string) {
 	try {
 		const [res1, res2, res3] = await Promise.all([
@@ -155,15 +148,15 @@ export async function searchAll(search: string) {
 		]);
 
 		if (res1.error) {
-			console.log('error 1');
+			console.error('error 1');
 			throw new Error(res1.data.error);
 		}
 		if (res2.error) {
-			console.log('error 2');
+			console.error('error 2');
 			throw new Error(res2.data.error);
 		}
 		if (res3.error) {
-			console.log('error 3');
+			console.error('error 3');
 			throw new Error(res3.data.error);
 		}
 		const artists: ArtistDetails[] = res1.data;
@@ -172,7 +165,7 @@ export async function searchAll(search: string) {
 
 		return { artists, albums, songs };
 	} catch (error) {
-		console.log('error', error);
+		console.error('error', error);
 
 		return null;
 	}

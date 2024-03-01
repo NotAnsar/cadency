@@ -18,7 +18,7 @@ export default async function page({ params }: { params: { slug: string } }) {
 			<AlbumDetails album={album} />
 			<AlbumControl
 				id={album.id}
-				albumLiked={user.likedAlbums.some((a) => a.albumId === album.id)}
+				initialLiked={user.likedAlbums.some((a) => a.albumId === album.id)}
 			/>
 			<AlbumSongs
 				label={album.label}

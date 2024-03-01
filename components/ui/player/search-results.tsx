@@ -33,7 +33,7 @@ export default function SearchResult({ data, closeModal, className }: Prop) {
 		image: string,
 		title: string,
 		type: string,
-		id: string,
+		id: number,
 		name?: string
 	) => {
 		return (

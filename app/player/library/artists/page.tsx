@@ -1,14 +1,15 @@
-import { getArtist } from '@/lib/db';
-import { Plus } from 'lucide-react';
+import { getFollowedArtists } from '@/lib/db_favorites';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
 export default async function page() {
-	const favorites = await getArtist('4050205');
+	const artists = await getFollowedArtists();
+	console.log(artists);
 
-	if (!favorites) {
-		redirect('/player');
+	if (!artists) {
+		notFound();
 	}
 
 	return (
@@ -16,8 +17,8 @@ export default async function page() {
 			<h1 className='text-4xl font-semibold'>Followed Artists</h1>
 
 			<div className='my-6 grid  grid-cols-3 md:grid-cols-5 gap-5'>
-				{favorites.related.map((artist) => (
-					<div key={artist.id} className=''>
+				{artists.map((artist) => (
+					<div key={artist.id}>
 						<Link href={`/player/artist/${artist.id}`}>
 							<Image
 								alt={artist.name}

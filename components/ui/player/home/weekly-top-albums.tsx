@@ -17,15 +17,19 @@ export default function WeeklyTopAlbums({ albums, classname = '' }: Prop) {
 					<div key={album.id} className='col-span-1'>
 						<Link
 							href={`/player/album/${album.id}`}
-							className='overflow-hidden rounded-md block border border-border'
+							className='overflow-hidden rounded-md block border border-border '
 						>
-							<Image
-								src={album.cover_medium}
-								alt={album.title}
-								width={170}
-								height={170}
-								className='rounded-md object-cover transition-all hover:scale-105 aspect-square cursor-pointer w-full h-auto'
-							/>
+							{album.cover_medium ? (
+								<Image
+									src={album.cover_medium}
+									alt={album.title}
+									width={170}
+									height={170}
+									className='rounded-md object-cover transition-all hover:scale-105 aspect-square cursor-pointer w-full h-auto'
+								/>
+							) : (
+								<div className='rounded-md object-cover transition-all hover:scale-105 aspect-square cursor-pointer w-full h-auto bg-muted-foreground' />
+							)}
 						</Link>
 
 						<Link
@@ -37,7 +41,6 @@ export default function WeeklyTopAlbums({ albums, classname = '' }: Prop) {
 
 						<Link
 							href={`/player/artist/${album.artist.id}`}
-							// className='text-xs text-muted-foreground mt-1 text-nowrap whitespace-nowrap overflow-hidden hover:underline'
 							className='text-xs text-muted-foreground mt-1 text-nowrap whitespace-nowrap overflow-hidden hover:underline cursor-pointer block leading-none'
 						>
 							{album.artist.name}

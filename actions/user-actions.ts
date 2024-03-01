@@ -5,7 +5,6 @@ import { getCurrentUser } from '@/lib/session';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { S3 } from '@aws-sdk/client-s3';
-import { toast } from '@/components/ui/use-toast';
 
 const s3 = new S3({
 	region: 'eu-west-3',
@@ -36,7 +35,6 @@ export async function updateUserInfo(
 
 export async function getCurrentUserData() {
 	const session = await getCurrentUser();
-	console.log('session', session);
 
 	if (session?.email) {
 		const user = await prisma.user.findUnique({
@@ -52,7 +50,6 @@ export async function getCurrentUserData() {
 				followedArtists: true,
 			},
 		});
-		console.log(user);
 
 		return user;
 	}
@@ -72,30 +69,11 @@ export async function deleteUser() {
 		});
 		return { message: 'Done' };
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 
 		return { message: 'Database Error: Failed to Delete User Information.' };
 	}
 }
-
-// export async function updateProfileImage(file: File) {
-// 	try {
-// 		const user = await getCurrentUser();
-// 		if (!user?.email) {
-// 			throw new Error();
-// 		}
-
-// 		const image = await uploadImage(file);
-// 		console.log(image);
-
-// 		await prisma.user.update({
-// 			where: { email: user.email },
-// 			data: { image },
-// 		});
-// 	} catch (error) {
-// 		return { message: 'Database Error: Failed to Delete User Information.' };
-// 	}
-// }
 
 export async function updateProfileImage(formData: FormData) {
 	const file = formData.get('image') as File;
@@ -113,7 +91,7 @@ export async function updateProfileImage(formData: FormData) {
 			data: { image },
 		});
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 		return { message: 'Database Error: Failed to Update User Picture.' };
 	}
 

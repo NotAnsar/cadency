@@ -12,9 +12,7 @@ import {
 	Mic2,
 	Music2,
 	PlusCircle,
-	Heart,
 	LucideIcon,
-	Search,
 	LibraryBig,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
@@ -36,9 +34,8 @@ export default function SideBarNav({
 	return (
 		<div
 			className={cn(
-				'pb-12 w-[72px] md:w-52 bg-background border-r-2 border-[#ddd] dark:border-[#333] flex flex-col  ',
-				className,
-				'h-screen fixed' //
+				'pb-12 w-[72px] md:w-52 bg-background border-r-2 border-[#ddd] dark:border-[#333] flex flex-col h-screen fixed',
+				className
 			)}
 			{...props}
 		>

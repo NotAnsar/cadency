@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-	const user = await getCurrentUser();
+	// const user = await getCurrentUser();
 
-	if (user) redirect('/player');
+	// if (user) redirect('/player');
 
 	return (
 		<div className='container relative  h-screen flex-col items-center justify-center grid lg:max-w-none lg:grid-cols-2 lg:px-0 '>

@@ -1,4 +1,5 @@
 'use client';
+import { togglelikedAlbum } from '@/actions/favorite-action';
 import { Icons } from '@/components/icons/audio-icons';
 import {
 	DropdownMenu,
@@ -8,17 +9,16 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
-import axios from 'axios';
-import { useState } from 'react';
+import { useOptimistic } from 'react';
 
-export default function AlbumControl({
-	id,
-	albumLiked,
-}: {
-	id: number;
-	albumLiked: boolean;
-}) {
-	const [liked, setliked] = useState(albumLiked);
+type Prop = { id: number; initialLiked: boolean };
+
+export default function AlbumControl({ id, initialLiked }: Prop) {
+	const [optimisticLiked, addOptimisticLiked] = useOptimistic(
+		initialLiked,
+		(state, _) => !state
+	);
+
 	return (
 		<div className='my-6 flex gap-4'>
 			{/* <button className='w-12 h-12 flex justify-center items-center bg-primary rounded-full cursor-pointer text-white'> */}
@@ -29,30 +29,25 @@ export default function AlbumControl({
 				<p className='font-medium'>Listening</p> */}
 			</button>
 
-			<button
-				className='w-12 h-12 flex justify-center items-center  rounded-full cursor-pointer'
-				type='submit'
-				onClick={async () => {
-					try {
-						const response = await axios.post('/api/album/like-toggle', {
-							albumId: id,
-						});
-						console.log(response.data.message);
-						setliked(response.data.message === 'liked');
-						console.log(response.data);
-					} catch (error) {
-						console.log(error);
-					}
+			<form
+				action={async (formData) => {
+					addOptimisticLiked(null);
+					await togglelikedAlbum(formData);
 				}}
 			>
-				<Icons.heart
-					className={cn(
-						'h-7 w-7 hover:scale-110',
-						liked ? 'fill-primary text-primary' : null
-					)}
-				/>
-			</button>
-
+				<button
+					className='w-12 h-12 flex justify-center items-center  rounded-full cursor-pointer'
+					type='submit'
+				>
+					<input className='hidden' name='albumId' defaultValue={id} />
+					<Icons.heart
+						className={cn(
+							'h-7 w-7 hover:scale-110',
+							optimisticLiked ? 'fill-primary text-primary' : null
+						)}
+					/>
+				</button>
+			</form>
 			<DropdownMenu>
 				<DropdownMenuTrigger>
 					<Icons.MoreHorizontal />
