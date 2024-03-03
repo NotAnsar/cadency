@@ -5,6 +5,8 @@ import { getCurrentUser } from '@/lib/session';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { S3 } from '@aws-sdk/client-s3';
+import { getFollowedArtists } from '@/lib/api/artist';
+import { getUserFollowedArtists } from '@/lib/db/user';
 
 const s3 = new S3({
 	region: 'eu-west-3',
@@ -100,22 +102,35 @@ export async function toggleFollow(formData: FormData) {
 			throw new Error('Data Error');
 		}
 
-		const usersession = await getCurrentUser();
+		// const usersession = await getCurrentUser();
 
-		if (!usersession || !usersession.id) {
+		// if (!usersession || !usersession.id) {
+		// 	throw new Error('Unauthorized');
+		// }
+		const user = await getCurrentUser();
+
+		if (!user || !user.id) {
 			throw new Error('Unauthorized');
 		}
 
-		const user = await prisma.user.findUnique({
-			where: { id: usersession?.id },
-			include: { followedArtists: true },
-		});
+		// const user = await prisma.user.findUnique({
+		// 	where: { id: usersession?.id },
+		// 	include: { followedArtists: true },
+		// });
+		// if (!user) {
+		// 	throw new Error('User Not Found');
+		// }
+		// const isFollwed = user.followedArtists.some(
+		// 	(artist) => artist.artistId === +artistId
+		// );
 
-		if (!user) {
+		const followedArtists = await getUserFollowedArtists();
+
+		if (!followedArtists) {
 			throw new Error('User Not Found');
 		}
 
-		const isFollwed = user.followedArtists.some(
+		const isFollwed = followedArtists.some(
 			(artist) => artist.artistId === +artistId
 		);
 
