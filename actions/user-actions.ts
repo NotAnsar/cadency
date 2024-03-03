@@ -131,7 +131,8 @@ export async function toggleFollow(formData: FormData) {
 		}
 
 		const isFollwed = followedArtists.some(
-			(artist) => artist.artistId === +artistId
+			(artist: { userId: string; artistId: number }) =>
+				artist.artistId === +artistId
 		);
 
 		if (isFollwed) {
