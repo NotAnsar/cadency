@@ -1,14 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { useDebounce, useDebouncedCallback } from 'use-debounce';
 import { Input } from '../input';
-import { searchAll } from '@/lib/db';
 import { Search } from 'lucide-react';
 import type { AlbumDetails, ArtistDetails, Track } from '@/types/music';
 import SearchResult from './search-results';
 import { cn } from '@/lib/utils';
+import { searchAll } from '@/lib/api/search';
 
 export type ResultType = {
 	artists: ArtistDetails[];

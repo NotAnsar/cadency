@@ -33,30 +33,6 @@ export async function updateUserInfo(
 	redirect('/player/setting');
 }
 
-export async function getCurrentUserData() {
-	const session = await getCurrentUser();
-
-	if (session?.email) {
-		const user = await prisma.user.findUnique({
-			where: { email: session.email },
-			select: {
-				id: true,
-				image: true,
-				name: true,
-				gender: true,
-				email: true,
-				birthDate: true,
-				likedAlbums: true,
-				followedArtists: true,
-			},
-		});
-
-		return user;
-	}
-
-	return null;
-}
-
 export async function deleteUser() {
 	try {
 		const user = await getCurrentUser();
@@ -114,4 +90,90 @@ async function uploadImage(file: File) {
 	});
 
 	return `https://cadency.s3.eu-west-3.amazonaws.com/${fileName}`;
+}
+
+export async function toggleFollow(formData: FormData) {
+	const artistId = formData.get('artistId') as string;
+
+	try {
+		if (!+artistId) {
+			throw new Error('Data Error');
+		}
+
+		const usersession = await getCurrentUser();
+
+		if (!usersession || !usersession.id) {
+			throw new Error('Unauthorized');
+		}
+
+		const user = await prisma.user.findUnique({
+			where: { id: usersession?.id },
+			include: { followedArtists: true },
+		});
+
+		if (!user) {
+			throw new Error('User Not Found');
+		}
+
+		const isFollwed = user.followedArtists.some(
+			(artist) => artist.artistId === +artistId
+		);
+
+		if (isFollwed) {
+			await prisma.artist.delete({
+				where: {
+					artistId_userId: { userId: user.id, artistId: +artistId },
+				},
+			});
+		} else {
+			await prisma.artist.create({
+				data: {
+					artistId: +artistId,
+					userId: user.id,
+				},
+			});
+		}
+	} catch (error) {
+		console.error('error', error);
+	}
+	revalidatePath(`/player/artist/${artistId}`);
+}
+
+export async function togglelikedAlbum(formData: FormData) {
+	const albumId = formData.get('albumId') as string;
+	try {
+		const usersession = await getCurrentUser();
+
+		if (!usersession || !usersession.id) {
+			throw new Error('Unauthorized');
+		}
+
+		const user = await prisma.user.findUnique({
+			where: { id: usersession?.id },
+			include: { likedAlbums: true },
+		});
+
+		if (!user) {
+			throw new Error('User Not Found');
+		}
+
+		const isLiked = user.likedAlbums.some(
+			(album) => album.albumId === +albumId
+		);
+
+		if (isLiked) {
+			await prisma.album.delete({
+				where: {
+					albumId_userId: { userId: user.id, albumId: +albumId },
+				},
+			});
+		} else {
+			await prisma.album.create({
+				data: { albumId: +albumId, userId: user.id },
+			});
+		}
+	} catch (error) {
+		console.error(error);
+	}
+	revalidatePath(`/player/album/${albumId}`);
 }

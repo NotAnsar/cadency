@@ -4,7 +4,7 @@ import { Button } from '../../button';
 import { ArtistDetails } from '@/types/music';
 import { cn } from '@/lib/utils';
 import { useOptimistic } from 'react';
-import { toggleFollow } from '@/actions/favorite-action';
+import { toggleFollow } from '@/actions/user-actions';
 
 export default function ArtistDetails({
 	artist,
@@ -45,7 +45,7 @@ export default function ArtistDetails({
 
 					<Button
 						className={cn(
-							'font-semibold text-base border-2 border-primary rounded-full py-6 w-40 transition-all duration-200',
+							'font-semibold text-base text-foreground border-2 border-primary rounded-full py-6 w-40 transition-all duration-200',
 							optimisticFollow ? 'bg-background' : 'bg-primary'
 						)}
 					>

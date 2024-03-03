@@ -1,14 +1,12 @@
-import { getCurrentUserData } from '@/actions/user-actions';
 import SettingForm from '@/components/ui/player/setting/SettingForm';
+import { getCurrentUserData } from '@/lib/db/user';
 
-import { redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 
 export default async function Page() {
 	const user = await getCurrentUserData();
 
-	if (!user) {
-		redirect('/signin');
-	}
+	if (!user) notFound();
 
 	return <SettingForm {...user} />;
 }

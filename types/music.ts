@@ -47,3 +47,19 @@ export type Chart = {
 	albums: Album[];
 	artists: Artist[];
 };
+
+export type Record = {
+	id: number;
+	title: string;
+	cover_medium: string;
+	release_date: string;
+	record_type: string;
+	explicit_lyrics: false;
+};
+
+export type RecordResponse = {
+	data: Record[];
+	total: number;
+	prev?: string;
+	next?: string;
+};

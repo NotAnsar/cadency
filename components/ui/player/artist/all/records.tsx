@@ -1,7 +1,7 @@
 'use client';
 
-import { Record } from '@/actions/fetch-all-records';
 import { cn } from '@/lib/utils';
+import { Record } from '@/types/music';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';

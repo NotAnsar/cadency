@@ -1,12 +1,10 @@
-import { getFollowedArtists } from '@/lib/db_favorites';
-
+import { getFollowedArtists } from '@/lib/api/artist';
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 
 export default async function page() {
 	const artists = await getFollowedArtists();
-	console.log(artists);
 
 	if (!artists) {
 		notFound();

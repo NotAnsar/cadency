@@ -1,9 +1,10 @@
 'use client';
 
-import { Record, getArtistRecords } from '@/actions/fetch-all-records';
 import Records from './records';
+import { Record } from '@/types/music';
 import { useScroll } from '@/hooks/useScroll';
 import { useCallback } from 'react';
+import { getArtistRecords } from '@/actions/fetch-all-records';
 
 export default function LoadMoreRecords({
 	id,
@@ -14,7 +15,6 @@ export default function LoadMoreRecords({
 }) {
 	const fun = useCallback((next: number) => getArtistRecords(id, next), [id]);
 	const { isDone, ref, data } = useScroll<Record>(islast, fun);
-
 	return (
 		<>
 			<Records records={data} />

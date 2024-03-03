@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { User } from '@prisma/client';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormState } from 'react-dom';
 
 export default function SettingFormServer({ user }: { user: User }) {
 	const updateUserWithEmail = updateUser.bind(null, user.email);

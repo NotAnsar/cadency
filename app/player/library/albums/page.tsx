@@ -1,22 +1,21 @@
-import { getArtist } from '@/lib/db';
+import { getLikedAlbums } from '@/lib/api/album';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 
 export default async function page() {
-	const favorites = await getArtist('4050205');
+	const albums = await getLikedAlbums();
 
-	if (!favorites) {
-		redirect('/player');
-	}
+	if (!albums) notFound();
 
 	return (
 		<div className='px-8 py-6 mb-16'>
 			<h1 className='text-4xl font-semibold'>Your Favorite Albums</h1>
 
 			<div className='my-6 grid grid-cols-3 md:grid-cols-5 gap-5'>
-				{favorites.albums.map((album) => (
-					<div key={album.id} className=''>
+				{albums.map((album) => (
+					<div key={album?.id} className=''>
 						<Link href={`/player/album/${album.id}`}>
 							<Image
 								alt={album.title}

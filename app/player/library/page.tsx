@@ -1,4 +1,4 @@
-import { getArtist } from '@/lib/db';
+import { getArtist } from '@/lib/api/artist';
 import { Plus } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';

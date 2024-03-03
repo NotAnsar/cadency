@@ -1,13 +1,14 @@
 'use client';
-import { togglelikedAlbum } from '@/actions/favorite-action';
+
+import { togglelikedAlbum } from '@/actions/user-actions';
 import { Icons } from '@/components/icons/audio-icons';
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+// import {
+// 	DropdownMenu,
+// 	DropdownMenuContent,
+// 	DropdownMenuItem,
+// 	DropdownMenuSeparator,
+// 	DropdownMenuTrigger,
+// } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 import { useOptimistic } from 'react';
 
@@ -48,7 +49,7 @@ export default function AlbumControl({ id, initialLiked }: Prop) {
 					/>
 				</button>
 			</form>
-			<DropdownMenu>
+			{/* <DropdownMenu>
 				<DropdownMenuTrigger>
 					<Icons.MoreHorizontal />
 				</DropdownMenuTrigger>
@@ -69,7 +70,7 @@ export default function AlbumControl({ id, initialLiked }: Prop) {
 					<DropdownMenuSeparator />
 					<DropdownMenuItem>Exit</DropdownMenuItem>
 				</DropdownMenuContent>
-			</DropdownMenu>
+			</DropdownMenu> */}
 		</div>
 	);
 }

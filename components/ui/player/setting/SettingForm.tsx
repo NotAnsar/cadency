@@ -92,6 +92,7 @@ export default function SettingForm({
 
 		setIsLoading(false);
 	}
+
 	return (
 		<Form {...form}>
 			<Form {...form}>

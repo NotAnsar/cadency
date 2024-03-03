@@ -1,4 +1,4 @@
-import { getFollowedArtists } from '@/lib/db_favorites';
+import { getFollowedArtists } from '@/lib/api/artist';
 import { UserRoundX } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';

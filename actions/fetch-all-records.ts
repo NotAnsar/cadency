@@ -1,4 +1,5 @@
-import { url } from '@/lib/db';
+import { url } from '@/lib/api/url';
+import { RecordResponse } from '@/types/music';
 import axios from 'axios';
 
 export async function getArtistRecords(
@@ -23,19 +24,3 @@ export async function getArtistRecords(
 		return null;
 	}
 }
-
-export type Record = {
-	id: number;
-	title: string;
-	cover_medium: string;
-	release_date: string;
-	record_type: string;
-	explicit_lyrics: false;
-};
-
-export type RecordResponse = {
-	data: Record[];
-	total: number;
-	prev?: string;
-	next?: string;
-};
