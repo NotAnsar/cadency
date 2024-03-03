@@ -6,7 +6,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { S3 } from '@aws-sdk/client-s3';
 import { getFollowedArtists } from '@/lib/api/artist';
-import { getUserFollowedArtists } from '@/lib/db/user';
+import { getUserFollowedArtists, getUserLikedAlbums } from '@/lib/db/user';
 
 const s3 = new S3({
 	region: 'eu-west-3',
@@ -103,16 +103,9 @@ export async function toggleFollow(formData: FormData) {
 		}
 
 		// const usersession = await getCurrentUser();
-
 		// if (!usersession || !usersession.id) {
 		// 	throw new Error('Unauthorized');
 		// }
-		const user = await getCurrentUser();
-
-		if (!user || !user.id) {
-			throw new Error('Unauthorized');
-		}
-
 		// const user = await prisma.user.findUnique({
 		// 	where: { id: usersession?.id },
 		// 	include: { followedArtists: true },
@@ -124,10 +117,16 @@ export async function toggleFollow(formData: FormData) {
 		// 	(artist) => artist.artistId === +artistId
 		// );
 
+		const user = await getCurrentUser();
+
+		if (!user || !user.id) {
+			throw new Error('Unauthorized');
+		}
+
 		const followedArtists = await getUserFollowedArtists();
 
 		if (!followedArtists) {
-			throw new Error('User Not Found');
+			throw new Error('Followed Artists Not Found');
 		}
 
 		const isFollwed = followedArtists.some(
@@ -158,24 +157,37 @@ export async function toggleFollow(formData: FormData) {
 export async function togglelikedAlbum(formData: FormData) {
 	const albumId = formData.get('albumId') as string;
 	try {
-		const usersession = await getCurrentUser();
+		// const usersession = await getCurrentUser();
 
-		if (!usersession || !usersession.id) {
+		// if (!usersession || !usersession.id) {
+		// 	throw new Error('Unauthorized');
+		// }
+
+		// const user = await prisma.user.findUnique({
+		// 	where: { id: usersession?.id },
+		// 	include: { likedAlbums: true },
+		// });
+
+		// if (!user) {
+		// 	throw new Error('User Not Found');
+		// }
+
+		// const isLiked = user.likedAlbums.some(
+		// 	(album) => album.albumId === +albumId
+		// );
+		const user = await getCurrentUser();
+
+		if (!user || !user.id) {
 			throw new Error('Unauthorized');
 		}
 
-		const user = await prisma.user.findUnique({
-			where: { id: usersession?.id },
-			include: { likedAlbums: true },
-		});
+		const likedAlbums = await getUserLikedAlbums();
 
-		if (!user) {
-			throw new Error('User Not Found');
+		if (!likedAlbums) {
+			throw new Error('Liked Albums Not Found');
 		}
 
-		const isLiked = user.likedAlbums.some(
-			(album) => album.albumId === +albumId
-		);
+		const isLiked = likedAlbums.some((album) => album.albumId === +albumId);
 
 		if (isLiked) {
 			await prisma.album.delete({
