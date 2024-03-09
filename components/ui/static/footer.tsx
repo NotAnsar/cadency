@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function Footer() {
 	return (
-		<footer className='bg-background/45'>
+		<footer className='border-t border-border'>
 			<Wrapper className='py-10 md:flex  md:justify-between md:items-center space-y-4 md:space-y-0 gap-4'>
 				<Logo className='text-2xl ' />
 				<ul className='flex flex-col md:flex-row  md:items-center gap-3 text-muted-foreground '>

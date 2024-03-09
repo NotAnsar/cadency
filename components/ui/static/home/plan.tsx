@@ -6,7 +6,7 @@ import Wrapper from '../wrapper';
 
 export default function PlanSection() {
 	return (
-		<Wrapper className='pt-20 text-center mb-10' id='pricing'>
+		<Wrapper className='pt-20 text-center mb-10 relative' id='pricing'>
 			<h2 className='text-4xl font-medium md:text-5xl'>
 				{"Choose the plan that's right for you."}
 			</h2>
@@ -15,14 +15,16 @@ export default function PlanSection() {
 				Perks
 			</p>
 
+			<div className='w-80 h-32 bg-primary absolute left-[50%] right-[50%] -translate-x-1/2 mx-auto  md:top-[25dvh] -rotate-45 blur-[140px] rounded-full -z-10' />
 			<div className='grid grid-cols-1 md:grid-cols-3 gap-6 mt-32 text-left'>
 				{PLANS.map((plan, i) => (
 					<article
 						key={i}
 						className={cn(
-							'bg-[#fdfdfd] dark:bg-[#181818] rounded-lg px-6 py-8 ',
-							plan.best && 'border-2 border-primary ',
-							i === 1 && 'md:-translate-y-12  md:z-10 '
+							'bg-[#fdfdfd] dark:bg-[#181818]  ',
+							'rounded-lg px-6 py-8 backdrop-blur-md',
+							plan.best && 'border-2 border-primary',
+							i === 1 && 'md:-translate-y-12 md:z-10 '
 						)}
 					>
 						<div className='space-y-4 pb-2 border-b-2 h-48'>

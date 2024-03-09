@@ -45,8 +45,7 @@ export default function ArtistDetails({
 
 					<Button
 						className={cn(
-							'font-semibold text-base text-foreground border-2 border-primary rounded-full py-6 w-40 transition-all duration-200',
-							optimisticFollow ? 'bg-background' : 'bg-primary'
+							'font-semibold text-base text-white border-2 border-primary rounded-lg py-6 w-40 transition-all duration-300'
 						)}
 					>
 						{optimisticFollow ? 'Following' : 'Follow'}

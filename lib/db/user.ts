@@ -52,3 +52,18 @@ export async function getUserLikedAlbums() {
 
 	return null;
 }
+
+export async function getUserLikedTracks() {
+	const session = await getCurrentUser();
+
+	if (session?.email) {
+		const user = await prisma.user.findUnique({
+			where: { email: session.email },
+			select: { likedtracks: true },
+		});
+
+		return user?.likedtracks;
+	}
+
+	return null;
+}

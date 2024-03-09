@@ -8,7 +8,7 @@ type DataType<T> = {
 
 export const useScroll = <T>(
 	islast: boolean,
-	getData: (next: number) => Promise<DataType<T> | null>
+	getData: (next: number) => Promise<DataType<T> | null> // should be Wrapped in useCallback
 ) => {
 	const [data, setData] = useState<T[]>([]);
 	const pageLoaded = useRef(1); // if i used state here useEffect load page twice in every mount

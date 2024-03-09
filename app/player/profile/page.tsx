@@ -46,9 +46,9 @@ export default async function Page() {
 					<TabsContent value='following'>
 						<ListFollowedArtists />
 					</TabsContent>
-					{/* <TabsContent value='playlist'>
-						<ListPlaylists albums={albums} />
-					</TabsContent> */}
+					<TabsContent value='playlist'>
+						<ListPlaylists />
+					</TabsContent>
 				</Tabs>
 			</div>
 		</main>
@@ -57,5 +57,5 @@ export default async function Page() {
 
 const tabs = [
 	{ value: 'following', label: 'Following' },
-	// { value: 'playlist', label: 'Playlist' },
+	{ value: 'playlist', label: 'Playlist' },
 ];

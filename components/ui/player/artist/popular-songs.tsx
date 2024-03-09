@@ -1,5 +1,6 @@
 'use client';
-import { Icons } from '@/components/icons/audio-icons';
+
+import LikeTrack from '@/components/like-track';
 import { formatSongTime } from '@/lib/utils';
 import { Track } from '@/types/music';
 import { MoreHorizontal } from 'lucide-react';
@@ -7,7 +8,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function PopularSongs({ songs }: { songs: Track[] }) {
+export default function PopularSongs({
+	songs,
+	likedTracks,
+}: {
+	songs: Track[];
+	likedTracks: {
+		userId: string;
+		trackId: string;
+	}[];
+}) {
 	const [showMore, setshowMore] = useState(false);
 	const songsShown = showMore ? songs.length : 5;
 
@@ -32,7 +42,7 @@ export default function PopularSongs({ songs }: { songs: Track[] }) {
 							/>
 
 							<div className='ml-4'>
-								<span className='text-[15px]'>{song.title}</span>
+								<span className='text-[15px]'>{song.title_short}</span>
 								<div className='text-xs font-normal hover text-muted-foreground'>
 									{song.contributors.map((a, i) => (
 										<span key={a.id}>
@@ -50,7 +60,11 @@ export default function PopularSongs({ songs }: { songs: Track[] }) {
 						</div>
 
 						<div className='flex items-center gap-6 mr-4'>
-							<Icons.heart className='w-5 h-5' />
+							<LikeTrack
+								trackId={song.id + ''}
+								isLiked={likedTracks.some((a) => a.trackId === song.id + '')}
+							/>
+
 							<p className='text-sm w-10'>{formatSongTime(song.duration)}</p>
 							<MoreHorizontal className='w-5 h-5' />
 						</div>

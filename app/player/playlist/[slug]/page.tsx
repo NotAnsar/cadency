@@ -1,35 +1,29 @@
 import AlbumControl from '@/components/ui/player/album/album-control';
 import AlbumDetails from '@/components/ui/player/album/album-details';
 import AlbumSongs from '@/components/ui/player/album/album-songs';
+import PlaylistControl from '@/components/ui/player/playlist/playlist-control';
+import PlaylistDetails from '@/components/ui/player/playlist/playlist-details';
 import { getAlbum } from '@/lib/api/album';
-import { getUserLikedAlbums, getUserLikedTracks } from '@/lib/db/user';
-
+import { getPlaylist } from '@/lib/db/playlist';
 import { notFound } from 'next/navigation';
 
 export default async function page({ params }: { params: { slug: string } }) {
-	const album = await getAlbum(params.slug);
-	const [likedAlbums, likedTracks] = await Promise.all([
-		getUserLikedAlbums(),
-		getUserLikedTracks(),
-	]);
+	const playlist = await getPlaylist(params.slug);
 
-	if (!album || !likedAlbums || !likedTracks) {
+	if (!playlist) {
 		notFound();
 	}
 
 	return (
 		<div className='px-8 py-6'>
-			<AlbumDetails album={album} />
-			<AlbumControl
-				id={album.id}
-				initialLiked={likedAlbums.some((a) => a.albumId === album.id)}
-			/>
+			<PlaylistDetails playlist={playlist} />
+			<PlaylistControl playlist={playlist} />
+			{/*
 			<AlbumSongs
 				label={album.label}
 				title={album.title}
 				tracks={album.tracks.data}
-				likedTracks={likedTracks}
-			/>
+			/> */}
 		</div>
 	);
 }

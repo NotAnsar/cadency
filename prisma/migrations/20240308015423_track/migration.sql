@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "PlaylistTrack" ALTER COLUMN "trackId" SET DATA TYPE BIGINT;
+
+-- AlterTable
+ALTER TABLE "Track" ALTER COLUMN "trackId" SET DATA TYPE BIGINT;

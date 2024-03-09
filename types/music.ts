@@ -2,6 +2,7 @@ export type TrackData = {
 	id: number;
 	title: string;
 	duration: number;
+	title_short: string;
 };
 
 export type Track = TrackData & {
@@ -10,6 +11,8 @@ export type Track = TrackData & {
 	artist: Artist;
 	album: Album;
 	contributors: Artist[];
+	release_date?: string;
+	explicit_lyrics?: boolean;
 };
 
 export type Artist = {

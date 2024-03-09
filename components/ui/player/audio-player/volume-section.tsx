@@ -5,6 +5,7 @@ import { MutableRefObject, useState } from 'react';
 import { useVolume } from '@/hooks/useVolume';
 import { Icons } from '@/components/icons/audio-icons';
 import { toast } from '../../use-toast';
+import LikeTrack from '@/components/like-track';
 
 type Prop = { audioRef: MutableRefObject<HTMLAudioElement | null> };
 
@@ -15,7 +16,7 @@ export default function VolumeSection({ audioRef }: Prop) {
 	return (
 		<div className='items-center gap-2 mr-4 flex flex-none'>
 			<div className='flex gap-4'>
-				<Icons.heart
+				{/* <Icons.heart
 					className={cn(
 						'cursor-pointer hover:scale-110 transition-all h-5 w-5 ',
 						liked ? 'fill-primary text-primary' : 'text-muted-foreground '
@@ -30,6 +31,11 @@ export default function VolumeSection({ audioRef }: Prop) {
 							className: 'absolute bottom-[90px] right-4',
 						});
 					}}
+				/> */}
+				<LikeTrack
+					className='text-muted-foreground'
+					trackId={''}
+					isLiked={true}
 				/>
 				{mute ? (
 					<Icons.speakerX

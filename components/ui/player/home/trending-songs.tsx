@@ -32,7 +32,7 @@ export default function TrendingSongs({ songs, classname = '' }: Prop) {
 
 							<div>
 								<p className='leading-none text-[15px] font-medium'>
-									{song.title}
+									{song.title_short}
 								</p>
 								<Link
 									href={`/player/artist/${song.artist.id}`}

@@ -2,45 +2,55 @@ import { cn } from '@/lib/utils';
 import { buttonVariants } from '../../button';
 import Link from 'next/link';
 import Wrapper from '../wrapper';
+import Image from 'next/image';
 
 export default function Hero() {
 	return (
-		<Wrapper
-			id='hero'
-			className={'grid items-center h-[550px] text-center w-full'}
-		>
-			<div className='mx-auto'>
-				<h1 className='text-[40px] md:text-7xl font-medium mb-8'>
-					Your Music, Your Way
-				</h1>
+		<Wrapper id='hero'>
+			<div className='w-96 h-40 bg-primary absolute  left-[10%] mx-auto top-[30dvh] md:top-[40dvh] -rotate-45 blur-[140px] rounded-full -z-10' />
+			<div className='mx-auto flex flex-col md:flex-row items-center mt-4'>
+				<div className='col-span-2 text-left'>
+					<h1 className='text-3xl  md:text-5xl lg:text-[53px] font-medium mb-4 '>
+						<span className='text-primary font-semibold'>
+							Cadence of Discovery:
+						</span>{' '}
+						Unlock Extraordinary Moments with Cadency.
+					</h1>
 
-				<p className='text-base text-muted-foreground mt-4 mb-8 max-w-2xl mx-auto'>
-					<span className='hidden md:inline'>
+					<p className='text-base text-muted-foreground mt-4 mb-8 max-w-2xl mx-auto'>
 						Explore the musical world with Cadency, where every note, rhythm,
-						and melody.
-					</span>{' '}
-					Discover, create, and let Cadency be the soundtrack to your journey.
-				</p>
-				<div className='flex gap-4 text-center justify-center items-center'>
-					<Link
-						href='/signin'
-						className={cn(
-							buttonVariants({ variant: 'hero_primary', size: 'hero' })
-						)}
-					>
-						Sign In To Get Started
-					</Link>
+						and melody. Discover, create, and let Cadency be the soundtrack to
+						your journey.
+					</p>
+					<div className='flex gap-4 items-center'>
+						<Link
+							href='/signin'
+							className={cn(
+								buttonVariants({ variant: 'hero_primary', size: 'hero' }),
+								'rounded-md'
+							)}
+						>
+							Get Started
+						</Link>
 
-					<Link
-						href='/#pricing'
-						className={cn(
-							buttonVariants({ variant: 'hero_secondary', size: 'hero' }),
-							'hidden md:inline-flex '
-						)}
-					>
-						View all Premium plans
-					</Link>
+						<Link
+							href='/#pricing'
+							className={cn(
+								buttonVariants({ variant: 'hero_secondary', size: 'hero' }),
+								'hidden md:inline-flex rounded-md'
+							)}
+						>
+							View Premium plans
+						</Link>
+					</div>
 				</div>
+				<Image
+					alt='dsds'
+					src={'/download.webp'}
+					width={640}
+					height={640}
+					className='w-auto aspect-square'
+				/>
 			</div>
 		</Wrapper>
 	);

@@ -11,7 +11,7 @@ export default async function page() {
 	}
 
 	return (
-		<div className='px-8 py-6 mb-16'>
+		<>
 			<h1 className='text-4xl font-semibold'>Followed Artists</h1>
 
 			<div className='my-6 grid  grid-cols-3 md:grid-cols-5 gap-5'>
@@ -39,6 +39,6 @@ export default async function page() {
 					</div>
 				))}
 			</div>
-		</div>
+		</>
 	);
 }

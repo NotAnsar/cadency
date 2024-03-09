@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { buttonVariants } from '../button';
+import { Button, buttonVariants } from '../button';
 import { ScrollArea } from '../scroll-area';
 import Logo from '@/components/logo';
 import {
@@ -24,6 +24,9 @@ import {
 } from '../tooltip';
 import Link from 'next/link';
 import { TooltipPortal } from '@radix-ui/react-tooltip';
+
+import { DialogTrigger } from '../dialog';
+import { PlaylistDialog } from '../playlist-modal/playlist-modal';
 
 export default function SideBarNav({
 	className,
@@ -89,12 +92,8 @@ export default function SideBarNav({
 						</h2>
 						<ScrollArea className='max-h-[220px] px-1'>
 							<div className='flex flex-col gap-1 p-2'>
-								<Nav
-									Icon={PlusCircle}
-									title={'New Playlist'}
-									path={'/platlist/new'}
-									currentPath={path}
-								/>
+								<NewPlaylistNav />
+
 								{playlists?.map((playlist, i) => (
 									<Nav
 										Icon={ListMusicIcon}
@@ -163,5 +162,30 @@ function Nav({
 				</TooltipContent>
 			</TooltipPortal>
 		</Tooltip>
+	);
+}
+
+function NewPlaylistNav() {
+	return (
+		<PlaylistDialog>
+			<Tooltip>
+				<TooltipTrigger asChild>
+					<DialogTrigger asChild>
+						<Button className={'justify-start'} variant={'ghost'}>
+							<PlusCircle className='md:mr-2 h-4 w-4' />
+							<p className='hidden md:block'>New Playlist</p>
+						</Button>
+					</DialogTrigger>
+				</TooltipTrigger>
+				<TooltipPortal>
+					<TooltipContent
+						side='right'
+						className='flex items-center gap-4 md:hidden'
+					>
+						New Playlist
+					</TooltipContent>
+				</TooltipPortal>
+			</Tooltip>
+		</PlaylistDialog>
 	);
 }

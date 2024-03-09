@@ -120,7 +120,7 @@ export default function SearchResult({ data, closeModal, className }: Prop) {
 							renderResult(
 								`/player/album/${song.album.id}`,
 								song.album.cover_medium,
-								song.title,
+								song.title_short,
 								'Song',
 								song.id,
 								song.artist.name

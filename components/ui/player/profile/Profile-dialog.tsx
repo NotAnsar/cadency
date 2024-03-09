@@ -46,6 +46,7 @@ export default function ProfileDialog({ user }: Prop) {
 					className={'h-44 w-44 md:h-52 md:w-52 object-cover'}
 					width={208}
 					height={208}
+					// loader={() => user.image}
 				/>
 			) : (
 				<User className='h-16 w-16 group-hover:hidden' />
