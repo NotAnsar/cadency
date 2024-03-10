@@ -1,10 +1,11 @@
-type TracksDB = {
+export type TracksDB = {
 	id: string;
 	playlistId: string;
 	trackId: string;
 	createdAt: Date;
 	updatedAt: Date;
 };
+
 type UserDB = {
 	id: string;
 	email: string;
@@ -24,5 +25,5 @@ export type Playlist = {
 	updatedAt: Date;
 	tracks: TracksDB[];
 	user: UserDB;
-	_count: { tracks: number };
+	_count: { tracks: number; user?: number };
 };

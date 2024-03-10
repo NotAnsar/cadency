@@ -25,5 +25,5 @@ async function getTrackDetails(track: {
 	createdAt: Date;
 }) {
 	const response = await axios.get(`${url}/track/${track.trackId}`);
-	return { ...response.data, createdAt: track.createdAt };
+	return { ...response.data, ...track };
 }

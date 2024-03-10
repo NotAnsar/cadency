@@ -3,15 +3,18 @@ import AlbumsCarousel from '@/components/ui/player/artist/albums-carousel';
 import ArtistDetails from '@/components/ui/player/artist/artist-details';
 import PopularSongs from '@/components/ui/player/artist/popular-songs';
 import { getArtist } from '@/lib/api/artist';
+import { getUserPlaylists } from '@/lib/db/playlist';
 import { getUserFollowedArtists, getUserLikedTracks } from '@/lib/db/user';
+import { Playlist } from '@/types/playlist';
 
 import { notFound } from 'next/navigation';
 
 export default async function page({ params }: { params: { slug: string } }) {
 	const res = await getArtist(params.slug);
-	const [followedArtists, likedTracks] = await Promise.all([
+	const [followedArtists, likedTracks, playlists] = await Promise.all([
 		getUserFollowedArtists(),
 		getUserLikedTracks(),
+		getUserPlaylists(),
 	]);
 
 	if (!res || !followedArtists || !likedTracks) notFound();
@@ -25,7 +28,11 @@ export default async function page({ params }: { params: { slug: string } }) {
 				initialFollow={followedArtists.some((a) => a.artistId === artist.id)}
 			/>
 			{songs.length ? (
-				<PopularSongs songs={songs} likedTracks={likedTracks} />
+				<PopularSongs
+					songs={songs}
+					likedTracks={likedTracks}
+					playlists={playlists || []}
+				/>
 			) : null}
 			{albums.length ? (
 				<AlbumsCarousel id={params.slug} albums={albums} />

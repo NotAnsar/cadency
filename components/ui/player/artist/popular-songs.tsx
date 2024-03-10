@@ -1,9 +1,10 @@
 'use client';
 
+import AddToPlaylist from '@/components/add-to-playlist';
 import LikeTrack from '@/components/like-track';
 import { formatSongTime } from '@/lib/utils';
 import { Track } from '@/types/music';
-import { MoreHorizontal } from 'lucide-react';
+import { Playlist } from '@/types/playlist';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -11,12 +12,14 @@ import { useState } from 'react';
 export default function PopularSongs({
 	songs,
 	likedTracks,
+	playlists,
 }: {
 	songs: Track[];
 	likedTracks: {
 		userId: string;
 		trackId: string;
 	}[];
+	playlists: Playlist[];
 }) {
 	const [showMore, setshowMore] = useState(false);
 	const songsShown = showMore ? songs.length : 5;
@@ -28,7 +31,7 @@ export default function PopularSongs({
 				{songs.slice(0, songsShown).map((song, i) => (
 					<div
 						key={song.id}
-						className='border-b transition-colors hover:bg-muted/50 flex items-center w-auto justify-between '
+						className='border-b transition-colors hover:bg-muted/50 flex items-center w-auto justify-between group'
 					>
 						<div className='flex items-center'>
 							<p className='p-4 align-middle  text-sm'>{i + 1}</p>
@@ -63,10 +66,16 @@ export default function PopularSongs({
 							<LikeTrack
 								trackId={song.id + ''}
 								isLiked={likedTracks.some((a) => a.trackId === song.id + '')}
+								classNameNotLiked='invisible group-hover:visible'
 							/>
 
 							<p className='text-sm w-10'>{formatSongTime(song.duration)}</p>
-							<MoreHorizontal className='w-5 h-5' />
+
+							<AddToPlaylist
+								playlists={playlists || []}
+								songId={song.id + ''}
+								className='invisible group-hover:visible'
+							/>
 						</div>
 					</div>
 				))}

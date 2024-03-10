@@ -11,27 +11,10 @@ type Prop = { audioRef: MutableRefObject<HTMLAudioElement | null> };
 
 export default function VolumeSection({ audioRef }: Prop) {
 	const { handleVolume, mute, toggleMute, volume } = useVolume(audioRef);
-	const [liked, setliked] = useState(false);
 
 	return (
 		<div className='items-center gap-2 mr-4 flex flex-none'>
 			<div className='flex gap-4'>
-				{/* <Icons.heart
-					className={cn(
-						'cursor-pointer hover:scale-110 transition-all h-5 w-5 ',
-						liked ? 'fill-primary text-primary' : 'text-muted-foreground '
-					)}
-					role='button'
-					onClick={() => {
-						setliked((a) => !a);
-						toast({
-							description: !liked
-								? 'Added To liked Song.'
-								: 'Removed From liked Song.',
-							className: 'absolute bottom-[90px] right-4',
-						});
-					}}
-				/> */}
 				<LikeTrack
 					className='text-muted-foreground'
 					trackId={''}

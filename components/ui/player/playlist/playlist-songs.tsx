@@ -1,4 +1,4 @@
-import { Clock3 } from 'lucide-react';
+import { Clock3, Delete, X } from 'lucide-react';
 import {
 	Table,
 	TableBody,
@@ -8,32 +8,26 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/table';
-import { TrackData } from '@/types/music';
-import { formatSongTime } from '@/lib/utils';
+import { cn, formatSongTime } from '@/lib/utils';
 import LikeTrack from '@/components/like-track';
-import AddToPlaylist from '@/components/add-to-playlist';
-import { getUserPlaylists } from '@/lib/db/playlist';
+import { PlaylistTrack } from '@/lib/api/playlist';
+import { togglelikedTrack } from '@/actions/user-actions';
+import { deletePlaylistSong } from '@/actions/playlist-action';
 
-type Prop = {
-	label: string;
-	tracks: TrackData[];
-	title: string;
+export default function PlaylistSongs({
+	tracks,
+	likedTracks,
+	playlistId,
+}: {
+	playlistId: string;
+	tracks: PlaylistTrack[];
 	likedTracks: {
 		userId: string;
 		trackId: string;
 	}[];
-};
-
-export default async function AlbumSongs({
-	label,
-	tracks,
-	title,
-	likedTracks,
-}: Prop) {
-	const playlists = await getUserPlaylists();
+}) {
 	return (
 		<Table className='mb-12'>
-			<TableCaption>© {label}</TableCaption>
 			<TableHeader>
 				<TableRow>
 					<TableHead className='w-[10px]'>#</TableHead>
@@ -52,13 +46,13 @@ export default async function AlbumSongs({
 					<TableRow key={song.id} className='group'>
 						<TableCell className='font-medium'>
 							<div>
-								{/* <Icons.play className='hidden hover:block w-5 h-5 ' /> */}
+								{/* <Icons.play className='hidden hover:block w-5 h-5 ' />  */}
 								<span>{i + 1}</span>
 							</div>
 						</TableCell>
 						<TableCell>{song.title_short}</TableCell>
 
-						<TableCell>{title}</TableCell>
+						<TableCell>{song.album.title}</TableCell>
 						<TableCell>
 							<LikeTrack
 								trackId={song.id + ''}
@@ -70,11 +64,29 @@ export default async function AlbumSongs({
 							{formatSongTime(song.duration)}
 						</TableCell>
 						<TableCell>
-							<AddToPlaylist
-								className='invisible group-hover:visible'
-								playlists={playlists || []}
-								songId={song.id + ''}
-							/>
+							<form
+								className='flex items-center justify-center'
+								action={deletePlaylistSong}
+							>
+								<input
+									className='hidden'
+									name='trackId'
+									defaultValue={song.id}
+								/>
+								<input
+									className='hidden'
+									name='playlistId'
+									defaultValue={playlistId}
+								/>
+								<button type='submit'>
+									<X
+										className={cn(
+											'h-5 w-5 cursor-pointer hover:scale-110 transition-all',
+											'invisible group-hover:visible'
+										)}
+									/>
+								</button>
+							</form>
 						</TableCell>
 					</TableRow>
 				))}

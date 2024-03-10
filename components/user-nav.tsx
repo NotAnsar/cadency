@@ -48,7 +48,7 @@ export default function UserNav({
 				</div>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem asChild>
-					<Link href='/player'>Music Player</Link>
+					<Link href='/player'>Home</Link>
 				</DropdownMenuItem>
 				<DropdownMenuItem asChild>
 					<Link href='/player/profile'>Profile</Link>

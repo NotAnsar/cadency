@@ -7,8 +7,8 @@ import { getUserLikedAlbums, getUserLikedTracks } from '@/lib/db/user';
 import { notFound } from 'next/navigation';
 
 export default async function page({ params }: { params: { slug: string } }) {
-	const album = await getAlbum(params.slug);
-	const [likedAlbums, likedTracks] = await Promise.all([
+	const [album, likedAlbums, likedTracks] = await Promise.all([
+		getAlbum(params.slug),
 		getUserLikedAlbums(),
 		getUserLikedTracks(),
 	]);

@@ -187,8 +187,6 @@ export async function togglelikedTrack(formData: FormData) {
 			throw new Error('Data Error');
 		}
 
-		console.log(trackId);
-
 		const user = await getCurrentUser();
 
 		if (!user || !user.id) {
@@ -214,7 +212,6 @@ export async function togglelikedTrack(formData: FormData) {
 				data: { trackId: trackId, userId: user.id },
 			});
 		}
-		console.log('done');
 	} catch (error) {
 		console.error(error);
 	}

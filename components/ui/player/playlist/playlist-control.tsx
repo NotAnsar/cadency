@@ -4,6 +4,7 @@ import { Icons } from '@/components/icons/audio-icons';
 import { Pencil, Trash } from 'lucide-react';
 import PlaylistModal from '../../playlist-modal/playlist-modal';
 import { Playlist } from '@/types/playlist';
+import { deletePlaylist } from '@/actions/playlist-action';
 
 export default function PlaylistControl({ playlist }: { playlist: Playlist }) {
 	return (
@@ -18,19 +19,26 @@ export default function PlaylistControl({ playlist }: { playlist: Playlist }) {
 
 			<PlaylistModal playlist={playlist}>
 				<button
-					className='px-4 rounded-md flex justify-center items-center bg-muted-foreground dark:bg-secondary cursor-pointer text-white gap-[6px] py-3 hover:opacity-95'
+					className='px-4 rounded-md flex justify-center items-center bg-muted-foreground dark:bg-secondary cursor-pointer text-white gap-[6px] py-3 hover:opacity-90'
 					type='submit'
 				>
 					<Pencil className='h-4 w-4' />
 					<p>Edit</p>
 				</button>
 			</PlaylistModal>
-			<button
-				className='px-4 rounded-md flex justify-center items-center cursor-pointer text-white gap-[6px] py-3 hover:bg-destructive/40'
-				type='submit'
-			>
-				<Trash className='h-5 w-5' />
-			</button>
+			<form action={deletePlaylist}>
+				<input
+					className='hidden'
+					name='playlistId'
+					defaultValue={playlist.id}
+				/>
+				<button
+					className='px-4 rounded-md flex justify-center items-center cursor-pointer text-white gap-[6px] py-3 bg-destructive hover:opacity-90'
+					type='submit'
+				>
+					<Trash className='h-5 w-5' />
+				</button>
+			</form>
 		</div>
 	);
 }
