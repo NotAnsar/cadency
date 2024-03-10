@@ -47,7 +47,6 @@ export default function AlbumsCarousel({
 
 				<CarouselContent>
 					{albums.map((album) => (
-						// album.explicit_lyrics
 						<CarouselItem
 							key={album.id}
 							className='basis-44 mr-4  md:basis-52  '

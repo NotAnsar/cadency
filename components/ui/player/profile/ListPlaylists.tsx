@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Button } from '../../button';
 import { getUserPlaylists } from '@/lib/db/playlist';
 import Link from 'next/link';
+import PlaylistModal from '../../playlist-modal/playlist-modal';
 
 export default async function ListPlaylists() {
 	const playlists = await getUserPlaylists();
@@ -13,7 +14,9 @@ export default async function ListPlaylists() {
 				<p className='text-muted-foreground'>
 					{"This Profile doesn't have any playlists yet."}
 				</p>
-				<Button>Publish a Playlist</Button>
+				<PlaylistModal>
+					<Button>Publish a Playlist</Button>
+				</PlaylistModal>
 			</div>
 		);
 	}

@@ -46,12 +46,9 @@ export default function PlaylistDetails({ playlist }: { playlist: Playlist }) {
 						</div>
 					)}
 
-					<Link
-						href={`/player/profile/${playlist.user.id}`}
-						className='text-sm hover:underline cursor-pointer'
-					>
+					<span className='text-sm hover:underline cursor-pointer'>
 						{playlist.user.name}
-					</Link>
+					</span>
 				</div>
 
 				<p className='text-[15px] text-muted-foreground'>

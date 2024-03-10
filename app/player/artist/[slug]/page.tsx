@@ -5,13 +5,11 @@ import PopularSongs from '@/components/ui/player/artist/popular-songs';
 import { getArtist } from '@/lib/api/artist';
 import { getUserPlaylists } from '@/lib/db/playlist';
 import { getUserFollowedArtists, getUserLikedTracks } from '@/lib/db/user';
-import { Playlist } from '@/types/playlist';
-
 import { notFound } from 'next/navigation';
 
 export default async function page({ params }: { params: { slug: string } }) {
-	const res = await getArtist(params.slug);
-	const [followedArtists, likedTracks, playlists] = await Promise.all([
+	const [res, followedArtists, likedTracks, playlists] = await Promise.all([
+		getArtist(params.slug),
 		getUserFollowedArtists(),
 		getUserLikedTracks(),
 		getUserPlaylists(),
