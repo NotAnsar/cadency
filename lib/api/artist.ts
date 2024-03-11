@@ -80,8 +80,22 @@ export async function getArtist(id: string) {
 	}
 }
 
+export async function getArtistInfo(id: string) {
+	try {
+		const res = await axios.get(`${url}/artist/${id}`);
+
+		if (res.data.error) throw new Error();
+
+		return res.data as ArtistDetails;
+	} catch (error) {
+		return null;
+	}
+}
 async function getArtistDetails(id: string) {
 	const response = await axios.get(`${url}/artist/${id}`);
+	if (response.data.error) {
+		return null;
+	}
 	return response.data;
 }
 
