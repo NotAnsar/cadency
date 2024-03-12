@@ -23,13 +23,13 @@ export async function getCurrentUserData() {
 	return null;
 }
 
-export async function getUserFollowedArtists() {
+export async function getUserFollowedArtists(limit?: number) {
 	const session = await getCurrentUser();
 
 	if (session?.email) {
 		const user = await prisma.user.findUnique({
 			where: { email: session.email },
-			select: { followedArtists: true },
+			select: { followedArtists: limit ? { take: 5 } : true },
 		});
 
 		return user?.followedArtists;
@@ -38,13 +38,13 @@ export async function getUserFollowedArtists() {
 	return null;
 }
 
-export async function getUserLikedAlbums() {
+export async function getUserLikedAlbums(limit?: number) {
 	const session = await getCurrentUser();
 
 	if (session?.email) {
 		const user = await prisma.user.findUnique({
 			where: { email: session.email },
-			select: { likedAlbums: true },
+			select: { likedAlbums: limit ? { take: limit } : true },
 		});
 
 		return user?.likedAlbums;
@@ -53,13 +53,13 @@ export async function getUserLikedAlbums() {
 	return null;
 }
 
-export async function getUserLikedTracks() {
+export async function getUserLikedTracks(limit?: number) {
 	const session = await getCurrentUser();
 
 	if (session?.email) {
 		const user = await prisma.user.findUnique({
 			where: { email: session.email },
-			select: { likedtracks: true },
+			select: { likedtracks: limit ? { take: limit } : true },
 		});
 
 		return user?.likedtracks;

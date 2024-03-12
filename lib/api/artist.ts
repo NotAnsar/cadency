@@ -3,9 +3,9 @@ import { Album, ArtistDetails, RecordResponse, Track } from '@/types/music';
 import axios from 'axios';
 import { getUserFollowedArtists } from '../db/user';
 
-export async function getFollowedArtists() {
+export async function getFollowedArtists(limit?: number) {
 	try {
-		const followedArtists = await getUserFollowedArtists();
+		const followedArtists = await getUserFollowedArtists(limit);
 		if (!followedArtists) throw new Error('unauthorized');
 
 		const artistsInfoPromises = followedArtists.map((artist) =>

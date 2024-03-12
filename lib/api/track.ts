@@ -3,9 +3,9 @@ import { getUserLikedTracks } from '../db/user';
 import { url } from './url';
 import { Track } from '@/types/music';
 
-export async function getLikedTracks() {
+export async function getLikedTracks(limit?: number) {
 	try {
-		const likedTracks = await getUserLikedTracks();
+		const likedTracks = await getUserLikedTracks(limit);
 		if (!likedTracks) throw new Error('unauthorized');
 
 		const likedTracksInfoPromises = likedTracks.map((track) =>

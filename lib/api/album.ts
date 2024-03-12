@@ -20,9 +20,9 @@ export async function getAlbum(id: string) {
 	}
 }
 
-export async function getLikedAlbums() {
+export async function getLikedAlbums(limit?: number) {
 	try {
-		const likedAlbums = await getUserLikedAlbums();
+		const likedAlbums = await getUserLikedAlbums(limit);
 		if (!likedAlbums) throw new Error('unauthorized');
 
 		const artistsInfoPromises = likedAlbums.map((album) =>

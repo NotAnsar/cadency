@@ -39,6 +39,7 @@ export default function ArtistDetails({
 					action={async (formData) => {
 						addOptimisticFollow(null);
 						await toggleFollow(formData);
+						// await toggleFollow(artist.id,);
 					}}
 				>
 					<input className='hidden' name='artistId' defaultValue={artist.id} />

@@ -1,11 +1,9 @@
-import { Button } from '@/components/ui/button';
 import NotFoundLibrary from '@/components/ui/player/library/not-found-library';
 import { getLikedAlbums } from '@/lib/api/album';
-import { DiscAlbum, X } from 'lucide-react';
+import { DiscAlbum } from 'lucide-react';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 
 export default async function page() {
 	const albums = await getLikedAlbums();

@@ -3,7 +3,6 @@ import { getUserPlaylists } from '@/lib/db/playlist';
 import { ListMusic, ListX } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 
 export default async function page() {
 	const playlists = await getUserPlaylists();
@@ -42,8 +41,7 @@ export default async function page() {
 								</Link>
 
 								<span className='text-xs mb-1 text-muted-foreground block'>
-									created At&nbsp;
-									{new Date(playlist.createdAt).toDateString()}
+									{playlist._count.tracks} Tracks
 								</span>
 							</div>
 						</div>

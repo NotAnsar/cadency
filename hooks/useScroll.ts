@@ -20,6 +20,7 @@ export const useScroll = <T>(
 			const nextPage = pageLoaded.current + 1;
 
 			const newData = await getData(nextPage);
+
 			if (newData) {
 				setData((prev) => [...prev, ...newData?.data]);
 			}

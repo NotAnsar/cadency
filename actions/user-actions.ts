@@ -120,6 +120,7 @@ export async function toggleFollow(formData: FormData) {
 		console.error('error', error);
 	}
 	revalidatePath(`/player/artist/${artistId}`);
+	revalidatePath(`/player/library`, 'layout');
 }
 
 export async function togglelikedAlbum(formData: FormData) {
@@ -154,6 +155,7 @@ export async function togglelikedAlbum(formData: FormData) {
 		console.error(error);
 	}
 	revalidatePath(`/player/album/${albumId}`);
+	revalidatePath(`/player/library`, 'layout');
 }
 
 export async function togglelikedTrack(formData: FormData) {

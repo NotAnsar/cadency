@@ -1,4 +1,3 @@
-import { url } from '@/lib/api/url';
 import { RecordResponse } from '@/types/music';
 import axios from 'axios';
 
@@ -9,8 +8,9 @@ export async function getArtistRecords(
 ): Promise<RecordResponse | null> {
 	try {
 		const index = (page - 1) * limit;
+
 		const response = await axios.get(
-			`${url}/artist/${id}/albums?limit=${limit}&index=${index}`
+			`https://api.deezer.com/artist/${id}/albums?limit=${limit}&index=${index}`
 		);
 
 		const data = response.data;

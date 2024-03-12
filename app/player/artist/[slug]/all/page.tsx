@@ -14,8 +14,6 @@ export default async function page({ params }: { params: { slug: string } }) {
 
 	if (!res || !artist) notFound();
 
-	console.log(res, artist);
-
 	const { data: records } = res;
 
 	return (

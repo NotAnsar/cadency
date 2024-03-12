@@ -34,6 +34,7 @@ export default function AlbumControl({ id, initialLiked }: Prop) {
 				action={async (formData) => {
 					addOptimisticLiked(null);
 					await togglelikedAlbum(formData);
+					// await togglelikedAlbum(formData,id,);
 				}}
 			>
 				<button
