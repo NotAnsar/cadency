@@ -21,6 +21,9 @@ export default async function page() {
 			</p>
 
 			<div className='mt-6 flex flex-col gap-5'>
+				<Suspense fallback={<LibraryPlaylistSkeleton />}>
+					<LibraryPlaylist />
+				</Suspense>
 				<Suspense fallback={<LibraryAlbumSkeleton />}>
 					<LibraryAlbum />
 				</Suspense>
@@ -29,9 +32,6 @@ export default async function page() {
 				</Suspense>
 				<Suspense fallback={<LibraryAlbumSkeleton />}>
 					<LibrarySong />
-				</Suspense>
-				<Suspense fallback={<LibraryPlaylistSkeleton />}>
-					<LibraryPlaylist />
 				</Suspense>
 			</div>
 		</>
