@@ -183,3 +183,18 @@ export async function togglelikedTrack(formData: FormData) {
 	}
 	revalidatePath(`/player`);
 }
+
+export async function getUserLikedTracks(limit?: number) {
+	const session = await getCurrentUser();
+
+	if (session?.email) {
+		const user = await prisma.user.findUnique({
+			where: { email: session.email },
+			select: { likedtracks: limit ? { take: limit } : true },
+		});
+
+		return user?.likedtracks;
+	}
+
+	return null;
+}

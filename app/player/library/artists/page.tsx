@@ -1,10 +1,12 @@
 import { Button } from '@/components/ui/button';
 import NotFoundLibrary from '@/components/ui/player/library/not-found-library';
+import ArtistSkeleton from '@/components/ui/skeleton/artist-skeleton';
 import { getFollowedArtists } from '@/lib/api/artist';
 import { User, UserRoundX, UserX } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 
 export default async function page() {
 	const artists = await getFollowedArtists();
@@ -12,7 +14,28 @@ export default async function page() {
 	return (
 		<>
 			<h1 className='text-4xl font-semibold'>Followed Artists</h1>
+			<Suspense fallback={<Skeleton />}>
+				<ArtistsCards />
+			</Suspense>
+		</>
+	);
+}
 
+function Skeleton() {
+	return (
+		<div className='my-6 grid grid-cols-3 md:grid-cols-5 gap-5'>
+			{Array.from({ length: 4 }).map((_, i) => (
+				<ArtistSkeleton key={i} />
+			))}
+		</div>
+	);
+}
+
+async function ArtistsCards() {
+	const artists = await getFollowedArtists();
+
+	return (
+		<>
 			{!artists || artists.length === 0 ? (
 				<NotFoundLibrary
 					Icon={User}

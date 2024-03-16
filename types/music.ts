@@ -7,10 +7,10 @@ export type TrackData = {
 
 export type Track = TrackData & {
 	preview: string;
-	position: number;
 	artist: Artist;
-	album: Album;
+	album: Omit<Album, 'artist'>;
 	contributors: Artist[];
+	position?: number;
 	release_date?: string;
 	explicit_lyrics?: boolean;
 };

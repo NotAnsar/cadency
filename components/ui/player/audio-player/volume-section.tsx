@@ -1,24 +1,45 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { MutableRefObject, useState } from 'react';
 import { useVolume } from '@/hooks/useVolume';
 import { Icons } from '@/components/icons/audio-icons';
-import { toast } from '../../use-toast';
 import LikeTrack from '@/components/like-track';
+import { useMusicPlayerContext } from '@/context/music-player';
 
-type Prop = { audioRef: MutableRefObject<HTMLAudioElement | null> };
+type tracks = {
+	userId: string;
+	trackId: string;
+	createdAt: Date;
+};
 
-export default function VolumeSection({ audioRef }: Prop) {
-	const { handleVolume, mute, toggleMute, volume } = useVolume(audioRef);
+export default function VolumeSection({
+	likedTracks,
+}: {
+	likedTracks: tracks[] | null;
+}) {
+	const {
+		songs,
+		currentIndex,
+
+		volume,
+		handleVolume,
+		toggleMute,
+		mute,
+	} = useMusicPlayerContext();
+
+	if (!songs[currentIndex] || !likedTracks) {
+		return <VolumeSkeleton />;
+	}
 
 	return (
 		<div className='items-center gap-2 mr-4 flex flex-none'>
 			<div className='flex gap-4'>
 				<LikeTrack
-					className='text-muted-foreground'
-					trackId={''}
-					isLiked={true}
+					className='text-muted-foreground hidden lg:block'
+					trackId={songs[currentIndex].id + ''}
+					isLiked={likedTracks?.some(
+						(a) => a.trackId === songs[currentIndex].id + ''
+					)}
 				/>
 				{mute ? (
 					<Icons.speakerX
@@ -54,6 +75,21 @@ export default function VolumeSection({ audioRef }: Prop) {
 						'h-1 w-20 bg-muted rounded-full accent-primary absolute z-10'
 					)}
 				/>
+			</div>
+		</div>
+	);
+}
+
+export function VolumeSkeleton() {
+	return (
+		<div className='items-center gap-2 mr-4 flex flex-none'>
+			<div className='flex gap-4'>
+				<Icons.heart className='text-muted h-5 w-5' />
+				<Icons.speakerWave className='text-muted h-5 w-5' />
+			</div>
+
+			<div className='flex items-center '>
+				<div className='h-1 w-20 bg-muted rounded-full' />
 			</div>
 		</div>
 	);

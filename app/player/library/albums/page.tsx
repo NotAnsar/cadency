@@ -1,16 +1,28 @@
 import NotFoundLibrary from '@/components/ui/player/library/not-found-library';
+import AlbumSkeleton from '@/components/ui/skeleton/album-skeleton';
 import { getLikedAlbums } from '@/lib/api/album';
 import { DiscAlbum } from 'lucide-react';
-
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 export default async function page() {
+	return (
+		<>
+			<h1 className='text-4xl font-semibold'>Your Favorite Albums</h1>
+
+			<Suspense fallback={<Skeleton />}>
+				<Albums />
+			</Suspense>
+		</>
+	);
+}
+
+async function Albums() {
 	const albums = await getLikedAlbums();
 
 	return (
 		<>
-			<h1 className='text-4xl font-semibold'>Your Favorite Albums</h1>
 			{!albums || albums.length === 0 ? (
 				<NotFoundLibrary
 					Icon={DiscAlbum}
@@ -46,5 +58,15 @@ export default async function page() {
 				</div>
 			)}
 		</>
+	);
+}
+
+function Skeleton() {
+	return (
+		<div className='my-6 grid grid-cols-3 md:grid-cols-5 gap-5'>
+			{Array.from({ length: 6 }).map((_, i) => (
+				<AlbumSkeleton key={i} />
+			))}
+		</div>
 	);
 }

@@ -13,24 +13,24 @@ import { formatSongTime } from '@/lib/utils';
 import LikeTrack from '@/components/like-track';
 import AddToPlaylist from '@/components/add-to-playlist';
 import { getUserPlaylists } from '@/lib/db/playlist';
+import { getUserLikedTracks } from '@/lib/db/user';
 
 type Prop = {
 	label: string;
 	tracks: TrackData[];
 	title: string;
-	likedTracks: {
-		userId: string;
-		trackId: string;
-	}[];
 };
 
-export default async function AlbumSongs({
-	label,
-	tracks,
-	title,
-	likedTracks,
-}: Prop) {
-	const playlists = await getUserPlaylists();
+export default async function AlbumSongs({ label, tracks, title }: Prop) {
+	const [playlists, likedTracks] = await Promise.all([
+		getUserPlaylists(),
+		getUserLikedTracks(),
+	]);
+
+	if (!likedTracks) {
+		throw new Error('Cannot get Album Tracks');
+	}
+
 	return (
 		<Table className='mb-12'>
 			<TableCaption>© {label}</TableCaption>

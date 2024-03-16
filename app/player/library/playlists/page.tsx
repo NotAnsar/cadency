@@ -1,16 +1,37 @@
 import NotFoundLibrary from '@/components/ui/player/library/not-found-library';
+import PlaylistSkeleton from '@/components/ui/skeleton/playlist-skeleton';
 import { getUserPlaylists } from '@/lib/db/playlist';
 import { ListMusic, ListX } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 export default async function page() {
+	return (
+		<>
+			<h1 className='text-4xl font-semibold'>Your Playlists</h1>
+			<Suspense fallback={<Skeleton />}>
+				<PlaylistsCards />
+			</Suspense>
+		</>
+	);
+}
+
+function Skeleton() {
+	return (
+		<div className='my-6 grid grid-cols-3 md:grid-cols-5 gap-5'>
+			{Array.from({ length: 4 }).map((_, i) => (
+				<PlaylistSkeleton key={i} />
+			))}
+		</div>
+	);
+}
+
+async function PlaylistsCards() {
 	const playlists = await getUserPlaylists();
 
 	return (
 		<>
-			<h1 className='text-4xl font-semibold'>Your Playlists</h1>
-
 			{!playlists || playlists.length === 0 ? (
 				<NotFoundLibrary Icon={ListX} message='No playlists found.' />
 			) : (

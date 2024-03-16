@@ -1,4 +1,4 @@
-import { Clock3, Delete, X } from 'lucide-react';
+import { Clock3, X } from 'lucide-react';
 import {
 	Table,
 	TableBody,
@@ -10,22 +10,27 @@ import {
 } from '@/components/ui/table';
 import { cn, formatSongTime } from '@/lib/utils';
 import LikeTrack from '@/components/like-track';
-import { PlaylistTrack } from '@/lib/api/playlist';
-import { togglelikedTrack } from '@/actions/user-actions';
-import { deletePlaylistSong } from '@/actions/playlist-action';
+import { getPlaylistTracks } from '@/lib/api/playlist';
 
-export default function PlaylistSongs({
-	tracks,
-	likedTracks,
+import { deletePlaylistSong } from '@/actions/playlist-action';
+import { getUserLikedTracks } from '@/lib/db/user';
+
+export default async function PlaylistSongs({
 	playlistId,
 }: {
 	playlistId: string;
-	tracks: PlaylistTrack[];
-	likedTracks: {
-		userId: string;
-		trackId: string;
-	}[];
 }) {
+	const [tracks, likedTracks] = await Promise.all([
+		getPlaylistTracks(playlistId),
+		getUserLikedTracks(),
+	]);
+
+	if (!likedTracks || !tracks) throw Error('Cannot fetch Songs');
+
+	if (tracks.length === 0) {
+		return <p>No tracks was Found</p>;
+	}
+
 	return (
 		<Table className='mb-12'>
 			<TableHeader>
@@ -56,7 +61,7 @@ export default function PlaylistSongs({
 						<TableCell>
 							<LikeTrack
 								trackId={song.id + ''}
-								isLiked={likedTracks.some((a) => a.trackId === song.id + '')}
+								isLiked={likedTracks?.some((a) => a.trackId === song.id + '')}
 								classNameNotLiked='invisible group-hover:visible'
 							/>
 						</TableCell>

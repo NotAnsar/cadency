@@ -1,22 +1,19 @@
-'use client';
 import Image from 'next/image';
-import { Button } from '../../button';
 import { ArtistDetails } from '@/types/music';
-import { cn } from '@/lib/utils';
-import { useOptimistic } from 'react';
-import { toggleFollow } from '@/actions/user-actions';
+import { getArtistInfo } from '@/lib/api/artist';
+import FollowArtistButton from './follow-artist';
+import { getUserFollowedArtists } from '@/lib/db/user';
+import { Skeleton } from '../../skeleton';
 
-export default function ArtistDetails({
-	artist,
-	initialFollow,
-}: {
-	artist: ArtistDetails;
-	initialFollow: boolean;
-}) {
-	const [optimisticFollow, addOptimisticFollow] = useOptimistic(
-		initialFollow,
-		(state, _) => !state
-	);
+export default async function ArtistDetails({ id }: { id: string }) {
+	const [artist, followedArtists] = await Promise.all([
+		getArtistInfo(id),
+		getUserFollowedArtists(),
+	]);
+
+	if (!artist || !followedArtists) {
+		throw Error('Cannot get Artist details');
+	}
 
 	return (
 		<div className='flex gap-6'>
@@ -34,24 +31,29 @@ export default function ArtistDetails({
 					</p>
 					<p className='text-5xl font-bold'>{artist.name}</p>
 				</div>
+				<FollowArtistButton
+					artistId={id}
+					initialFollow={followedArtists.some((a) => a.artistId === artist.id)}
+				/>
+			</div>
+		</div>
+	);
+}
 
-				<form
-					action={async (formData) => {
-						addOptimisticFollow(null);
-						await toggleFollow(formData);
-						// await toggleFollow(artist.id,);
-					}}
-				>
-					<input className='hidden' name='artistId' defaultValue={artist.id} />
+export function ArtistDetailsSkeleton() {
+	return (
+		<div className='flex gap-6'>
+			<Skeleton className='aspect-square w-[180px] h-[180px] rounded-full border border-border' />
 
-					<Button
-						className={cn(
-							'font-semibold text-base text-white border-2 border-primary rounded-lg py-6 w-40 transition-all duration-300'
-						)}
-					>
-						{optimisticFollow ? 'Following' : 'Follow'}
-					</Button>
-				</form>
+			<div className='flex flex-col justify-between mb-2'>
+				<div>
+					<p className='text-sm font-medium text-muted-foreground mb-1'>
+						Artist
+					</p>
+
+					<Skeleton className='aspect-square w-[180px] h-[48px] ' />
+				</div>
+				<Skeleton className='aspect-square w-[160px] h-[56px] rounded-lg border border-border mt-2' />
 			</div>
 		</div>
 	);

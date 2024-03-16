@@ -16,7 +16,7 @@ export default function AlbumsCarousel({
 	title = 'Albums',
 	id,
 }: {
-	albums: Album[];
+	albums: Omit<Album, 'artist'>[];
 	title?: string;
 	id: string;
 }) {
@@ -60,7 +60,7 @@ export default function AlbumsCarousel({
 									alt={album.title}
 									width={170}
 									height={170}
-									className='rounded-md h-auto object-cover transition-all hover:scale-105 aspect-square cursor-pointer border-border w-auto'
+									className='rounded-md w-full h-auto aspect-square object-cover transition-all hover:scale-105 cursor-pointer border-border '
 								/>
 							</Link>
 

@@ -1,9 +1,18 @@
-import { useState, useCallback, useRef, MutableRefObject } from 'react';
+import { Track } from '@/types/music';
+import {
+	useState,
+	useCallback,
+	useRef,
+	MutableRefObject,
+	useEffect,
+} from 'react';
 
 export const useAudioPlayer = (
 	audioRef: MutableRefObject<HTMLAudioElement | null>,
 	progressBarRef: MutableRefObject<HTMLInputElement | null>
 ) => {
+	const [currentSong, setCurrentSong] = useState<Track>();
+
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [duration, setDuration] = useState(0);
 	const [currentTime, setCurrentTime] = useState(0);
@@ -15,6 +24,19 @@ export const useAudioPlayer = (
 			setDuration(seconds);
 		}
 	}, [audioRef]);
+
+	const playNewSong = useCallback(
+		(song: Track) => {
+			setCurrentSong(song);
+			if (audioRef.current) {
+				audioRef.current.src = song.preview;
+				audioRef.current.load();
+				audioRef.current.play();
+				setIsPlaying(true);
+			}
+		},
+		[audioRef]
+	);
 
 	function tooglePlay() {
 		if (isPlaying) pause();
@@ -60,7 +82,7 @@ export const useAudioPlayer = (
 			audioRef.current.currentTime = value;
 			setCurrentTime(value);
 		}
-	} 
+	}
 
 	return {
 		isPlaying,
@@ -69,5 +91,7 @@ export const useAudioPlayer = (
 		tooglePlay,
 		onLoadedMetadata,
 		handleCurrentTime,
+		playNewSong,
+		currentSong,
 	};
 };

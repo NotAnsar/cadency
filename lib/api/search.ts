@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { url } from './url';
 import { AlbumDetails, ArtistDetails, Track } from '@/types/music';
 
+const url = 'https://api.deezer.com';
 export async function searchAll(search: string) {
 	try {
 		const [res1, res2, res3] = await Promise.all([

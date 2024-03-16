@@ -20,19 +20,6 @@ export default function SearchForm() {
 	const [open, setOpen] = useState(false);
 	const [searchResult, setSearchResult] = useState<ResultType>(null);
 	const [query] = useDebounce(search, 400);
-	// const debounced = useDebouncedCallback((value: string) => {
-	// 	setSearch(value);
-	// 	if (value === '') {
-	// 		setOpen(false);
-	// 	} else {
-	// 		setOpen(true);
-	// 		const getSearch = async () => {
-	// 			const res = await searchAll(value);
-	// 			setSearchResult(res);
-	// 		};
-	// 		getSearch();
-	// 	}
-	// }, 400);
 
 	useEffect(() => {
 		const getSearch = async () => {
