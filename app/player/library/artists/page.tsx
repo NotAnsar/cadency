@@ -5,12 +5,9 @@ import { getFollowedArtists } from '@/lib/api/artist';
 import { User, UserRoundX, UserX } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
 export default async function page() {
-	const artists = await getFollowedArtists();
-
 	return (
 		<>
 			<h1 className='text-4xl font-semibold'>Followed Artists</h1>

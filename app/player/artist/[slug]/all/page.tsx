@@ -1,9 +1,7 @@
 import { getArtistRecords } from '@/actions/fetch-all-records';
-
 import LoadMoreRecords from '@/components/ui/player/artist/all/load-more-records';
 import Records from '@/components/ui/player/artist/all/records';
 import { getArtistInfo } from '@/lib/api/artist';
-
 import { notFound } from 'next/navigation';
 
 export default async function page({ params }: { params: { slug: string } }) {

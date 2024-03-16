@@ -14,6 +14,7 @@ import {
 import { cn } from '@/lib/utils';
 import { signOut } from 'next-auth/react';
 import { deleteUser } from '@/actions/user-actions';
+import { toast } from '@/components/ui/use-toast';
 
 export default function Page() {
 	return (
@@ -47,7 +48,9 @@ export default function Page() {
 								if (res.message === 'Done') {
 									signOut();
 								} else {
-									// toast(res.message)
+									toast({
+										description: res.message,
+									});
 								}
 							}}
 						>

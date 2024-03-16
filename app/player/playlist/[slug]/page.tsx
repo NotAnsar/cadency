@@ -1,9 +1,8 @@
-import PlaylistControl from '@/components/ui/player/playlist/playlist-control';
 import PlaylistDetails from '@/components/ui/player/playlist/playlist-details';
 import PlaylistSongs from '@/components/ui/player/playlist/playlist-songs';
-import { getPlaylistTracks } from '@/lib/api/playlist';
+
 import { getPlaylist } from '@/lib/db/playlist';
-import { getUserLikedTracks } from '@/lib/db/user';
+
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 

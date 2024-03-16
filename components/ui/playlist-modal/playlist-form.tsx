@@ -8,7 +8,7 @@ import { Button } from '../button';
 import { createOrUpdatePlaylist } from '@/actions/playlist-action';
 import { useFormState, useFormStatus } from 'react-dom';
 import { cn } from '@/lib/utils';
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 import { Icons } from '../../icons/icons';
 import Image from 'next/image';

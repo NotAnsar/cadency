@@ -1,4 +1,4 @@
-import VolumeSection from './volume-section';
+import VolumeSection, { VolumeSkeleton } from './volume-section';
 import SongDetails from './song-details';
 
 import { getUserLikedTracks } from '@/actions/user-actions';
@@ -9,12 +9,15 @@ export default async function AudioPlayer() {
 
 	return (
 		<div className='h-20 bg-background w-full sticky backdrop-blur-sm border-t-4 border-primary flex justify-between items-center px-3 focus-visible:outline-none gap-4'>
-			{/* <div className='h-20 bg-background w-full sticky backdrop-blur-sm border-t-4 border-primary justify-between items-center px-3 focus-visible:outline-none gap-4 grid-cols-6 grid'> */}
-			<SongDetails className='' />
+			<SongDetails />
 
-			<AudioPlaybar className='' />
-			<div className='hidden lg:grid '>
-				<VolumeSection likedTracks={likedTracks || null} />
+			<AudioPlaybar />
+			<div className='hidden lg:grid'>
+				{likedTracks ? (
+					<VolumeSection likedTracks={likedTracks} />
+				) : (
+					<VolumeSkeleton />
+				)}
 			</div>
 		</div>
 	);

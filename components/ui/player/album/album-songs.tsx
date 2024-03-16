@@ -8,16 +8,17 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/table';
-import { TrackData } from '@/types/music';
+import { Track } from '@/types/music';
 import { formatSongTime } from '@/lib/utils';
 import LikeTrack from '@/components/like-track';
 import AddToPlaylist from '@/components/add-to-playlist';
 import { getUserPlaylists } from '@/lib/db/playlist';
 import { getUserLikedTracks } from '@/lib/db/user';
+import PlayTrack from './play-track';
 
 type Prop = {
 	label: string;
-	tracks: TrackData[];
+	tracks: Track[];
 	title: string;
 };
 
@@ -51,10 +52,7 @@ export default async function AlbumSongs({ label, tracks, title }: Prop) {
 				{tracks.map((song, i) => (
 					<TableRow key={song.id} className='group'>
 						<TableCell className='font-medium'>
-							<div>
-								{/* <Icons.play className='hidden hover:block w-5 h-5 ' /> */}
-								<span>{i + 1}</span>
-							</div>
+							<PlayTrack tracks={tracks} i={i} />
 						</TableCell>
 						<TableCell>{song.title_short}</TableCell>
 
@@ -64,6 +62,7 @@ export default async function AlbumSongs({ label, tracks, title }: Prop) {
 								trackId={song.id + ''}
 								isLiked={likedTracks.some((a) => a.trackId === song.id + '')}
 								classNameNotLiked='invisible group-hover:visible'
+								key={likedTracks.toString()}
 							/>
 						</TableCell>
 						<TableCell className='text-right'>

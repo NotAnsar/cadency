@@ -1,10 +1,10 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { useVolume } from '@/hooks/useVolume';
 import { Icons } from '@/components/icons/audio-icons';
 import LikeTrack from '@/components/like-track';
 import { useMusicPlayerContext } from '@/context/music-player';
+import { useEffect, useState } from 'react';
 
 type tracks = {
 	userId: string;
@@ -15,19 +15,22 @@ type tracks = {
 export default function VolumeSection({
 	likedTracks,
 }: {
-	likedTracks: tracks[] | null;
+	likedTracks: tracks[];
 }) {
-	const {
-		songs,
-		currentIndex,
+	const { songs, currentIndex, volume, handleVolume, toggleMute, mute } =
+		useMusicPlayerContext();
 
-		volume,
-		handleVolume,
-		toggleMute,
-		mute,
-	} = useMusicPlayerContext();
+	const [isLiked, setIsLiked] = useState<boolean>(
+		likedTracks?.some((a) => a.trackId === songs[currentIndex]?.id + '')
+	);
 
-	if (!songs[currentIndex] || !likedTracks) {
+	useEffect(() => {
+		setIsLiked(
+			likedTracks?.some((a) => a.trackId === songs[currentIndex]?.id + '')
+		);
+	}, [likedTracks, songs, currentIndex]);
+
+	if (!songs[currentIndex]) {
 		return <VolumeSkeleton />;
 	}
 
@@ -35,11 +38,10 @@ export default function VolumeSection({
 		<div className='items-center gap-2 mr-4 flex flex-none'>
 			<div className='flex gap-4'>
 				<LikeTrack
+					key={isLiked ? 'liked' : 'not-liked'}
 					className='text-muted-foreground hidden lg:block'
 					trackId={songs[currentIndex].id + ''}
-					isLiked={likedTracks?.some(
-						(a) => a.trackId === songs[currentIndex].id + ''
-					)}
+					isLiked={isLiked}
 				/>
 				{mute ? (
 					<Icons.speakerX

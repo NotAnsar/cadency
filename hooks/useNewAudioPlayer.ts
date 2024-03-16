@@ -1,11 +1,5 @@
 import { Track } from '@/types/music';
-import {
-	useState,
-	useCallback,
-	useRef,
-	MutableRefObject,
-	SyntheticEvent,
-} from 'react';
+import { useState, useRef, MutableRefObject, SyntheticEvent } from 'react';
 
 export type AudioPlayerProps = {
 	isPlaying: boolean;
@@ -65,7 +59,6 @@ export const useAudioPlayer2 = (): AudioPlayerProps => {
 	const animationRef = useRef<number | null>(null);
 	const [currentIndex, setCurrentIndex] = useState<number>(0);
 	const [songs, setSongs] = useState<Track[]>([]);
-
 	const [volume, setVolume] = useState<number>(1);
 	const [mute, setMuted] = useState(false);
 	const audioRef = useRef<HTMLAudioElement | null>(

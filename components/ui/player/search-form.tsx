@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useDebounce, useDebouncedCallback } from 'use-debounce';
+import { useDebounce } from 'use-debounce';
 import { Input } from '../input';
 import { Search } from 'lucide-react';
 import type { AlbumDetails, ArtistDetails, Track } from '@/types/music';

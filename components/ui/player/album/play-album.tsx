@@ -7,7 +7,7 @@ import { Track } from '@/types/music';
 type Prop = { albumId: string; tracks: Track[] };
 
 export default function PlayAlbum({ albumId, tracks }: Prop) {
-	const { isPlaying, songs, currentIndex, playNewSong, play, togglePlay } =
+	const { isPlaying, songs, currentIndex, playNewSong, togglePlay } =
 		useMusicPlayerContext();
 
 	return (

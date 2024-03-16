@@ -1,8 +1,8 @@
 import { type Track } from '@/types/music';
-import { Icons } from '@/components/icons/audio-icons';
 import { cn, formatSongTime } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
+import PlayTrendingSong from './play-trending-song';
 
 type Prop = { songs: Track[]; classname?: string };
 
@@ -14,7 +14,7 @@ export default function TrendingSongs({ songs, classname = '' }: Prop) {
 			</h2>
 
 			<div className='flex w-full flex-col gap-2'>
-				{songs.slice(0, 5).map((song: Track) => (
+				{songs.slice(0, 5).map((song, i) => (
 					<div
 						className='flex justify-between w-full rounded-md overflow-hidden items-center bg-transparent border border-border gap-2'
 						key={song.id}
@@ -45,8 +45,8 @@ export default function TrendingSongs({ songs, classname = '' }: Prop) {
 
 						<div className='flex gap-2 mr-4 items-center'>
 							<span className='text-xs '>{formatSongTime(song.duration)}</span>
-							{/* <Icons.play className='w-6 h-6 cursor-pointer text-primary fill-primary' /> */}
-							<Icons.pause className='w-6 h-6 cursor-pointer text-primary fill-primary stroke-[3]' />
+
+							<PlayTrendingSong i={i} tracks={songs} />
 						</div>
 					</div>
 				))}

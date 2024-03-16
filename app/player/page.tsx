@@ -2,7 +2,6 @@ import TopArtists from '@/components/ui/player/home/top-artists';
 import TrendingSongs from '@/components/ui/player/home/trending-songs';
 import WeeklyTopAlbums from '@/components/ui/player/home/weekly-top-albums';
 import { getChart } from '@/lib/api/chart';
-import { notFound } from 'next/navigation';
 
 export default async function Page() {
 	const res = await getChart();

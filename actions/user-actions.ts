@@ -178,10 +178,12 @@ export async function togglelikedTrack(formData: FormData) {
 		} else {
 			await prisma.track.create({ data: { trackId, userId: user.id } });
 		}
+		console.log(isLiked, trackId);
 	} catch (error) {
 		console.error(error);
 	}
-	revalidatePath(`/player`);
+	console.log('revalidatePath');
+	revalidatePath(`/player`, 'layout');
 }
 
 export async function getUserLikedTracks(limit?: number) {

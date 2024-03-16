@@ -2,7 +2,6 @@ import { Clock3, X } from 'lucide-react';
 import {
 	Table,
 	TableBody,
-	TableCaption,
 	TableCell,
 	TableHead,
 	TableHeader,
@@ -11,7 +10,6 @@ import {
 import { cn, formatSongTime } from '@/lib/utils';
 import LikeTrack from '@/components/like-track';
 import { getPlaylistTracks } from '@/lib/api/playlist';
-
 import { deletePlaylistSong } from '@/actions/playlist-action';
 import { getUserLikedTracks } from '@/lib/db/user';
 
@@ -63,6 +61,7 @@ export default async function PlaylistSongs({
 								trackId={song.id + ''}
 								isLiked={likedTracks?.some((a) => a.trackId === song.id + '')}
 								classNameNotLiked='invisible group-hover:visible'
+								key={likedTracks.toString()}
 							/>
 						</TableCell>
 						<TableCell className='text-right'>

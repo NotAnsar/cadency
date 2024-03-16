@@ -2,7 +2,7 @@
 import { cn } from '@/lib/utils';
 import { Icons } from './icons/audio-icons';
 import { useOptimistic } from 'react';
-import { togglelikedAlbum, togglelikedTrack } from '@/actions/user-actions';
+import { togglelikedTrack } from '@/actions/user-actions';
 
 export default function LikeTrack({
 	className,
@@ -27,6 +27,7 @@ export default function LikeTrack({
 			className='flex items-center justify-center'
 			action={async (formData) => {
 				addOptimisticLiked(null);
+
 				await togglelikedTrack(formData);
 			}}
 		>

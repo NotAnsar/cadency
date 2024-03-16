@@ -2,23 +2,19 @@ import { Clock3, Music2 } from 'lucide-react';
 import {
 	Table,
 	TableBody,
-	TableCaption,
 	TableCell,
-	TableFooter,
 	TableHead,
 	TableHeader,
 	TableRow,
 } from '@/components/ui/table';
 import { getLikedTracks } from '@/lib/api/track';
-import { notFound } from 'next/navigation';
-import { Icons } from '@/components/icons/audio-icons';
 import LikeTrack from '@/components/like-track';
 import { formatSongTime } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import AddToPlaylist from '@/components/add-to-playlist';
 import { getUserPlaylists } from '@/lib/db/playlist';
-import { getUserLikedTracks } from '@/lib/db/user';
+import PlayTrack from '@/components/ui/player/album/play-track';
 import NotFoundLibrary from '@/components/ui/player/library/not-found-library';
 
 export default async function page() {
@@ -51,10 +47,7 @@ export default async function page() {
 							{likedTracks.map((song, i) => (
 								<TableRow key={song.id} className='group'>
 									<TableCell className='font-medium'>
-										<div>
-											<Icons.play className='hidden hover:block w-5 h-5 ' />
-											<span>{i + 1}</span>
-										</div>
+										<PlayTrack i={i} tracks={likedTracks} />
 									</TableCell>
 
 									<TableCell className='text-sm flex'>
@@ -97,8 +90,10 @@ export default async function page() {
 									<TableCell>
 										<LikeTrack
 											trackId={song.id + ''}
-											isLiked={true}
+											// isLiked={true}
+											isLiked={likedTracks?.some((a) => a.id === song.id)}
 											classNameNotLiked='invisible group-hover:visible'
+											key={likedTracks.toString()}
 										/>
 									</TableCell>
 									<TableCell className='text-right'>

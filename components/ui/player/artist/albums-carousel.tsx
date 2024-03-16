@@ -1,6 +1,5 @@
 'use client';
 import { Album } from '@/types/music';
-
 import {
 	Carousel,
 	CarouselContent,

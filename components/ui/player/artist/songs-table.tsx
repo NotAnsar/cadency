@@ -8,6 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { useState } from 'react';
+import PlayTrack from '../album/play-track';
 
 export default function SongsTable({
 	songs,
@@ -31,7 +32,9 @@ export default function SongsTable({
 					className='border-b transition-colors hover:bg-muted/50 flex items-center w-auto justify-between group'
 				>
 					<div className='flex items-center'>
-						<p className='p-4 align-middle  text-sm'>{i + 1}</p>
+						<div className='p-4 align-middle text-sm'>
+							<PlayTrack i={i} tracks={songs} />
+						</div>
 
 						<Image
 							alt={song.title}
@@ -64,6 +67,7 @@ export default function SongsTable({
 							trackId={song.id + ''}
 							isLiked={likedTracks.some((a) => a.trackId === song.id + '')}
 							classNameNotLiked='invisible group-hover:visible'
+							key={likedTracks.toString()}
 						/>
 
 						<p className='text-sm w-10'>{formatSongTime(song.duration)}</p>

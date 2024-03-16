@@ -1,10 +1,9 @@
 import { Icons } from '@/components/icons/audio-icons';
-
 import LikeAlbumForm from './like-album-form';
 import { getUserLikedAlbums } from '@/lib/db/user';
 import { Skeleton } from '../../skeleton';
 import PlayAlbum from './play-album';
-import { Track, TrackData } from '@/types/music';
+import { Track } from '@/types/music';
 
 type Prop = { id: string; tracks: Track[] };
 
