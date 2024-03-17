@@ -67,7 +67,6 @@ export default function SongsTable({
 							trackId={song.id + ''}
 							isLiked={likedTracks.some((a) => a.trackId === song.id + '')}
 							classNameNotLiked='invisible group-hover:visible'
-							key={likedTracks.toString()}
 						/>
 
 						<p className='text-sm w-10'>{formatSongTime(song.duration)}</p>

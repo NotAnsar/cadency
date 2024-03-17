@@ -3,10 +3,30 @@
 import { useMusicPlayerContext } from '@/context/music-player';
 import { cn, formatSongTime } from '@/lib/utils';
 import AudioController, { AudioControllerSkeleton } from './audio-controller';
+import { useEffect, useState } from 'react';
+import { LogOutIcon } from 'lucide-react';
 
 export default function AudioPlaybar({ className }: { className?: string }) {
-	const { audioRef, handleCurrentTime, progressBarRef, songs, currentIndex } =
-		useMusicPlayerContext();
+	const {
+		audioRef,
+		handleCurrentTime,
+		progressBarRef,
+		songs,
+		currentIndex,
+		togglePlay,
+	} = useMusicPlayerContext();
+
+	useEffect(() => {
+		const handleSpacebarPress = (e: KeyboardEvent) => {
+			if (!!(e.key === ' ' && songs[currentIndex])) togglePlay();
+		};
+
+		document.body.addEventListener('keydown', handleSpacebarPress);
+
+		return () => {
+			document.body.removeEventListener('keydown', handleSpacebarPress);
+		};
+	}, [songs, currentIndex, togglePlay]);
 
 	if (!songs[currentIndex]) {
 		return <AudioPlaybarSkeleton />;

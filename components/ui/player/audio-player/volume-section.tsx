@@ -20,15 +20,15 @@ export default function VolumeSection({
 	const { songs, currentIndex, volume, handleVolume, toggleMute, mute } =
 		useMusicPlayerContext();
 
-	const [isLiked, setIsLiked] = useState<boolean>(
-		likedTracks?.some((a) => a.trackId === songs[currentIndex]?.id + '')
-	);
+	// const [isLiked, setIsLiked] = useState<boolean>(
+	// 	likedTracks?.some((a) => a.trackId === songs[currentIndex]?.id + '')
+	// );
 
-	useEffect(() => {
-		setIsLiked(
-			likedTracks?.some((a) => a.trackId === songs[currentIndex]?.id + '')
-		);
-	}, [likedTracks, songs, currentIndex]);
+	// useEffect(() => {
+	// 	setIsLiked(
+	// 		likedTracks?.some((a) => a.trackId === songs[currentIndex]?.id + '')
+	// 	);
+	// }, [likedTracks, songs, currentIndex]);
 
 	if (!songs[currentIndex]) {
 		return <VolumeSkeleton />;
@@ -37,12 +37,12 @@ export default function VolumeSection({
 	return (
 		<div className='items-center gap-2 mr-4 flex flex-none'>
 			<div className='flex gap-4'>
-				<LikeTrack
+				{/* <LikeTrack
 					key={isLiked ? 'liked' : 'not-liked'}
 					className='text-muted-foreground hidden lg:block'
 					trackId={songs[currentIndex].id + ''}
 					isLiked={isLiked}
-				/>
+				/> */}
 				{mute ? (
 					<Icons.speakerX
 						className='cursor-pointer text-muted-foreground hover:text-foreground transition-colors h-5 w-5'

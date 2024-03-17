@@ -62,7 +62,6 @@ export default async function AlbumSongs({ label, tracks, title }: Prop) {
 								trackId={song.id + ''}
 								isLiked={likedTracks.some((a) => a.trackId === song.id + '')}
 								classNameNotLiked='invisible group-hover:visible'
-								key={likedTracks.toString()}
 							/>
 						</TableCell>
 						<TableCell className='text-right'>

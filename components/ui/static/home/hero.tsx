@@ -44,12 +44,14 @@ export default function Hero() {
 						</Link>
 					</div>
 				</div>
+
 				<Image
-					alt='dsds'
+					alt='hero page image'
 					src={'/download.webp'}
 					width={640}
 					height={640}
-					className='w-auto aspect-square'
+					priority
+					className='w-full h-auto aspect-square'
 				/>
 			</div>
 		</Wrapper>

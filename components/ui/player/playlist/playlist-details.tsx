@@ -1,7 +1,6 @@
 import { Playlist } from '@/types/playlist';
 import { ListMusic, User } from 'lucide-react';
 import Image from 'next/image';
-import PlaylistControl from './playlist-control';
 
 export default function PlaylistDetails({ playlist }: { playlist: Playlist }) {
 	return (
@@ -59,7 +58,6 @@ export default function PlaylistDetails({ playlist }: { playlist: Playlist }) {
 					</p>
 				</div>
 			</div>
-			<PlaylistControl playlist={playlist} />
 		</>
 	);
 }

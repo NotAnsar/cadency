@@ -1,3 +1,6 @@
+import PlaylistControl, {
+	PlaylistControlSkeleton,
+} from '@/components/ui/player/playlist/playlist-control';
 import PlaylistDetails from '@/components/ui/player/playlist/playlist-details';
 import PlaylistSongs from '@/components/ui/player/playlist/playlist-songs';
 
@@ -17,8 +20,15 @@ export default async function page({ params }: { params: { slug: string } }) {
 		<div className='px-8 py-6'>
 			<PlaylistDetails playlist={playlist} />
 
-			<Suspense fallback={<p>Loading</p>}>
-				<PlaylistSongs playlistId={params.slug} />
+			<Suspense
+				fallback={
+					<>
+						<PlaylistControlSkeleton />
+						<p>Loading</p>
+					</>
+				}
+			>
+				<PlaylistSongs playlist={playlist} />
 			</Suspense>
 		</div>
 	);

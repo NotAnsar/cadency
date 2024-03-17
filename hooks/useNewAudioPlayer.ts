@@ -138,7 +138,7 @@ export const useAudioPlayer2 = (): AudioPlayerProps => {
 		setCurrentIndex(isLastSong ? currentIndex : currentIndex + 1);
 
 		if (isLastSong) pause();
-		else play();
+		// else play();
 	}
 
 	const playNext = () => {

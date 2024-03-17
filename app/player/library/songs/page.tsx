@@ -90,10 +90,8 @@ export default async function page() {
 									<TableCell>
 										<LikeTrack
 											trackId={song.id + ''}
-											// isLiked={true}
 											isLiked={likedTracks?.some((a) => a.id === song.id)}
 											classNameNotLiked='invisible group-hover:visible'
-											key={likedTracks.toString()}
 										/>
 									</TableCell>
 									<TableCell className='text-right'>

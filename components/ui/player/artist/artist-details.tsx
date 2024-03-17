@@ -30,6 +30,9 @@ export default async function ArtistDetails({ id }: { id: string }) {
 						Artist
 					</p>
 					<p className='text-5xl font-bold'>{artist.name}</p>
+					<p className='text-muted-foreground text-sm font-medium mt-2'>
+						{artist.nb_fan} fans
+					</p>
 				</div>
 				<FollowArtistButton
 					artistId={id}

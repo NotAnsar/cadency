@@ -5,9 +5,9 @@ import { useOptimistic } from 'react';
 import { togglelikedTrack } from '@/actions/user-actions';
 
 export default function LikeTrack({
-	className,
 	trackId,
 	isLiked,
+	className,
 	classNameLiked,
 	classNameNotLiked,
 }: {

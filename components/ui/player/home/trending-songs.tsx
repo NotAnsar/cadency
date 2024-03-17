@@ -31,12 +31,16 @@ export default function TrendingSongs({ songs, classname = '' }: Prop) {
 							</Link>
 
 							<div>
-								<p className='leading-none text-[15px] font-medium'>
+								<Link
+									href={`/player/album/${song.album.id}`}
+									className='leading-none text-[15px] font-medium block hover:underline '
+								>
 									{song.title_short}
-								</p>
+								</Link>
+
 								<Link
 									href={`/player/artist/${song.artist.id}`}
-									className='text-xs text-muted-foreground mt-1 text-nowrap whitespace-nowrap overflow-hidden hover:underline'
+									className='text-xs text-muted-foreground mt-1 text-nowrap whitespace-nowrap overflow-hidden hover:underline block'
 								>
 									{song.artist.name}
 								</Link>
