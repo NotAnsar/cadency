@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import { Montserrat } from 'next/font/google';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const montserrat = Montserrat({
 	subsets: ['latin'],
@@ -36,6 +37,7 @@ export default async function RootLayout({ children }: LayoutProps) {
 					disableTransitionOnChange
 				>
 					{children}
+					<SpeedInsights />
 					<Toaster />
 				</ThemeProvider>
 			</body>
