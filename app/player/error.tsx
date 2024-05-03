@@ -9,11 +9,13 @@ export default function Error({
 	error: Error & { digest?: string };
 	reset: () => void;
 }) {
+	console.error(error);
 	return (
 		<main className='flex h-[80vh] flex-col items-center justify-center gap-2 font-medium text-lg'>
-			<h2 className='text-center'>
+			{/* <h2 className='text-center'>
 				{error ? error.message : 'Something went wrong!'}
-			</h2>
+			</h2> */}
+			<h2 className='text-center'>Something went wrong!</h2>
 			<Button onClick={() => reset()}>Try again</Button>
 		</main>
 	);
